@@ -1,0 +1,79 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+.header {
+  display: flex;
+  position: sticky;
+  top: 0;
+  justify-content: space-around;
+  padding: 5px 50px;
+  box-shadow: 0px 1px 3px -2px black;
+  background: #253b80;
+  font-size: 18px;
+  color: white;
+  z-index: 1000;
+}
+
+.header-logo {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-box {
+  display: flex;
+  flex: 1.5;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-box input {
+  width: 400px;
+  height: 30px;
+  border: none;
+}
+.search-box button {
+  height: 30px;
+  border: none;
+  color: #253b80;
+  cursor: pointer;
+}
+.search-box button:hover {
+  background: #96abe9;
+}
+.header-menu {
+  display: flex;
+  flex: 2;
+  align-items: center;
+  list-style: none;
+  justify-content: space-around;
+}
+.header-menu li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  cursor: pointer;
+}
+
+.header-menu img {
+  height: 30px;
+}
+
+.account {
+  position: relative;
+}
+
+.login-options {
+  position: absolute;
+  top: 150%;
+  left: 0;
+  width: 100px;
+  background-color: #253b80;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
