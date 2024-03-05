@@ -47,40 +47,43 @@ const FilterProducts = ({ handleFilters }) => {
         <label>Giá:</label>
         <select value={price} onChange={handlePriceChange}>
           <option value="">Tất cả</option>
-          <option value="below100">Dưới 2 triệu</option>
-          <option value="100to500">Từ 2 - 4 triệu</option>
-          <option value="above500">Từ 4 - 7 triệu</option>
-          <option value="above500">Từ 7 - 13 triệu</option>
-          <option value="above500">Từ 13 - 20 triệu</option>
-          <option value="above500">Trên 20 triệu</option>
+          <option value="<2">Dưới 2 triệu</option>
+          <option value="2-4">Từ 2 - 4 triệu</option>
+          <option value="4-7">Từ 4 - 7 triệu</option>
+          <option value="7-13">Từ 7 - 13 triệu</option>
+          <option value="13-20">Từ 13 - 20 triệu</option>
+          <option value=">20">Trên 20 triệu</option>
         </select>
       </div>
       <div className={`filter-item ${ramActive ? "active" : ""}`}>
         <label>Ram:</label>
         <select value={ram} onChange={handleRamChange}>
           <option value="">Tất cả</option>
-          <option value="1">1GB</option>
-          <option value="2">2GB</option>
-          <option value="3">3GB</option>
-          <option value="4">4GB</option>
+          <option value="<4">Dưới 4GB</option>
+          <option value="4-6">Từ 4-6GB</option>
+          <option value="6-8">Từ 6-8GB</option>
+          <option value=">8">Trên 8GB</option>
         </select>
       </div>
       <div className={`filter-item ${romActive ? "active" : ""}`}>
         <label>Bộ nhớ trong:</label>
         <select value={rom} onChange={handleRomChange}>
           <option value="">Tất cả</option>
-          <option value="32gb">32GB</option>
-          <option value="64gb">64GB</option>
-          <option value="128gb">128GB</option>
+          <option value="16">16GB</option>
+          <option value="32">32GB</option>
+          <option value="64">64GB</option>
+          <option value="128">128GB</option>
+          <option value="256">256GB</option>
+          <option value="512">512GB</option>
         </select>
       </div>
       <div className={`filter-item ${batteryActive ? "active" : ""}`}>
         <label>Dung lượng pin:</label>
         <select value={battery} onChange={handleBatteryChange}>
           <option value="">Tất cả</option>
-          <option value="below2000">Dưới 2000 mAh</option>
-          <option value="2000to4000">Từ 2000-4000 mAh</option>
-          <option value="above4000">Trên 4000 mAh</option>
+          <option value="<4000">Dưới 4000 mAh</option>
+          <option value="4000-5000">Từ 4000-5000 mAh</option>
+          <option value=">5000">Trên 5000 mAh</option>
         </select>
       </div>
 

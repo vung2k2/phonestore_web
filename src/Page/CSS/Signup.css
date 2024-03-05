@@ -3,7 +3,7 @@
   height: 80vh;
   background: #fce3fe;
   padding-top: 40px;
-  background: linear-gradient(180deg, #fde1ff 0%, #e1ffea22 100%);
+  background: linear-gradient(180deg, #d3caf4 0%, #e1ffea22 100%);
 }
 
 .signup-container {
@@ -22,7 +22,8 @@
   width: 580px;
   height: 72px;
   color: white;
-  background: #ff4141;
+  border-radius: 5px;
+  background: #253b80;
   margin-top: 30px;
   border: none;
   font-size: 24px;
@@ -54,6 +55,7 @@
   width: 100%-20px;
   padding-left: 20px;
   border: 1px solid #c9c9c9;
+  border-radius: 5px;
   outline: none;
   color: #5c5c5c;
   font-size: 18px;
