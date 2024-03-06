@@ -23,7 +23,12 @@ const Header = () => {
         </Link>
       </div>
       <div className="search-box">
-        <input type="search" name="search-w" placeholder="Bạn cần tìm gi?" />
+        <input
+          type="search"
+          name="search-w"
+          autoComplete="on"
+          placeholder="Bạn cần tìm gi?"
+        />
         <button type="submit">Tìm kiếm</button>
       </div>
       <ul className="header-menu">
