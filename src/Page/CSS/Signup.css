@@ -70,3 +70,8 @@
   font-size: 18px;
   font-weight: 500;
 }
+
+.error-message {
+  color: red;
+  text-align: center;
+}
