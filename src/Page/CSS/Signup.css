@@ -20,7 +20,7 @@
 
 .signup-container button {
   width: 580px;
-  height: 72px;
+  height: 55px;
   color: white;
   border-radius: 5px;
   background: #253b80;
@@ -51,7 +51,7 @@
 }
 
 .signup-form input {
-  height: 72px;
+  height: 55px;
   width: 100%-20px;
   padding-left: 20px;
   border: 1px solid #c9c9c9;

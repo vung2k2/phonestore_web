@@ -34,6 +34,7 @@
 }
 
 .search-box input {
+  outline: none;
   width: 400px;
   height: 35px;
   padding: 10px;
