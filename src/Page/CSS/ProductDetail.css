@@ -82,14 +82,14 @@
   font-weight: 600;
 }
 .box-right {
-  flex: 1;
+  flex: 1.1;
 }
 
 .box-right .product-parameters {
 }
 
 .product-parameters span {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
 }
 

@@ -22,7 +22,7 @@ function App() {
             <Route path="/product/:slug" element={<ProductDetail />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/cart" element={<Cart />} />{" "}
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </ProductProvider>
       </BrowserRouter>

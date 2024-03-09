@@ -42,21 +42,22 @@ const Breadcrum = (props) => {
           fontWeight: "600",
           color: "#808080",
         }}
-        to="/"
+        to="/product"
       >
         {capitalizeFirstLetter(product.category)}
       </Link>
       <MdArrowForwardIos color="#808080" />
-      <p
+      <Link
         style={{
           textDecoration: "none",
           fontSize: "17px",
           fontWeight: "600",
           color: "#808080",
         }}
+        to="/"
       >
         {product.name}
-      </p>
+      </Link>
     </div>
   );
 };
