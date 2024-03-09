@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Navbar.css";
 import samsung_logo from "../../Assets/img/samsung-logo.png";
 import iphone_logo from "../../Assets/img/iphone-logo.png";
-import nokia_logo from "../../Assets/img/nokia-logo.jpg";
+import all_logo from "../../Assets/img/all-logo.png";
 import masstel_logo from "../../Assets/img/masstel-logo.png";
 import oppo_logo from "../../Assets/img/oppo-logo.jpg";
 import vivo_logo from "../../Assets/img/vivo-logo.png";
@@ -10,7 +10,7 @@ import xiaomi_logo from "../../Assets/img/xiaomi-logo.png";
 import other_logo from "../../Assets/img/other-logo.png";
 
 const Navbar = ({ handleBrandClick }) => {
-  const [activeBrand, setActiveBrand] = useState(null);
+  const [activeBrand, setActiveBrand] = useState("");
 
   const handleBrand = (brand) => {
     setActiveBrand(brand);
@@ -20,6 +20,14 @@ const Navbar = ({ handleBrandClick }) => {
   return (
     <nav className="navbar">
       <ul className="navbar-menu">
+        <li className="navbar-item">
+          <img
+            src={all_logo}
+            onClick={() => handleBrand("")}
+            alt=""
+            className={`brand-logo ${activeBrand === "" ? "active" : ""}`}
+          />
+        </li>
         <li className="navbar-item">
           <img
             src={iphone_logo}
@@ -39,14 +47,6 @@ const Navbar = ({ handleBrandClick }) => {
           />
         </li>
 
-        <li className="navbar-item">
-          <img
-            src={nokia_logo}
-            onClick={() => handleBrand("nokia")}
-            alt=""
-            className={`brand-logo ${activeBrand === "nokia" ? "active" : ""}`}
-          />
-        </li>
         <li className="navbar-item">
           <img
             src={xiaomi_logo}
