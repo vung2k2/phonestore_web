@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./FilterProducts.css";
+import { IoSearch } from "react-icons/io5";
 
 const FilterProducts = ({ handleFilters }) => {
   const [ram, setRam] = useState("");
@@ -87,7 +88,9 @@ const FilterProducts = ({ handleFilters }) => {
         </select>
       </div>
 
-      <button onClick={applyFilters}>Tìm</button>
+      <button onClick={applyFilters}>
+        <IoSearch size={25} />
+      </button>
     </div>
   );
 };

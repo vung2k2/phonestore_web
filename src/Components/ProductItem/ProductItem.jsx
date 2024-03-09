@@ -12,7 +12,7 @@ const ProductItem = ({ product }) => {
   };
 
   const toggleCompare = () => {
-    setIsCompared(!isCompared); // Đảo ngược trạng thái so sánh
+    setIsCompared(!isCompared);
   };
 
   return (

@@ -30,14 +30,14 @@
 
 .filter-container button {
   height: 35px;
-  width: 50px;
+  width: 35px;
   font-weight: 600;
-  margin-top: 10px;
+  margin-top: 14px;
   border: none;
   border-radius: 5px;
   background-color: #3d559d;
   color: #fff;
-  font-size: 16px;
+
   cursor: pointer;
   transition: background-color 0.3s;
 }

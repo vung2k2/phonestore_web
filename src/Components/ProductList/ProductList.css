@@ -7,3 +7,10 @@
   flex-wrap: wrap;
   gap: 30px;
 }
+
+.product-list-container p {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 600;
+  color: rgb(65, 65, 65);
+}

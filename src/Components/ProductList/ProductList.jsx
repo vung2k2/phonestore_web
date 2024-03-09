@@ -142,6 +142,8 @@ const ProductList = ({ selectedCategory, filters }) => {
             <ProductItem key={product.id} product={product} />
           ))}
         </ul>
+      ) : allproducts.length == 0 ? (
+        <p>Đang tải sản phẩm...</p>
       ) : (
         <p>Không có sản phẩm nào</p>
       )}

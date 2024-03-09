@@ -39,6 +39,7 @@
   padding: 10px;
   border: none;
   border-radius: 5px 0px 0px 5px;
+  font-size: 15px;
 }
 
 .search-box button {
@@ -48,6 +49,7 @@
   color: #253b80;
   cursor: pointer;
   border-radius: 0px 5px 5px 0px;
+  font-size: 15px;
 }
 .search-box button:hover {
   background: #96abe9;
@@ -69,7 +71,12 @@
   gap: 1px;
   cursor: pointer;
 }
-
+.header-menu li span {
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+}
 .header-menu img {
   height: 30px;
 }
@@ -80,7 +87,7 @@
 
 .login-options {
   position: absolute;
-  top: 150%;
+  top: 100%;
   left: 0;
   width: 100px;
   background-color: #253b80;
@@ -92,17 +99,21 @@
   text-align: left;
 }
 
+.login-options li:hover {
+  background-color: #0842f0;
+}
 .cart {
-  padding-bottom: 10px;
+  position: relative;
 }
 .cart-count {
+  position: absolute;
   width: 22px;
   height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: -42px;
-  margin-left: 40px;
+  top: -7px;
+  right: -12px;
   border-radius: 11px;
   font-size: 14px;
   background: red;

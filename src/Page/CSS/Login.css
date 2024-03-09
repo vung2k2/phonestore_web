@@ -12,6 +12,7 @@
   background: white;
   margin: auto;
   padding: 10px 60px;
+  position: relative;
 }
 
 .login-container h1 {
@@ -48,8 +49,7 @@
   color: #5c5c5c;
   font-size: 18px;
 }
- .error-message {
-    color: red;
-    text-align: center;
-  }
-
+.error-message {
+  color: red;
+  text-align: center;
+}

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./Header.css";
 import logo from "../../Assets/img/logo.png";
-import cart_icon from "../../Assets/img/cart_icon.png";
 import { Link } from "react-router-dom";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 const Header = () => {
   const [showLoginOptions, setShowLoginOptions] = useState(false);
@@ -45,15 +46,17 @@ const Header = () => {
             Sản Phẩm
           </Link>
         </li>
-        <li className="account">
-          <span
-            style={{
-              textDecoration: "none",
-              color: "white",
-            }}
-            onClick={toggleLoginOptions}
-          >
-            Tài Khoản <span>&#9660;</span>
+        <li
+          className="account"
+          onMouseEnter={toggleLoginOptions}
+          onMouseLeave={toggleLoginOptions}
+        >
+          <span>
+            Tài khoản
+            <RiArrowDropDownLine
+              size={35}
+              style={{ marginLeft: "-8px", marginTop: "2px" }}
+            />
           </span>
           {showLoginOptions && (
             <ul className="login-options" onClick={toggleLoginOptions}>
@@ -62,6 +65,7 @@ const Header = () => {
                   style={{
                     textDecoration: "none",
                     color: "white",
+                    marginLeft: "0px",
                   }}
                   to="/login"
                 >
@@ -73,6 +77,7 @@ const Header = () => {
                   style={{
                     textDecoration: "none",
                     color: "white",
+                    marginLeft: "0px",
                   }}
                   to="/signup"
                 >
@@ -84,7 +89,7 @@ const Header = () => {
         </li>
         <li className="cart">
           <Link style={{ textDecoration: "none", color: "white" }} to="/cart">
-            <img src={cart_icon} alt="" />
+            <AiOutlineShoppingCart size={35} />
           </Link>
           <div className="cart-count">0</div>
         </li>
