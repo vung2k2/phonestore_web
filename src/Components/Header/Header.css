@@ -1,121 +1,122 @@
 .header {
-  display: flex;
-  position: sticky;
-  top: 0;
-  justify-content: center;
-  align-items: center;
-  padding: 5px 50px;
-  box-shadow: 0px 1px 3px -2px black;
-  background: #253b80;
-  font-size: 18px;
-  color: white;
-  z-index: 1000;
+    display: flex;
+    position: sticky;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 50px;
+    box-shadow: 0px 1px 3px -2px black;
+    background: #253b80;
+    font-size: 18px;
+    color: white;
+    z-index: 1000;
 }
 
 .header-logo {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 10px;
 }
 .header-logo p {
-  padding-left: 15px;
-  transform: scale(1.5);
-  font-weight: 600;
-  display: flex;
-  padding: auto;
+    padding-left: 15px;
+    transform: scale(1.5);
+    font-weight: 600;
+    display: flex;
+    padding: auto;
 }
 .search-box {
-  display: flex;
+    display: flex;
 
-  flex: 1.5;
-  align-items: center;
-  justify-content: center;
+    flex: 1.5;
+    align-items: center;
+    justify-content: center;
 }
 
 .search-box input {
-  width: 400px;
-  height: 35px;
-  padding: 10px;
-  border: none;
-  border-radius: 5px 0px 0px 5px;
-  font-size: 15px;
+    outline: none;
+    width: 400px;
+    height: 35px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px 0px 0px 5px;
+    font-size: 15px;
 }
 
 .search-box button {
-  height: 35px;
-  width: 90px;
-  border: none;
-  color: #253b80;
-  cursor: pointer;
-  border-radius: 0px 5px 5px 0px;
-  font-size: 15px;
+    height: 35px;
+    width: 90px;
+    border: none;
+    color: #253b80;
+    cursor: pointer;
+    border-radius: 0px 5px 5px 0px;
+    font-size: 15px;
 }
 .search-box button:hover {
-  background: #96abe9;
+    background: #96abe9;
 }
 .header-menu {
-  display: flex;
-  flex: 2;
-  align-items: center;
-  list-style: none;
-  justify-content: space-around;
+    display: flex;
+    flex: 2;
+    align-items: center;
+    list-style: none;
+    justify-content: space-around;
 }
 .header-menu li {
-  display: flex;
-  font-size: 18px;
-  font-weight: 600;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1px;
-  cursor: pointer;
+    display: flex;
+    font-size: 18px;
+    font-weight: 600;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    cursor: pointer;
 }
 .header-menu li span {
-  text-decoration: none;
-  color: white;
-  display: flex;
-  align-items: center;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
 }
 .header-menu img {
-  height: 30px;
+    height: 30px;
 }
 
 .account {
-  position: relative;
+    position: relative;
 }
 
 .login-options {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100px;
-  background-color: #253b80;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100px;
+    background-color: #253b80;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
 .login-options li:hover {
-  background-color: #0842f0;
+    background-color: #0842f0;
 }
 .cart {
-  position: relative;
+    position: relative;
 }
 .cart-count {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  top: -7px;
-  right: -12px;
-  border-radius: 11px;
-  font-size: 14px;
-  background: red;
-  color: white;
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: -7px;
+    right: -12px;
+    border-radius: 11px;
+    font-size: 14px;
+    background: red;
+    color: white;
 }

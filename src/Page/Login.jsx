@@ -40,7 +40,7 @@ const Login = () => {
         <div className="login-form">
           <input
             type="text"
-            placeholder="Your email"
+            placeholder="Email của bạn"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
