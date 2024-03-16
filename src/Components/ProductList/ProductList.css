@@ -1,16 +1,26 @@
 .product-list-container {
-  padding-top: 30px;
+    padding-top: 30px;
 }
 .product-list {
-  padding-left: 75px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
+    padding-left: 115px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px 10px;
 }
 
 .product-list-container p {
-  text-align: center;
-  font-size: 25px;
-  font-weight: 600;
-  color: rgb(65, 65, 65);
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+    color: rgb(65, 65, 65);
+}
+
+@media screen and (max-width: 1024px) {
+    .product-list-container {
+        padding-top: 20px;
+    }
+    .product-list {
+        padding-left: 110px;
+        gap: 25px;
+    }
 }
