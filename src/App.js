@@ -15,6 +15,8 @@ import { Bounce, ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import Footer from './Components/Footer/Footer';
+import ForgotPassword from './Page/ForgotPassword';
+import ResetPassword from './Page/ResetPassword';
 
 function App() {
     return (
@@ -31,6 +33,8 @@ function App() {
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/signup" element={<Signup />} />
                                 <Route path="/cart" element={<Cart />} />{' '}
+                                <Route path="/forgot-password" element={<ForgotPassword />} />
+                                <Route path="/reset-password" element={<ResetPassword />} />
                             </Routes>
                             <Footer />
                         </ShopContextProvider>

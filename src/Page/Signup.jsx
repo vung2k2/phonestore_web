@@ -50,7 +50,7 @@ const Signup = () => {
                     <input type="text" placeholder="Họ và tên" value={name} onChange={(e) => setName(e.target.value)} />
                     <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     <input
-                        type="password"
+                        type="text"
                         placeholder="Mật khẩu (Mật khẩu tối thiểu 6 ký tự)"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}

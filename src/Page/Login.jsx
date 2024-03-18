@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './CSS/Login.css';
 import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { LOGIN } from '../redux/reducers/loginReducer';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -22,7 +27,9 @@ const Login = () => {
 
             if (response.status === 200) {
                 console.log('Đăng nhập thành công:', response.data);
-                window.location.href = '/';
+                dispatch({ type: LOGIN, payload: true });
+
+                navigate('/');
             }
         } catch (error) {
             console.error('Lỗi đăng nhập:', error.response ? error.response.data : error.message);
@@ -58,9 +65,9 @@ const Login = () => {
                         onClick={togglePasswordVisibility}
                     >
                         {showPassword ? (
-                            <RiEyeLine size={30} color="#808080" />
-                        ) : (
                             <RiEyeCloseLine size={30} color="#808080" />
+                        ) : (
+                            <RiEyeLine size={30} color="#808080" />
                         )}
                     </span>
                 </div>
