@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 10px;
     margin-top: 100px;
     background-color: #fcf9f9;
 }
@@ -15,15 +15,16 @@
 }
 .footer-logo p {
     color: #383838;
-    font-size: 46px;
+    font-size: 36px;
     font-weight: 700;
 }
+
 .footer-links {
     display: flex;
     list-style: none;
     gap: 50px;
     color: #252525;
-    font-size: 20px;
+    font-size: 18px;
 }
 .footer-links li {
     cursor: pointer;
@@ -45,7 +46,11 @@
     cursor: pointer;
     border-radius: 15px;
 }
-.footer-icons-container:hover {
+
+.footer-icons-container a {
+    color: black;
+}
+.footer-icons-container a:hover {
     color: blue;
 }
 .footer-copyright {
@@ -54,9 +59,9 @@
     align-items: center;
     gap: 0px;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     color: #1a1a1a;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .footer-copyright hr {

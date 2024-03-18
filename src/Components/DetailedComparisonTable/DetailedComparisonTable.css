@@ -1,9 +1,8 @@
-.detailed-comparison-table {
+.detailed-comparison-list {
     position: fixed;
     top: 50%;
     left: 50%;
-    height: 500px;
-    width: 500px;
+    width: 1400px;
     transform: translate(-50%, -50%);
     background-color: #ffffff;
     border: 1px solid #cccccc;
@@ -13,13 +12,100 @@
     z-index: 9999;
 }
 
-.backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
+.detailed-comparison-list .close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 30px;
+    color: #333;
+}
+
+.detailed-comparison-list .product-info {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    width: 90%;
+    padding-bottom: 8px;
+}
+
+.detailed-comparison-list .product-img {
+    max-height: 50px;
+}
+
+.detailed-comparison-list .remove {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 25px;
+    color: #666;
+    cursor: pointer;
+}
+
+.detailed-comparison-list .price {
+    display: flex;
+    align-items: center;
+}
+.detailed-comparison-list .name {
+    font-size: 15px;
+}
+.detailed-comparison-list .price .new-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ee4d2d;
+    margin-right: 10px;
+}
+.detailed-comparison-list .price .old-price {
+    font-size: 14px;
+    color: #aaa;
+    text-decoration: line-through;
+}
+
+.detailed-comparison-list table {
+    border-spacing: 0;
     width: 100%;
-    height: 100%;
-    background-color: #333;
-    opacity: 0.8;
-    z-index: 9998;
+    padding: 50px;
+}
+
+.detailed-comparison-list th {
+    position: relative;
+}
+
+.detailed-comparison-list td:not(:first-child),
+.detailed-comparison-list th:not(:first-child) {
+    width: 27%;
+    border-left: 1px solid rgb(209, 208, 208);
+}
+
+.detailed-comparison-list th {
+    border-bottom: 1px solid rgb(209, 208, 208);
+}
+
+.detailed-comparison-list th,
+td {
+    padding: 10px;
+}
+.detailed-comparison-list tbody tr:nth-child(odd) {
+    background-color: aliceblue;
+}
+.detailed-comparison-list .title {
+    width: 19%;
+    font-weight: 600;
+}
+
+.detailed-comparison-list .btn-buy {
+    width: 70%;
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-color: #3d559d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.detailed-comparison-list .btn-buy:hover {
+    background-color: #0f2d84;
 }

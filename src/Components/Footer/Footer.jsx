@@ -22,13 +22,19 @@ const Footer = () => {
             </div>
             <div className="footer-social-icon">
                 <div className="footer-icons-container">
-                    <PiFacebookLogoBold size={50} />
+                    <a href="https://www.facebook.com/luongvung247/" target="_blank" rel="noopener noreferrer">
+                        <PiFacebookLogoBold size={40} />
+                    </a>
                 </div>
                 <div className="footer-icons-container">
-                    <FaInstagram size={50} />
+                    <a href="https://www.facebook.com/luongvung247/" target="_blank" rel="noopener noreferrer">
+                        <FaInstagram size={40} />
+                    </a>
                 </div>
                 <div className="footer-icons-container">
-                    <FaWhatsapp size={50} />
+                    <a href="https://www.facebook.com/luongvung247/" target="_blank" rel="noopener noreferrer">
+                        <FaWhatsapp size={40} />
+                    </a>
                 </div>
             </div>
             <div className="footer-copyright">

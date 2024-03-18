@@ -7,12 +7,22 @@ import 'react-slideshow-image/dist/styles.css';
 import { Slide } from 'react-slideshow-image';
 import Breadcrum from '../Components/Breadcrum/Breadcrum';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import CompareList from '../Components/CompareList/CompareList';
+import Footer from '../Components/Footer/Footer';
 
 const ProductDetail = () => {
     const { slug } = useParams();
     const allProducts = useProducts();
     const product = allProducts.find((product) => product.slug === slug);
     const [showPurchaseConfirmation, setShowPurchaseConfirmation] = useState(false);
+
+    useEffect(() => {
+        document.body.style.overflow = showPurchaseConfirmation ? 'hidden' : 'unset';
+        // Thiết lập lại trạng thái ngăn cuộn khi component bị hủy
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [showPurchaseConfirmation]);
 
     // Xử lý khi click so sánh
     const { addToCompareList, removeFromCompareList, compareList, setViewedProducts } = useContext(ShopContext);
@@ -149,7 +159,7 @@ const ProductDetail = () => {
                                 <span className="product-old-price">
                                     {product.oldPrice.toString().length >= 8
                                         ? product.oldPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-                                        : product.oldPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'd'}
+                                        : product.oldPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ'}
                                 </span>
                                 <span className="product-discount">
                                     Giảm {Math.floor((1 - product.newPrice / product.oldPrice) * 100)}%
@@ -218,7 +228,7 @@ const ProductDetail = () => {
             </div>
             {showPurchaseConfirmation && (
                 <>
-                    <div className="backdrop"></div> {/* Phần backdrop */}
+                    <div className="backdrop"></div>
                     <div className="purchase-confirmation">
                         <AiOutlineCloseCircle
                             style={{ cursor: 'pointer' }}
@@ -261,6 +271,8 @@ const ProductDetail = () => {
                     </div>
                 </>
             )}
+            <CompareList />
+            <Footer />
         </div>
     );
 };

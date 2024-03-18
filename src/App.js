@@ -14,7 +14,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import Footer from './Components/Footer/Footer';
 
 function App() {
     return (
@@ -32,7 +31,6 @@ function App() {
                                 <Route path="/signup" element={<Signup />} />
                                 <Route path="/cart" element={<Cart />} />{' '}
                             </Routes>
-                            <Footer />
                         </ShopContextProvider>
                     </ProductProvider>
                 </BrowserRouter>

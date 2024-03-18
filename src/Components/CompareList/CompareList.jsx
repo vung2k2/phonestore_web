@@ -14,6 +14,18 @@ const CompareList = () => {
     const [showViewedProducts, setShowViewedProducts] = useState(false);
     const [showCompareList, setShowCompareList] = useState(false);
 
+    useEffect(() => {
+        const body = document.body;
+        if (showComparisonTable || showViewedProducts) {
+            body.style.overflow = 'hidden';
+        } else {
+            body.style.overflow = 'unset';
+        }
+        return () => {
+            body.style.overflow = 'unset';
+        };
+    }, [showComparisonTable, showViewedProducts]);
+
     const handleShowCompareList = () => {
         setShowCompareList(true);
     };
@@ -74,7 +86,14 @@ const CompareList = () => {
                                 className="remove"
                                 onClick={handleHideCompareList}
                             />
-                            <button onClick={handleShowComparisonTable}>So sánh ngay</button>
+                            <button
+                                onClick={() => {
+                                    handleShowComparisonTable();
+                                    handleHideCompareList();
+                                }}
+                            >
+                                So sánh ngay
+                            </button>
                             <p className="remove-all" onClick={() => removeAllFromCompareList()}>
                                 Xóa tất cả sản phẩm
                             </p>
@@ -84,10 +103,7 @@ const CompareList = () => {
                 {showComparisonTable && (
                     <>
                         <div className="backdrop"></div>
-                        <DetailedComparisonTable
-                            compareList={compareList}
-                            setShowComparisonTable={setShowComparisonTable}
-                        />
+                        <DetailedComparisonTable setShowComparisonTable={setShowComparisonTable} />
                     </>
                 )}
                 {showViewedProducts && (
