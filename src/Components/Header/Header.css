@@ -27,7 +27,6 @@
 }
 .search-box {
     display: flex;
-
     flex: 1.5;
     align-items: center;
     justify-content: center;
@@ -106,6 +105,10 @@
 .cart {
     position: relative;
 }
+
+.cart-icon {
+    font-size: 35px;
+}
 .cart-count {
     position: absolute;
     width: 22px;
@@ -119,4 +122,47 @@
     font-size: 14px;
     background: red;
     color: white;
+}
+
+@media screen and (max-width: 1024px) {
+    .header {
+        padding: 0 20px;
+        font-size: 16px;
+    }
+
+    .header-logo img {
+        height: 40px;
+    }
+
+    .header-logo p {
+        padding-left: 10px;
+
+        transform: scale(1.3);
+    }
+
+    .search-box input {
+        width: 300px;
+        height: 30px;
+    }
+
+    .search-box button {
+        height: 30px;
+        width: 70px;
+        font-size: 13px;
+    }
+
+    .header-menu li {
+        font-size: 16px;
+    }
+
+    .cart-count {
+        width: 15px;
+        height: 15px;
+        top: -5px;
+        right: -12px;
+    }
+
+    .cart-icon {
+        font-size: 28px;
+    }
 }
