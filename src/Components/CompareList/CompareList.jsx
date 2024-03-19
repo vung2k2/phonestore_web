@@ -108,7 +108,7 @@ const CompareList = () => {
                 )}
                 {showViewedProducts && (
                     <>
-                        <div className="backdrop"></div>
+                        <div className="backdrop-showViewedProducts "></div>
                         <ViewedProducts
                             viewedProducts={getViewedProducts()}
                             setShowViewedProducts={setShowViewedProducts}

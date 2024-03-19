@@ -128,6 +128,7 @@ const DetailedComparisonTable = ({ setShowComparisonTable }) => {
             </div>
             {showViewedProducts && (
                 <>
+                    <div className="backdrop-showViewedProducts "></div>
                     <ViewedProducts
                         viewedProducts={getViewedProducts()}
                         setShowViewedProducts={setShowViewedProducts}
