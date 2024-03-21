@@ -25,35 +25,7 @@
     display: flex;
     padding: auto;
 }
-.search-box {
-    display: flex;
-    flex: 1.5;
-    align-items: center;
-    justify-content: center;
-}
 
-.search-box input {
-    outline: none;
-    width: 400px;
-    height: 35px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px 0px 0px 5px;
-    font-size: 15px;
-}
-
-.search-box button {
-    height: 35px;
-    width: 90px;
-    border: none;
-    color: #253b80;
-    cursor: pointer;
-    border-radius: 0px 5px 5px 0px;
-    font-size: 15px;
-}
-.search-box button:hover {
-    background: #96abe9;
-}
 .header-menu {
     display: flex;
     flex: 2;

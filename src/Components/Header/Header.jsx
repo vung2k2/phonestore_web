@@ -4,6 +4,7 @@ import logo from '../../Assets/img/logo.png';
 import { Link } from 'react-router-dom';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { RiArrowDropDownLine } from 'react-icons/ri';
+import Search from '../Search/Search';
 
 const Header = () => {
     const [showLoginOptions, setShowLoginOptions] = useState(false);
@@ -19,10 +20,7 @@ const Header = () => {
                     <p>Phonestore</p>
                 </Link>
             </div>
-            <div className="search-box">
-                <input type="search" name="search-w" autoComplete="on" placeholder="Bạn cần tìm gi?" />
-                <button type="submit">Tìm kiếm</button>
-            </div>
+            <Search />
             <ul className="header-menu">
                 <li>
                     <Link style={{ textDecoration: 'none', color: 'white' }} to="/">
