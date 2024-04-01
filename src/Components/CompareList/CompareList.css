@@ -63,7 +63,9 @@
     margin-top: 10px;
     cursor: pointer;
 }
-
+.compare-item button:hover {
+    background-color: #253b80;
+}
 .add-icon {
     display: flex;
     font-size: 24px;

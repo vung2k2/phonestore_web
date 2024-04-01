@@ -1,5 +1,5 @@
 // src/components/ProductList.js
-import React from 'react';
+import React, { useState } from 'react';
 
 import './ProductList.css';
 
@@ -24,6 +24,23 @@ const ProductList = ({ selectedCategory, filters }) => {
     //   fetchData();
     // }, []);
 
+    const [sortBy, setSortBy] = useState('bestSelling');
+
+    // Hàm sắp xếp sản phẩm
+    const sortProducts = (products) => {
+        switch (sortBy) {
+            case 'priceHighToLow':
+                return products.slice().sort((a, b) => b.newPrice - a.newPrice);
+            case 'priceLowToHigh':
+                return products.slice().sort((a, b) => a.newPrice - b.newPrice);
+            case 'bestSelling':
+                return products.slice().sort((a, b) => b.numberReview - a.numberReview);
+            default:
+                return products;
+        }
+    };
+
+    // Hàm lọc sản phẩm
     const applyFilters = (product) => {
         let passFilters = true; // Mặc định tất cả các điều kiện đều được thỏa mãn
 
@@ -114,12 +131,22 @@ const ProductList = ({ selectedCategory, filters }) => {
         return passFilters;
     };
 
-    const products = selectedCategory
+    const filteredAndSortedProducts = selectedCategory
         ? allproducts.filter((product) => product.category === selectedCategory && applyFilters(product))
         : allproducts.filter(applyFilters);
 
+    const products = sortProducts(filteredAndSortedProducts);
+
     return (
         <div className="product-list-container">
+            <div className="box-sort">
+                <label>Sắp xếp theo </label>
+                <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                    <option value="bestSelling">Bán chạy</option>
+                    <option value="priceHighToLow">Giá từ cao đến thấp</option>
+                    <option value="priceLowToHigh">Giá từ thấp đến cao</option>
+                </select>
+            </div>
             {products.length > 0 ? (
                 <ul className="product-list">
                     {products.map((product) => (
@@ -127,7 +154,8 @@ const ProductList = ({ selectedCategory, filters }) => {
                     ))}
                 </ul>
             ) : allproducts.length == 0 ? (
-                <p>Đang tải sản phẩm...</p>
+                // <p>Đang tải sản phẩm...</p>
+                <div className="loading-spinner"></div>
             ) : (
                 <p>Không có sản phẩm nào</p>
             )}

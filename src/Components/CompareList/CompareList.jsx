@@ -94,7 +94,11 @@ const CompareList = () => {
                             >
                                 So sánh ngay
                             </button>
-                            <p className="remove-all" onClick={() => removeAllFromCompareList()}>
+                            <p
+                                className="remove-all"
+                                style={{ cursor: 'pointer' }}
+                                onClick={() => removeAllFromCompareList()}
+                            >
                                 Xóa tất cả sản phẩm
                             </p>
                         </div>

@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './CSS/Login.css';
 import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
-import { useDispatch } from 'react-redux';
+
 import { useNavigate } from 'react-router-dom';
-import { LOGIN } from '../redux/reducers/loginReducer';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
@@ -27,9 +25,13 @@ const Login = () => {
 
             if (response.status === 200) {
                 console.log('Đăng nhập thành công:', response.data);
-                dispatch({ type: LOGIN, payload: true });
+
+                localStorage.setItem('accessToken', response.data.accessToken);
+                localStorage.setItem('refreshToken', response.data.refreshToken);
+                localStorage.setItem('userName', response.data.name);
 
                 navigate('/');
+                window.location.reload();
             }
         } catch (error) {
             console.error('Lỗi đăng nhập:', error.response ? error.response.data : error.message);

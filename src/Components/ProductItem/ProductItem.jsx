@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import './ProductItem.css'; // Import CSS file
 import { Link } from 'react-router-dom';
 import { ShopContext } from '../../context/ShopContext';
@@ -30,7 +31,7 @@ const ProductItem = ({ product }) => {
         <li className="product-card">
             <Link style={{ textDecoration: 'none' }} to={`/product/${product.slug}`} className="product-link">
                 <div className="product-card-image-wrapper">
-                    <img className="product-card-image" src={imageUrl} alt={name} />
+                    <LazyLoadImage className="product-card-image" src={imageUrl} width={250} height={250} alt={name} />
                 </div>
             </Link>
             <div className="product-card-info">
