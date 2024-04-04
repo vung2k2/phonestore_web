@@ -1,9 +1,19 @@
 import React, { useContext } from 'react';
 import { ShopContext } from '../context/ShopContext';
 import './CSS/Cart.css';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { CHECK_OUT } from '../redux/reducers/checkout';
 
 const Cart = () => {
     const { cartItems } = useContext(ShopContext);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleCheckout = () => {
+        dispatch({ type: CHECK_OUT, payload: cartItems });
+        navigate('/checkout', { state: { cartItems: cartItems } });
+    };
 
     return (
         <div className="cart-container">
@@ -22,7 +32,9 @@ const Cart = () => {
                             </div>
                         </div>
                     ))}
-                    <button className="proceed-to-checkout">Proceed to Checkout</button>
+                    <button onClick={handleCheckout} className="proceed-to-checkout">
+                        Proceed to Checkout
+                    </button>
                 </div>
             )}
         </div>
