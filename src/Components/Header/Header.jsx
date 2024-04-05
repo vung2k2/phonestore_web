@@ -11,7 +11,7 @@ import Search from '../Search/Search';
 const Header = () => {
     const [showLoginOptions, setShowLoginOptions] = useState(false);
     const [userName, setUserName] = useState('');
-    const { cartItems } = useContext(ShopContext);
+    const { cartItems, getTotalCartItems } = useContext(ShopContext);
 
     useEffect(() => {
         const storedUserName = localStorage.getItem('userName');
@@ -116,7 +116,7 @@ const Header = () => {
                     <Link style={{ textDecoration: 'none', color: 'white' }} to="/cart">
                         <AiOutlineShoppingCart className="cart-icon" />
                     </Link>
-                    <div className="cart-count">{cartItems.length}</div>
+                    <div className="cart-count">{getTotalCartItems()}</div>
                 </li>
             </ul>
         </div>

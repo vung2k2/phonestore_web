@@ -71,9 +71,6 @@ export const ShopContextProvider = (props) => {
             };
 
             fetchCartItems();
-            setTimeout(async () => {
-                console.log(cartItems);
-            }, 5000);
         }
     }, [accessToken]);
 
@@ -95,18 +92,30 @@ export const ShopContextProvider = (props) => {
         }
     };
 
-    const addToCart = async (productId) => {
+    const getTotalCartItems = () => {
+        return cartItems.length;
+    };
+
+    const addToCart = async (product, quantity) => {
+        const updatedProduct = { ...product, productQuantity: quantity || 1 };
+        setCartItems([...cartItems, updatedProduct]);
+
         try {
             const response = await axios.post(
                 'http://localhost:1406/user/cart',
-                { productId },
+                {
+                    productId: product.id,
+                    quantity: quantity,
+                },
                 {
                     headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
                 },
             );
-            setCartItems([...cartItems, response.data]);
+            console.log('Response:', response.data);
+            // Xử lý phản hồi từ máy chủ nếu cần
         } catch (error) {
-            console.error('Error adding item to cart:', error);
+            console.error('Error:', error.response ? error.response.data : error.message);
+            // Xử lý lỗi nếu có
         }
     };
 
@@ -129,9 +138,11 @@ export const ShopContextProvider = (props) => {
         getViewedProducts,
         setViewedProducts,
         cartItems,
+        getTotalCartItems,
         addToCart,
         removeFromCart,
     };
 
     return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>;
 };
+export default ShopContextProvider;

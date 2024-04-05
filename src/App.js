@@ -14,7 +14,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import Footer from './Components/Footer/Footer';
 import ForgotPassword from './Page/ForgotPassword';
 import ResetPassword from './Page/ResetPassword';
 

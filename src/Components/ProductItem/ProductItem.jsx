@@ -7,7 +7,7 @@ import { ShopContext } from '../../context/ShopContext';
 const ProductItem = ({ product }) => {
     const { imageUrl, name, oldPrice, newPrice, rate, numberReview } = product;
 
-    const { addToCompareList, removeFromCompareList, compareList } = useContext(ShopContext);
+    const { addToCompareList, removeFromCompareList, compareList, addToCart } = useContext(ShopContext);
 
     const [isCompared, setIsCompared] = useState(compareList.some((item) => item.id === product.id));
 
@@ -23,8 +23,8 @@ const ProductItem = ({ product }) => {
         }
     };
 
-    const addToCart = () => {
-        // Code xử lý thêm sản phẩm vào giỏ hàng
+    const handleAddToCart = () => {
+        addToCart(product, 1);
     };
 
     return (
@@ -64,7 +64,7 @@ const ProductItem = ({ product }) => {
                     </span>
                 </div>
                 <div className="product-card-actions">
-                    <button className="product-card-action-button" onClick={addToCart}>
+                    <button className="product-card-action-button" onClick={handleAddToCart}>
                         Thêm vào giỏ hàng
                     </button>
                 </div>

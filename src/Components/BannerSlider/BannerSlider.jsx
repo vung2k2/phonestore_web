@@ -5,8 +5,6 @@ import './BannerSlider.css';
 const BannerSlider = () => {
     const slideImages = [
         'https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/vivo-v29e-sliding-th333.png',
-        'https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/oppo-reno-11f-sliding-hssv.jpg',
-        'https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/xiaomi-14-sliding-preorder.jpg',
         'https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/infinix-hot-40-sliding-0111.jpg',
     ];
 
