@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './CSS/Checkout.css';
 import Paypal from '../Components/Paypal';
+import VNPay from '../Components/VNPay';
 
 const Checkout = () => {
     const checkoutItems = useSelector((state) => state.checkoutItems);
@@ -32,9 +33,7 @@ const Checkout = () => {
         <>
             <div className="cart-container">
                 <h1>Shopping Cart</h1>
-                {items.length === 0 ? (
-                    <p className="cart-empty-message">Không có sản phẩm nào trong giỏ hàng</p>
-                ) : (
+                {items.length > 0 ? (
                     <>
                         <div>
                             {items.map((item) => (
@@ -59,7 +58,12 @@ const Checkout = () => {
                                 }}
                             />
                         </div>
+                        <div>
+                            <VNPay total={totalAmount(items)} />
+                        </div>
                     </>
+                ) : (
+                    <div className="cart-empty-message">Không có sản phẩm nào trong giỏ hàng</div>
                 )}
             </div>
         </>
