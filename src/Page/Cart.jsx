@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import VNPay from '../Components/VNPay';
 import Paypal from '../Components/Paypal';
+import Momo from '../Components/Momo';
+import Url from 'url';
 
 const Cart = () => {
     const { cartItems } = useContext(ShopContext);
@@ -30,13 +32,13 @@ const Cart = () => {
         return total;
     };
 
-    const createOrder = async (products) => {
+    const createOrder = async (products, provider) => {
         try {
             const order = await axios.post(
                 'http://localhost:1406/user/order',
                 {
                     total_amount: AmountVNP,
-                    provider: 'vnpay',
+                    provider: provider,
                     payment_status: 'completed',
                 },
                 {
@@ -58,7 +60,7 @@ const Cart = () => {
                     },
                 );
             }
-            toast.success('Thanh toán thành công qua VNPay');
+            toast.success(`Thanh toán thành công qua ${provider}`);
             setTimeout(() => {
                 navigate('/cart');
             }, 6000);
@@ -78,10 +80,15 @@ const Cart = () => {
         const queryString = returnUrl.split('?')[1];
         const params = new URLSearchParams(queryString);
 
+        const resultCode = params.get('resultCode');
         // Lấy giá trị của vnp_ResponseCode
         const responseCode = params.get('vnp_ResponseCode');
-        if (typeof responseCode === 'string' && responseCode === '00') {
-            await createOrder(cartItems);
+        console.log(responseCode);
+        if (typeof responseCode === 'string' && responseCode === '00' && resultCode === null) {
+            await createOrder(cartItems, 'VNPay');
+        }
+        if (typeof resultCode === 'string' && resultCode === '0' && responseCode === null) {
+            await createOrder(cartItems, 'Momo');
         } else {
             toast.error('Thanh toán thất bại');
         }
@@ -132,6 +139,9 @@ const Cart = () => {
                     </div>
                     <div>
                         <VNPay total={totalAmount(cartItems)} />
+                    </div>
+                    <div>
+                        <Momo total={totalAmount(cartItems) / 100} />
                     </div>
                 </div>
             )}
