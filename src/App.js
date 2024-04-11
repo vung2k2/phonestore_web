@@ -16,6 +16,7 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import ForgotPassword from './Page/ForgotPassword';
 import ResetPassword from './Page/ResetPassword';
+import Checkout from './Page/Checkout';
 
 function App() {
     return (
@@ -34,6 +35,7 @@ function App() {
                                 <Route path="/cart" element={<Cart />} />{' '}
                                 <Route path="/forgot-password" element={<ForgotPassword />} />
                                 <Route path="/reset-password" element={<ResetPassword />} />
+                                <Route path="/checkout" element={<Checkout />} />
                             </Routes>
                         </ShopContextProvider>
                     </ProductProvider>

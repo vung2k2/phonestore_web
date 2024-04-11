@@ -29,9 +29,10 @@ const Login = () => {
                 localStorage.setItem('accessToken', response.data.accessToken);
                 localStorage.setItem('refreshToken', response.data.refreshToken);
                 localStorage.setItem('userName', response.data.name);
+                localStorage.setItem('userPhoneNumber', response.data.phone);
+                localStorage.setItem('userAddress', response.data.address);
 
-                navigate('/');
-                window.location.reload();
+                window.location.href = '/';
             }
         } catch (error) {
             console.error('Lỗi đăng nhập:', error.response ? error.response.data : error.message);

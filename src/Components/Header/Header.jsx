@@ -29,7 +29,7 @@ const Header = () => {
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('userName');
         setUserName(''); // Đặt userName về giá trị rỗng sau khi xóa
-        window.location.reload();
+        window.location.href = '/';
     };
 
     return (

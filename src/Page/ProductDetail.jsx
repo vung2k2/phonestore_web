@@ -12,9 +12,15 @@ import Footer from '../Components/Footer/Footer';
 
 const ProductDetail = () => {
     const { slug } = useParams();
+    const { addToCart } = useContext(ShopContext);
     const allProducts = useProducts();
     const product = allProducts.find((product) => product.slug === slug);
     const [showPurchaseConfirmation, setShowPurchaseConfirmation] = useState(false);
+    const [quantity, setQuantity] = useState(1);
+
+    const handleAddToCart = () => {
+        addToCart(product, quantity); // Gọi hàm addToCart và truyền vào id và số lượng
+    };
 
     useEffect(() => {
         document.body.style.overflow = showPurchaseConfirmation ? 'hidden' : 'unset';
@@ -257,11 +263,17 @@ const ProductDetail = () => {
                         </div>
                         <div className="select-quantity">
                             <p>Chọn số lượng:</p>
-                            <input type="number" defaultValue="1" min={1} max={product.quantity} />
+                            <input
+                                type="number"
+                                value={quantity}
+                                min={1}
+                                max={product.quantity}
+                                onChange={(e) => setQuantity(parseInt(e.target.value))}
+                            />
                             <span> {product.quantity} sản phẩm có sẵn</span>
                         </div>
                         <div className="add-cart">
-                            <button>Thêm vào giỏ hàng</button>
+                            <button onClick={handleAddToCart}>Thêm vào giỏ hàng</button>
                         </div>
                         <div style={{ width: '100%', paddingTop: '5px', justifyContent: 'center', display: 'flex' }}>
                             <Link style={{ textDecoration: 'none', color: 'blue', textAlign: 'center' }} to="/cart">

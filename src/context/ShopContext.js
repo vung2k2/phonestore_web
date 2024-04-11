@@ -97,8 +97,24 @@ export const ShopContextProvider = (props) => {
     };
 
     const addToCart = async (product, quantity) => {
-        const updatedProduct = { ...product, productQuantity: quantity || 1 };
-        setCartItems([...cartItems, updatedProduct]);
+        // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
+        const existingProductIndex = cartItems.findIndex((item) => item.id === product.id);
+
+        if (existingProductIndex !== -1) {
+            // Nếu sản phẩm đã tồn tại trong giỏ hàng, tăng số lượng của nó
+            const updatedCartItems = cartItems.map((item, index) => {
+                if (index === existingProductIndex) {
+                    return { ...item, productQuantity: item.productQuantity + 1 };
+                }
+                return item;
+            });
+
+            setCartItems(updatedCartItems);
+        } else {
+            // Nếu sản phẩm chưa có trong giỏ hàng, thêm mới vào giỏ hàng với số lượng là 1
+            const updatedProduct = { ...product, productQuantity: 1 };
+            setCartItems([...cartItems, updatedProduct]);
+        }
 
         try {
             const response = await axios.post(
@@ -121,7 +137,7 @@ export const ShopContextProvider = (props) => {
 
     const removeFromCart = async (productId) => {
         try {
-            await axios.delete(`http://localhost:1406/user/cart/${productId}`, {
+            await axios.delete(`http://localhost:1406/user/delete-product/${productId}`, {
                 headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
             });
             setCartItems(cartItems.filter((item) => item.id !== productId));
@@ -130,6 +146,22 @@ export const ShopContextProvider = (props) => {
         }
     };
 
+    const changeQuantityItem = async (productId, quantity) => {
+        try {
+            await axios.put(
+                `http://localhost:1406/user/change-quantity`,
+                {
+                    productId: productId,
+                    quantity: quantity,
+                },
+                {
+                    headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
+                },
+            );
+        } catch (error) {
+            console.error('Lỗi cập nhật số lượng sp trong cart:', error);
+        }
+    };
     const contextValue = {
         compareList,
         addToCompareList,
@@ -138,9 +170,11 @@ export const ShopContextProvider = (props) => {
         getViewedProducts,
         setViewedProducts,
         cartItems,
+        setCartItems,
         getTotalCartItems,
         addToCart,
         removeFromCart,
+        changeQuantityItem,
     };
 
     return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>;
