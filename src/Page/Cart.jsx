@@ -14,6 +14,7 @@ import { IoMdAdd } from 'react-icons/io';
 import TextField from '@mui/material/TextField';
 import { IoIosArrowBack } from 'react-icons/io';
 import Loading from '../Components/Loading/Loading';
+import SelectAddress from '../Components/SelectAddress/SelectAddress';
 
 const Cart = () => {
     const { cartItems, setCartItems, removeFromCart, changeQuantityItem } = useContext(ShopContext);
@@ -22,6 +23,7 @@ const Cart = () => {
     const navigate = useNavigate();
     const accessToken = localStorage.getItem('accessToken');
     const [isLoading, setIsLoading] = useState(false);
+    const [isEditingAddress, setIsEditingAddress] = useState(false);
 
     const timeoutRef = useRef(null);
 
@@ -83,6 +85,16 @@ const Cart = () => {
             ? ''
             : localStorage.getItem('userAddress'),
     );
+
+    const handleAddressSelect = (address) => {
+        setUserAddress(address);
+        localStorage.setItem('userAddress', address);
+        setIsEditingAddress(false);
+    };
+
+    const handleEditAddress = () => {
+        setIsEditingAddress((prevState) => !prevState);
+    };
 
     function formatCurrency(amount) {
         return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
@@ -292,8 +304,13 @@ const Cart = () => {
 
                                 <div className="address">
                                     <p>
-                                        Địa chỉ: {userAddress}
+                                        <i>
+                                            <b>Địa chỉ: </b>
+                                        </i>
+                                        {'     '}
+                                        {userAddress}
                                         <span
+                                            onClick={handleEditAddress}
                                             style={{
                                                 color: 'blue',
                                                 cursor: 'pointer',
@@ -304,6 +321,7 @@ const Cart = () => {
                                             Sửa
                                         </span>
                                     </p>
+                                    {isEditingAddress && <SelectAddress onSelect={handleAddressSelect} />}
                                 </div>
                             </div>
                             <div className="pay">
