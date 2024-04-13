@@ -32,7 +32,7 @@ const ButtonWrapper = ({ currency, showSpinner, total, payload }) => {
                     {
                         total_amount: payload.amount,
                         provider: 'paypal',
-                        payment_status: 'completed',
+                        payment_status: 'pending',
                     },
                     {
                         headers: { 'Content-Type': 'application/json', AccessToken: accessToken },

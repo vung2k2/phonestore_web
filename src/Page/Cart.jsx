@@ -39,7 +39,7 @@ const Cart = () => {
                 {
                     total_amount: AmountVNP,
                     provider: provider,
-                    payment_status: 'completed',
+                    payment_status: 'pending',
                 },
                 {
                     headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
