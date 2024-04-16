@@ -9,6 +9,7 @@ import Breadcrum from '../Components/Breadcrum/Breadcrum';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import CompareList from '../Components/CompareList/CompareList';
 import Footer from '../Components/Footer/Footer';
+import { toast } from 'react-toastify';
 
 const ProductDetail = () => {
     const { slug } = useParams();
@@ -20,6 +21,8 @@ const ProductDetail = () => {
 
     const handleAddToCart = () => {
         addToCart(product, quantity); // Gọi hàm addToCart và truyền vào id và số lượng
+        toast.success('Đã thêm vào giỏ hàng', { position: 'top-center', autoClose: 1500 });
+        setShowPurchaseConfirmation(false);
     };
 
     useEffect(() => {

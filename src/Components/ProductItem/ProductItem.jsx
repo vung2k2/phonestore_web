@@ -3,6 +3,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import './ProductItem.css'; // Import CSS file
 import { Link } from 'react-router-dom';
 import { ShopContext } from '../../context/ShopContext';
+import { toast } from 'react-toastify';
 
 const ProductItem = ({ product }) => {
     const { imageUrl, name, oldPrice, newPrice, rate, numberReview } = product;
@@ -19,12 +20,13 @@ const ProductItem = ({ product }) => {
             addToCompareList(product);
             setIsCompared(!isCompared);
         } else {
-            alert('Danh sách so sánh đã đầy');
+            toast.warning('Danh sách đã đầy!', { position: 'top-center', autoClose: 1500 });
         }
     };
 
     const handleAddToCart = () => {
         addToCart(product, 1);
+        toast.success('Đã thêm vào giỏ hàng', { position: 'top-center', autoClose: 1500 });
     };
 
     return (

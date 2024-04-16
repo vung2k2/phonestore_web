@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useProducts } from './ProductContext';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export const ShopContext = createContext(null);
 
@@ -146,6 +147,21 @@ export const ShopContextProvider = (props) => {
         }
     };
 
+    const deleteCart = async () => {
+        try {
+            await axios.post(
+                `http://localhost:1406/user/delete-all-cart`,
+                {},
+                {
+                    headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
+                },
+            );
+            setCartItems([]);
+        } catch (error) {
+            console.error('Error removing item from cart:', error);
+        }
+    };
+
     const changeQuantityItem = async (productId, quantity) => {
         try {
             await axios.put(
@@ -162,6 +178,74 @@ export const ShopContextProvider = (props) => {
             console.error('Lỗi cập nhật số lượng sp trong cart:', error);
         }
     };
+
+    const totalAmount = () => {
+        let total = 0;
+        for (let i = 0; i < cartItems.length; i++) {
+            total += cartItems[i].newPrice * cartItems[i].productQuantity;
+        }
+
+        return total;
+    };
+
+    const createOrder = async () => {
+        try {
+            const order = await axios.post(
+                'http://localhost:1406/user/order',
+                {
+                    total_amount: totalAmount(),
+                    provider: 'vnpay',
+                    payment_status: 'pending',
+                },
+                {
+                    headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
+                },
+            );
+
+            let order_id = order.data.insertId;
+            for (let i = 0; i < cartItems.length; i++) {
+                await axios.post(
+                    'http://localhost:1406/user/order-detail',
+                    {
+                        order_id: order_id,
+                        productId: cartItems[i].id,
+                        quantity: cartItems[i].productQuantity,
+                        price: parseInt(parseInt(cartItems[i].productQuantity) * parseInt(cartItems[i].newPrice)),
+                    },
+                    {
+                        headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
+                    },
+                );
+            }
+            deleteCart();
+        } catch (error) {
+            console.error('Error creating order:', error);
+        }
+    };
+
+    const updateInfo = async (name, address, phone) => {
+        try {
+            await axios.put(
+                `http://localhost:1406/user/info`,
+                {
+                    name: name,
+                    address: address,
+                    phone: phone,
+                },
+                {
+                    headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
+                },
+            );
+            localStorage.setItem('userName', name);
+            localStorage.setItem('userAddress', address);
+            localStorage.setItem('userPhoneNumber', phone);
+            toast.success('Đã cập nhật thông tin cá nhân!', { position: 'top-center', autoClose: 1500 });
+            window.location.reload();
+        } catch (error) {
+            console.error('Lỗi cập nhật thoong tin cá nhân:', error);
+            toast.error('Đã xảy ra lỗi!', { position: 'top-center', autoClose: 1500 });
+        }
+    };
     const contextValue = {
         compareList,
         addToCompareList,
@@ -174,7 +258,10 @@ export const ShopContextProvider = (props) => {
         getTotalCartItems,
         addToCart,
         removeFromCart,
+        deleteCart,
+        createOrder,
         changeQuantityItem,
+        updateInfo,
     };
 
     return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>;

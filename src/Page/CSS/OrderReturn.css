@@ -1,0 +1,39 @@
+.order-return {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.order-return .icon-success {
+    font-size: 100px;
+    color: green;
+}
+.order-return .icon-error {
+    font-size: 100px;
+    color: red;
+}
+.order-return p {
+    font-size: 35px;
+    margin-top: -20px;
+}
+.order-return .btn {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.order-return .btn button {
+    padding: 10px 20px; /* Kích thước padding cho nút */
+    background-color: #3d559d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.order-return .btn button:hover {
+    background-color: #0f2d84;
+}

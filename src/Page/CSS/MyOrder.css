@@ -1,0 +1,36 @@
+.my-order {
+    background: #f0f0f0;
+    padding: 60px 300px 90px 300px;
+}
+.my-order-main {
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 20px;
+    justify-content: center;
+    padding: 1px 0px 60px 0px;
+}
+.my-order-category {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    padding-bottom: 20px;
+    background-color: #f0f0f0;
+}
+
+.my-order-category button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.my-order-category button.active {
+    background-color: #253b80;
+    color: #fff;
+}

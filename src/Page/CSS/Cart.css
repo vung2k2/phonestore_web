@@ -117,6 +117,7 @@
 }
 .cartitems-right .pay > div {
     padding-bottom: 10px;
+    cursor: pointer;
 }
 .cartitems-right .customer-info {
     border-bottom: 1px solid #ccc;

@@ -67,9 +67,21 @@ const Header = () => {
                                             color: 'white',
                                             marginLeft: '0px',
                                         }}
-                                        to="/login"
+                                        to="/my-account"
                                     >
                                         Tài khoản
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        style={{
+                                            textDecoration: 'none',
+                                            color: 'white',
+                                            marginLeft: '0px',
+                                        }}
+                                        to="/my-order"
+                                    >
+                                        Đơn mua
                                     </Link>
                                 </li>
                                 <li onClick={handleLogout}>Đăng xuất</li>

@@ -17,6 +17,9 @@ import { store } from './redux/store';
 import ForgotPassword from './Page/ForgotPassword';
 import ResetPassword from './Page/ResetPassword';
 import Checkout from './Page/Checkout';
+import MyAccount from './Page/MyAccount';
+import OrderReturn from './Page/OrderReturn';
+import MyOrder from './Page/MyOrder';
 
 function App() {
     return (
@@ -32,10 +35,13 @@ function App() {
                                 <Route path="/product/:slug" element={<ProductDetail />} />
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/signup" element={<Signup />} />
-                                <Route path="/cart" element={<Cart />} />{' '}
+                                <Route path="/cart" element={<Cart />} />
+                                <Route path="/my-account" element={<MyAccount />} />
                                 <Route path="/forgot-password" element={<ForgotPassword />} />
                                 <Route path="/reset-password" element={<ResetPassword />} />
                                 <Route path="/checkout" element={<Checkout />} />
+                                <Route path="/order-return" element={<OrderReturn />} />
+                                <Route path="/my-order" element={<MyOrder />} />
                             </Routes>
                         </ShopContextProvider>
                     </ProductProvider>

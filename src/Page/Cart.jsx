@@ -17,8 +17,7 @@ import Loading from '../Components/Loading/Loading';
 import SelectAddress from '../Components/SelectAddress/SelectAddress';
 
 const Cart = () => {
-    const { cartItems, setCartItems, removeFromCart, changeQuantityItem } = useContext(ShopContext);
-    const [currentUrl, setCurrentUrl] = useState('http://localhost:3000/cart');
+    const { cartItems, setCartItems, removeFromCart, changeQuantityItem, deleteCart } = useContext(ShopContext);
     const [AmountVNP, setAmountVNP] = useState(0);
     const navigate = useNavigate();
     const accessToken = localStorage.getItem('accessToken');
@@ -109,75 +108,12 @@ const Cart = () => {
         return total;
     };
 
-    const createOrder = async (products) => {
-        try {
-            const order = await axios.post(
-                'http://localhost:1406/user/order',
-                {
-                    total_amount: AmountVNP,
-                    provider: 'vnpay',
-                    payment_status: 'completed',
-                },
-                {
-                    headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
-                },
-            );
-            let order_id = order.data.insertId;
-            for (let i = 0; i < products.length; i++) {
-                await axios.post(
-                    'http://localhost:1406/user/order-detail',
-                    {
-                        order_id: order_id,
-                        productId: products[i].id,
-                        quantity: products[i].productQuantity,
-                        price: parseInt(parseInt(products[i].productQuantity) * parseInt(products[i].newPrice)),
-                    },
-                    {
-                        headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
-                    },
-                );
-            }
-            toast.success('Thanh toán thành công qua VNPay');
-            setTimeout(() => {
-                navigate('/cart');
-            }, 6000);
-        } catch (error) {
-            console.error('Error creating order:', error);
-        }
-    };
-
     const vndToUsd = (vnd) => {
         const exchangeRate = 23000;
         return vnd / exchangeRate;
     };
 
     let amount = parseInt(vndToUsd(totalAmount(cartItems)));
-
-    const getStatus = async (returnUrl) => {
-        const queryString = returnUrl.split('?')[1];
-        const params = new URLSearchParams(queryString);
-
-        // Lấy giá trị của vnp_ResponseCode
-        const responseCode = params.get('vnp_ResponseCode');
-        if (typeof responseCode === 'string' && responseCode === '00') {
-            await createOrder(cartItems);
-        } else {
-            toast.error('Thanh toán thất bại');
-        }
-    };
-
-    useEffect(() => {
-        // Mã này sẽ được thực thi mỗi khi currentUrl thay đổi
-        if (currentUrl !== 'http://localhost:3000/cart') {
-            getStatus(currentUrl);
-        }
-    }, [currentUrl, AmountVNP]); // Theo dõi sự thay đổi của currentUrl
-
-    useEffect(() => {
-        // Lấy currentUrl khi component được render
-        let currentUrl = window.location.href;
-        setCurrentUrl(currentUrl);
-    }, []);
 
     useEffect(() => {
         setAmountVNP(totalAmount(cartItems));
@@ -213,61 +149,67 @@ const Cart = () => {
                             </div>
                             <hr />
 
-                            {cartItems.map((product) => (
-                                <div key={product.id}>
-                                    <div className="cartitems-left-format cartitems-left-format-main">
-                                        <div className="cartitems-info">
-                                            <Link style={{ textDecoration: 'none' }} to={`/product/${product.slug}`}>
-                                                <img src={product.imageUrl} className="product-img" alt="" />
-                                            </Link>
-                                            <div className="product-name-price">
-                                                <div className="name">{product.name}</div>
-                                                <div className="price">
-                                                    <div className="new-price">
-                                                        {product.newPrice
-                                                            .toString()
-                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '.đ'}
+                            {cartItems
+                                .slice()
+                                .reverse()
+                                .map((product) => (
+                                    <div key={product.id}>
+                                        <div className="cartitems-left-format cartitems-left-format-main">
+                                            <div className="cartitems-info">
+                                                <Link
+                                                    style={{ textDecoration: 'none' }}
+                                                    to={`/product/${product.slug}`}
+                                                >
+                                                    <img src={product.imageUrl} className="product-img" alt="" />
+                                                </Link>
+                                                <div className="product-name-price">
+                                                    <div className="name">{product.name}</div>
+                                                    <div className="price">
+                                                        <div className="new-price">
+                                                            {product.newPrice
+                                                                .toString()
+                                                                .replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '.đ'}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="cartitems-quantity">
-                                            <button
-                                                onClick={() => handleQuantityChange(product.id, -1)}
-                                                disabled={product.productQuantity <= 1}
-                                            >
-                                                <IoMdRemove size={20} />
-                                            </button>
-                                            <input
-                                                type="text"
-                                                className="cartitems-quantity-value"
-                                                maxLength={3}
-                                                value={product.productQuantity}
-                                                readOnly
-                                            />
-                                            <button
-                                                onClick={() => handleQuantityChange(product.id, 1)}
-                                                disabled={product.productQuantity >= product.quantity}
-                                            >
-                                                <IoMdAdd size={20} />
-                                            </button>
-                                        </div>
+                                            <div className="cartitems-quantity">
+                                                <button
+                                                    onClick={() => handleQuantityChange(product.id, -1)}
+                                                    disabled={product.productQuantity <= 1}
+                                                >
+                                                    <IoMdRemove size={20} />
+                                                </button>
+                                                <input
+                                                    type="text"
+                                                    className="cartitems-quantity-value"
+                                                    maxLength={3}
+                                                    value={product.productQuantity}
+                                                    readOnly
+                                                />
+                                                <button
+                                                    onClick={() => handleQuantityChange(product.id, 1)}
+                                                    disabled={product.productQuantity >= product.quantity}
+                                                >
+                                                    <IoMdAdd size={20} />
+                                                </button>
+                                            </div>
 
-                                        <p className="cartitems-price-total">
-                                            {(product.newPrice * product.productQuantity)
-                                                .toString()
-                                                .replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '.đ'}
-                                        </p>
-                                        <RiDeleteBin6Line
-                                            className="cartitems-remove-icon"
-                                            size={25}
-                                            style={{ cursor: 'pointer' }}
-                                            onClick={() => removeFromCart(product.id)}
-                                        />
+                                            <p className="cartitems-price-total">
+                                                {(product.newPrice * product.productQuantity)
+                                                    .toString()
+                                                    .replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '.đ'}
+                                            </p>
+                                            <RiDeleteBin6Line
+                                                className="cartitems-remove-icon"
+                                                size={25}
+                                                style={{ cursor: 'pointer' }}
+                                                onClick={() => removeFromCart(product.id)}
+                                            />
+                                        </div>
+                                        <hr />
                                     </div>
-                                    <hr />
-                                </div>
-                            ))}
+                                ))}
                         </div>
                         <div className="cartitems-right">
                             <div className="customer-info">

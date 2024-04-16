@@ -1,14 +1,16 @@
 import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { ShopContext } from '../../context/ShopContext';
 
 // This value is from the props in the UI
 const style = { layout: 'vertical' };
 
 // Custom component to wrap the PayPalButtons and show loading spinner
 const ButtonWrapper = ({ currency, showSpinner, total, payload }) => {
+    const { deleteCart } = useContext(ShopContext);
     const navigate = useNavigate();
     let products = payload.products;
     const accessToken = localStorage.getItem('accessToken');
@@ -32,7 +34,7 @@ const ButtonWrapper = ({ currency, showSpinner, total, payload }) => {
                     {
                         total_amount: payload.amount,
                         provider: 'paypal',
-                        payment_status: 'completed',
+                        payment_status: 'pending',
                     },
                     {
                         headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
@@ -53,12 +55,9 @@ const ButtonWrapper = ({ currency, showSpinner, total, payload }) => {
                         },
                     );
                 }
-
-                toast.success('Thanh toán thành công');
-                setTimeout(() => {
-                    navigate('/cart');
-                }, 6000);
-            } else toast.error('Thanh toán thất bại');
+                deleteCart();
+                navigate('/order-return?paypal_TransactionStatus=00');
+            } else navigate('/order-return?paypal_TransactionStatus=01');
         });
     };
 

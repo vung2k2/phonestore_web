@@ -6,9 +6,15 @@ import vnpay_logo from '../../Assets/img/vnpay-logo.png';
 const VNPayy = ({ total }) => {
     const navigate = useNavigate();
     const handleClick = async () => {
-        const response = await axios.post('http://localhost:1406/user/payment', {
-            total: total,
-        });
+        const response = await axios.post(
+            'http://localhost:1406/user/payment',
+            {
+                total: total,
+            },
+            {
+                headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
+            },
+        );
         window.location.href = response.data;
     };
 
@@ -22,6 +28,7 @@ const VNPayy = ({ total }) => {
                 justifyContent: 'center',
                 backgroundColor: '#ccc',
                 borderRadius: '5px',
+                cursor: 'pointer',
             }}
         >
             <img style={{ width: '100px' }} onClick={handleClick} src={vnpay_logo} alt="" />
