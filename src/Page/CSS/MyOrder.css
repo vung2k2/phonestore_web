@@ -14,14 +14,16 @@
 .my-order-category {
     display: flex;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 25px;
     padding-bottom: 20px;
     background-color: #f0f0f0;
 }
 
 .my-order-category button {
+    position: relative;
+
     padding: 8px 12px;
-    border: none;
+    border: 1px solid #253b80;
     border-radius: 5px;
     background-color: #fff;
     color: #333;
@@ -33,4 +35,19 @@
 .my-order-category button.active {
     background-color: #253b80;
     color: #fff;
+}
+.my-order-category span {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: -10px;
+    right: -10px;
+    border-radius: 11px;
+    font-size: 12px;
+    font-weight: 600;
+    background: red;
+    color: white;
 }

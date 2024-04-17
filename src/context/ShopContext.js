@@ -9,6 +9,7 @@ export const ShopContextProvider = (props) => {
     const [compareList, setCompareList] = useState([]);
     const [viewedProducts, setViewedProducts] = useState([]);
     const [cartItems, setCartItems] = useState([]);
+    const [orders, setOrders] = useState([]);
     const [accessToken, setAccessToken] = useState('');
     const [refreshToken, setRefreshToken] = useState('');
 
@@ -223,6 +224,24 @@ export const ShopContextProvider = (props) => {
         }
     };
 
+    const fetchOrders = async () => {
+        try {
+            const response = await axios.get(
+                'http://localhost:1406/user/detail-order',
+
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        AccessToken: localStorage.getItem('accessToken'),
+                    },
+                },
+            );
+            setOrders(response.data);
+        } catch (error) {
+            console.error('Lỗi tải đơn hàng:', error);
+        }
+    };
+
     const updateInfo = async (name, address, phone) => {
         try {
             await axios.put(
@@ -254,12 +273,14 @@ export const ShopContextProvider = (props) => {
         getViewedProducts,
         setViewedProducts,
         cartItems,
+        orders,
         setCartItems,
         getTotalCartItems,
         addToCart,
         removeFromCart,
         deleteCart,
         createOrder,
+        fetchOrders,
         changeQuantityItem,
         updateInfo,
     };

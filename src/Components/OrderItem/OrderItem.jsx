@@ -3,7 +3,7 @@ import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import './OrderItem.css';
 
 const OrderItem = ({ order }) => {
-    const { id, total_amount, order_status, order_date, order_details } = order;
+    const { id, total_amount, status, order_date, order_details } = order;
     const maxItemsToShow = 2;
     const [showAllItems, setShowAllItems] = useState(false);
 
@@ -16,7 +16,7 @@ const OrderItem = ({ order }) => {
     const showMoreButton = !showAllItems && order_details.length > maxItemsToShow;
 
     const renderActionButton = () => {
-        switch (order_status) {
+        switch (status) {
             case 'pending':
                 return <button className="cancel-btn">Hủy đơn</button>;
             case 'delivered':
@@ -44,8 +44,12 @@ const OrderItem = ({ order }) => {
                                 <p className="item-quantity">x{detail.quantity}</p>
                             </div>
                             <div className="price">
-                                <p className="price-old">9.000.000.đ</p>
-                                <p className="price-new">5.000.000.đ</p>
+                                <p className="price-old">
+                                    {detail.oldPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ'}
+                                </p>
+                                <p className="price-new">
+                                    {detail.newPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ'}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -59,7 +63,7 @@ const OrderItem = ({ order }) => {
             </div>
             <div className="bottom">
                 <p className="total-amount">
-                    Thành tiền: <span>5.000.000.đ</span>
+                    Thành tiền: <span>{total_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ'}</span>
                 </p>
                 {renderActionButton()}
             </div>
