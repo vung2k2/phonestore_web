@@ -5,6 +5,7 @@ import Footer from '../Components/Footer/Footer';
 import { TextField } from '@mui/material';
 import SelectAddress from '../Components/SelectAddress/SelectAddress';
 import { ShopContext } from '../context/ShopContext';
+import { ClassNames } from '@emotion/react';
 
 const MyAccount = () => {
     const { updateInfo } = useContext(ShopContext);
@@ -100,10 +101,14 @@ const MyAccount = () => {
                                 onClick={() => {
                                     updateInfo(userName, userAddress, userPhoneNumber);
                                 }}
+                                className="btn"
                             >
                                 Cập nhật thông tin
                             </button>
-                            <button style={{ background: '#cad8ff', color: '#3d559d', fontWeight: 600 }}>
+                            <button
+                                className="btn"
+                                style={{ background: '#cad8ff', color: '#3d559d', fontWeight: 600 }}
+                            >
                                 Thay đổi mật khẩu
                             </button>
                         </div>

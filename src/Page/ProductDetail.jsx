@@ -20,8 +20,7 @@ const ProductDetail = () => {
     const [quantity, setQuantity] = useState(1);
 
     const handleAddToCart = () => {
-        addToCart(product, quantity); // Gọi hàm addToCart và truyền vào id và số lượng
-        toast.success('Đã thêm vào giỏ hàng', { position: 'top-center', autoClose: 1500 });
+        addToCart(product.id, quantity); // Gọi hàm addToCart và truyền vào id và số lượng
         setShowPurchaseConfirmation(false);
     };
 

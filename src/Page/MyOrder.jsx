@@ -10,7 +10,6 @@ const MyOrder = () => {
     useEffect(() => {
         // Gọi hàm để lấy tất cả hóa đơn khi component được render lần đầu tiên
         fetchOrders();
-        console.log(orders);
     }, []);
 
     // Hàm lọc danh sách các đơn hàng theo category
@@ -23,7 +22,7 @@ const MyOrder = () => {
     const categories = [
         { label: 'Tất cả', value: 'all' },
         { label: 'Chờ xác nhận', value: 'pending' },
-        { label: 'Đã mua', value: 'delivered' },
+        { label: 'Đã mua', value: 'completed' },
         { label: 'Đã hủy', value: 'cancelled' },
     ];
 
@@ -38,7 +37,7 @@ const MyOrder = () => {
             <div className="my-order-category">
                 {/* Hiển thị danh sách các category */}
                 {categories.map((category, index) => (
-                    <div>
+                    <div key={index}>
                         <button
                             key={index}
                             className={selectedCategory === category.value ? 'active' : ''}
@@ -54,9 +53,12 @@ const MyOrder = () => {
             </div>
             <div className="my-order-main">
                 {/* Hiển thị danh sách các đơn hàng */}
-                {filteredOrders.map((order, index) => (
-                    <OrderItem key={index} order={order} />
-                ))}
+                {filteredOrders
+                    .slice()
+                    .reverse()
+                    .map((order, index) => (
+                        <OrderItem key={index} order={order} />
+                    ))}
             </div>
         </div>
     );

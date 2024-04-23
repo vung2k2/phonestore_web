@@ -60,21 +60,20 @@ export const ShopContextProvider = (props) => {
             setAccessToken(storedAccessToken);
             setRefreshToken(storedRefreshToken);
 
-            const fetchCartItems = async () => {
-                try {
-                    const response = await axios.get('http://localhost:1406/user/cart', {
-                        headers: { 'Content-Type': 'application/json', AccessToken: storedAccessToken },
-                    });
-                    setCartItems(response.data);
-                } catch (error) {
-                    console.error('Error fetching cart items:', error);
-                    await refreshAccessToken(storedRefreshToken);
-                }
-            };
-
             fetchCartItems();
         }
     }, [accessToken]);
+
+    const fetchCartItems = async () => {
+        try {
+            const response = await axios.get('http://localhost:1406/user/cart', {
+                headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
+            });
+            setCartItems(response.data);
+        } catch (error) {
+            console.error('Error fetching cart items:', error);
+        }
+    };
 
     const refreshAccessToken = async (refreshToken) => {
         try {
@@ -98,39 +97,39 @@ export const ShopContextProvider = (props) => {
         return cartItems.length;
     };
 
-    const addToCart = async (product, quantity) => {
-        // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
-        const existingProductIndex = cartItems.findIndex((item) => item.id === product.id);
+    const addToCart = async (id, quantity) => {
+        // // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
+        // const existingProductIndex = cartItems.findIndex((item) => item.id === product.id);
 
-        if (existingProductIndex !== -1) {
-            // Nếu sản phẩm đã tồn tại trong giỏ hàng, tăng số lượng của nó
-            const updatedCartItems = cartItems.map((item, index) => {
-                if (index === existingProductIndex) {
-                    return { ...item, productQuantity: item.productQuantity + 1 };
-                }
-                return item;
-            });
+        // if (existingProductIndex !== -1) {
+        //     // Nếu sản phẩm đã tồn tại trong giỏ hàng, tăng số lượng của nó
+        //     const updatedCartItems = cartItems.map((item, index) => {
+        //         if (index === existingProductIndex) {
+        //             return { ...item, productQuantity: item.productQuantity + quantity };
+        //         }
+        //         return item;
+        //     });
 
-            setCartItems(updatedCartItems);
-        } else {
-            // Nếu sản phẩm chưa có trong giỏ hàng, thêm mới vào giỏ hàng với số lượng là 1
-            const updatedProduct = { ...product, productQuantity: 1 };
-            setCartItems([...cartItems, updatedProduct]);
-        }
+        //     setCartItems(updatedCartItems);
+        // } else {
+        //     // Nếu sản phẩm chưa có trong giỏ hàng, thêm mới vào giỏ hàng với số lượng là 1
+        //     const updatedProduct = { ...product, productQuantity: quantity };
+        //     setCartItems([...cartItems, updatedProduct]);
+        // }
 
         try {
             const response = await axios.post(
                 'http://localhost:1406/user/cart',
                 {
-                    productId: product.id,
+                    productId: id,
                     quantity: quantity,
                 },
                 {
-                    headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
+                    headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
                 },
             );
-            console.log('Response:', response.data);
-            // Xử lý phản hồi từ máy chủ nếu cần
+            toast.success('Đã thêm vào giỏ hàng', { position: 'top-center', autoClose: 1500 });
+            fetchCartItems();
         } catch (error) {
             console.error('Error:', error.response ? error.response.data : error.message);
             // Xử lý lỗi nếu có
@@ -140,7 +139,7 @@ export const ShopContextProvider = (props) => {
     const removeFromCart = async (productId) => {
         try {
             await axios.delete(`http://localhost:1406/user/delete-product/${productId}`, {
-                headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
+                headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
             });
             setCartItems(cartItems.filter((item) => item.id !== productId));
         } catch (error) {
@@ -154,7 +153,7 @@ export const ShopContextProvider = (props) => {
                 `http://localhost:1406/user/delete-all-cart`,
                 {},
                 {
-                    headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
+                    headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
                 },
             );
             setCartItems([]);
@@ -172,7 +171,7 @@ export const ShopContextProvider = (props) => {
                     quantity: quantity,
                 },
                 {
-                    headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
+                    headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
                 },
             );
         } catch (error) {
@@ -189,21 +188,23 @@ export const ShopContextProvider = (props) => {
         return total;
     };
 
-    const createOrder = async () => {
+    const createOrder = async (amount) => {
         try {
+            console.log(amount);
             const order = await axios.post(
                 'http://localhost:1406/user/order',
                 {
-                    total_amount: totalAmount(),
+                    total_amount: amount,
                     provider: 'vnpay',
                     payment_status: 'pending',
                 },
                 {
-                    headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
+                    headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
                 },
             );
 
             let order_id = order.data.insertId;
+            console.log(cartItems.length);
             for (let i = 0; i < cartItems.length; i++) {
                 await axios.post(
                     'http://localhost:1406/user/order-detail',
@@ -214,13 +215,37 @@ export const ShopContextProvider = (props) => {
                         price: parseInt(parseInt(cartItems[i].productQuantity) * parseInt(cartItems[i].newPrice)),
                     },
                     {
-                        headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
+                        headers: {
+                            'Content-Type': 'application/json',
+                            AccessToken: localStorage.getItem('accessToken'),
+                        },
                     },
                 );
             }
             deleteCart();
         } catch (error) {
             console.error('Error creating order:', error);
+        }
+    };
+
+    const CancelOrder = async (id) => {
+        try {
+            await axios.put(
+                `http://localhost:1406/user/order/${id}`,
+                {},
+
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        AccessToken: localStorage.getItem('accessToken'),
+                    },
+                },
+            );
+            fetchOrders();
+            toast.success(`Đã hủy đơn hàng #${id}`, { position: 'top-center', autoClose: 1500 });
+        } catch (error) {
+            console.error('Lỗi huỷ đơn hàng:', error);
+            toast.error('Đã xảy ra lỗi!', { position: 'top-center', autoClose: 1500 });
         }
     };
 
@@ -280,6 +305,7 @@ export const ShopContextProvider = (props) => {
         removeFromCart,
         deleteCart,
         createOrder,
+        CancelOrder,
         fetchOrders,
         changeQuantityItem,
         updateInfo,

@@ -125,8 +125,8 @@ const Cart = () => {
                 <p className="cartitems-empty-message">Không có sản phẩm nào trong giỏ hàng</p>
             ) : (
                 <div className="cartitems-container">
-                    <a
-                        href="/product"
+                    <Link
+                        to="/product"
                         style={{
                             display: 'inline-flex',
                             alignItems: 'center',
@@ -138,7 +138,7 @@ const Cart = () => {
                     >
                         <IoIosArrowBack style={{ marginRight: '2px' }} />
                         Mua thêm sản phẩm khác
-                    </a>
+                    </Link>
                     <div className="cartitems-main">
                         <div className="cartitems-left">
                             <div style={{ padding: '10px 0 0 10px' }} className="cartitems-left-format-main">

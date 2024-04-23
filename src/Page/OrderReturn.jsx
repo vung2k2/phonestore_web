@@ -13,6 +13,7 @@ const OrderReturn = () => {
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const vnpStatus = params.get('vnp_TransactionStatus');
+        const vnp_Amount = params.get('vnp_Amount');
         const paypalStatus = params.get('paypal_TransactionStatus');
         const momolStatus = params.get('paypal_TransactionStatus');
 
@@ -20,10 +21,6 @@ const OrderReturn = () => {
             setIsOrderSuccess(true);
         } else {
             setIsOrderSuccess(false);
-        }
-
-        if (vnpStatus === '00') {
-            createOrder();
         }
     }, [location]);
 
@@ -36,7 +33,7 @@ const OrderReturn = () => {
                     </div>
                     <p>Đặt hàng thành công</p>
                     <div className="btn">
-                        <button>Xem lại đơn hàng</button>
+                        <button onClick={() => (window.location.href = '/my-order')}>Xem lại đơn hàng</button>
                         <button>Quay lại trang chủ</button>
                     </div>
                 </div>

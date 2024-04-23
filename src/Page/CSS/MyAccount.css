@@ -72,7 +72,7 @@
 .my-account-main .edit-form > div:nth-child(3) {
     grid-column: span 2; /* Chiếm cả 2 cột */
 }
-.my-account-main .edit-form button {
+.my-account-main .edit-form .btn {
     height: 50px;
     width: 90%;
     border-radius: 30px;

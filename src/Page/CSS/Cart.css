@@ -1,6 +1,9 @@
 .cartitems {
     background: #f3f3f3;
 }
+.hidden {
+    overflow: hidden;
+}
 .cartitems-main {
     background-color: #fff;
     margin: 0px 150px;

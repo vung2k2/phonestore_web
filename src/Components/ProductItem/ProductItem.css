@@ -34,7 +34,6 @@
     padding: 12px;
     display: flex;
     flex-direction: column;
-
     height: 100%;
 }
 
@@ -104,8 +103,11 @@
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
+    transition: 0.1s ease-in-out;
 }
-
+.product-card-action-button:active {
+    transform: scale(0.95);
+}
 .product-card-action-button:hover {
     background-color: #0f2d84;
 }

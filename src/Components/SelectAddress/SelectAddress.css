@@ -1,6 +1,7 @@
 .select-address {
     display: flex;
     flex-direction: column; /* Định hướng dọc */
+    transition: 0.3s ease-in-out;
 }
 
 .select-address select,
@@ -15,10 +16,12 @@
 }
 
 .select-address button {
-    background-color: #007bff; /* Màu nền */
+    background-color: #3d559d; /* Màu nền */
     color: #fff; /* Màu chữ */
     border: none; /* Loại bỏ đường viền */
     cursor: pointer; /* Con trỏ chuột */
+    width: 100%;
+    border-radius: 20px;
 }
 
 .select-address button:hover {

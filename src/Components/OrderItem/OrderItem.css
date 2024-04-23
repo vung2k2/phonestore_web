@@ -5,6 +5,17 @@
     padding: 20px;
 }
 
+.order-item .review-btn {
+    margin-left: 20px;
+    border: 1px solid #253b80;
+    background-color: #fff;
+    color: #253b80;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 20px;
+    padding: 3px 10px;
+    cursor: pointer;
+}
 .order-item .top {
     display: inline-flex;
     align-items: center;
@@ -38,7 +49,6 @@
     flex-direction: column;
     flex-wrap: wrap;
     border-bottom: 1px solid #ccc;
-    cursor: pointer;
 }
 .order-item .main .show-more-btn {
     display: flex;

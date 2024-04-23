@@ -25,12 +25,11 @@ const ProductItem = ({ product }) => {
     };
 
     const handleAddToCart = () => {
-        addToCart(product, 1);
-        toast.success('Đã thêm vào giỏ hàng', { position: 'top-center', autoClose: 1500 });
+        addToCart(product.id, 1);
     };
 
     return (
-        <li className="product-card">
+        <div className="product-card">
             <Link style={{ textDecoration: 'none' }} to={`/product/${product.slug}`} className="product-link">
                 <div className="product-card-image-wrapper">
                     <LazyLoadImage className="product-card-image" src={imageUrl} width={250} height={250} alt={name} />
@@ -41,7 +40,7 @@ const ProductItem = ({ product }) => {
                     <div className="product-card-name">{name}</div>
                     <div className="product-card-prices">
                         <span className="product-card-new-price">
-                            {newPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
+                            {newPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}.đ
                         </span>
 
                         <span className="product-card-old-price">
@@ -50,7 +49,7 @@ const ProductItem = ({ product }) => {
                                       .toString()
                                       .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
                                       .substring(0, 6) + '...'
-                                : oldPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ'}
+                                : oldPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '.đ'}
                         </span>
 
                         <span className="product-card-discount">-{Math.floor((1 - newPrice / oldPrice) * 100)}%</span>
@@ -71,7 +70,7 @@ const ProductItem = ({ product }) => {
                     </button>
                 </div>
             </div>
-        </li>
+        </div>
     );
 };
 
