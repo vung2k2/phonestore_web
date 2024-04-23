@@ -3,7 +3,7 @@ import axios from 'axios';
 import './CSS/Login.css';
 import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -76,6 +76,9 @@ const Login = () => {
                 </div>
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
                 <button onClick={handleLogin}>Đăng nhập</button>
+                <div className="forgot-password">
+                    <Link to="/forgot-password">Quên mật khẩu?</Link>
+                </div>
             </div>
         </div>
     );
