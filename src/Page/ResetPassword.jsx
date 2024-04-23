@@ -1,37 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './CSS/ResetPassword.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const ResetPassword = () => {
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [oldPassword, setOldPassword] = useState('');
     const [rePassword, setRePassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [success, setSuccess] = useState(false);
+    const [token, setToken] = useState('');
     const navigate = useNavigate();
+    useEffect(() => {
+        const queryString = window.location.search;
+        const token = queryString.substring(queryString.indexOf('token=') + 6);
+        setToken(token);
+    });
 
     const handleChangePassword = async () => {
-        if (oldPassword === password) {
-            setErrorMessage('Mật khẩu mới không được giống mật khẩu cũ');
-        } else if (password !== rePassword) {
+        if (password !== rePassword) {
             setErrorMessage('Mật khẩu mới không khớp');
-        } else if (oldPassword !== '123456789') {
-            setErrorMessage('Mật khẩu không khớp trong email');
         } else {
             try {
-                const response = await axios.post('http://localhost:1406/auth/change-password', {
-                    email,
-                    password: oldPassword,
+                const response = await axios.post('http://localhost:1406/auth/reset-password', {
+                    token: token,
                     newPassword: rePassword,
                 });
-                if (response.status === 200) {
-                    setEmail('');
+                if (response.data.status === true) {
                     setPassword('');
                     setRePassword('');
-                    setOldPassword('');
                     setSuccess(true);
                     toast.success('Thay đổi mật khẩu thành công');
                 }
@@ -46,18 +43,6 @@ const ResetPassword = () => {
             <div className="signup-container">
                 <h2>Tạo lại mật khẩu</h2>
                 <div className="signup-form">
-                    <input
-                        type="email"
-                        placeholder="Email của bạn"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Mật khẩu được cấp"
-                        value={oldPassword}
-                        onChange={(e) => setOldPassword(e.target.value)}
-                    />
                     <input
                         type="text"
                         placeholder="Mật khẩu mới"
@@ -79,7 +64,7 @@ const ResetPassword = () => {
                         Quay lại đăng nhập
                     </button>
                 ) : (
-                    <button onClick={handleChangePassword}>Đăng ký</button>
+                    <button onClick={handleChangePassword}>Thay đổi mật khẩu</button>
                 )}
             </div>
         </div>
