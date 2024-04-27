@@ -16,7 +16,8 @@ const Login = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleLogin = async () => {
+    const handleLogin = async (e) => {
+        e.preventDefault();
         try {
             const response = await axios.post('http://localhost:1406/auth/login', {
                 email,
@@ -24,8 +25,6 @@ const Login = () => {
             });
 
             if (response.status === 200) {
-                console.log('Đăng nhập thành công:', response.data);
-
                 localStorage.setItem('accessToken', response.data.accessToken);
                 localStorage.setItem('refreshToken', response.data.refreshToken);
                 localStorage.setItem('userName', response.data.name);
@@ -44,9 +43,9 @@ const Login = () => {
         <div className="login">
             <div className="login-container">
                 <h1>Đăng nhập</h1>
-                <div className="login-form">
+                <form className="login-form" onSubmit={handleLogin}>
                     <input
-                        type="text"
+                        type="email"
                         placeholder="Email của bạn"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -73,9 +72,10 @@ const Login = () => {
                             <RiEyeCloseLine size={30} color="#808080" />
                         )}
                     </span>
-                </div>
-                {errorMessage && <p className="error-message">{errorMessage}</p>}
-                <button onClick={handleLogin}>Đăng nhập</button>
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
+                    <button>Đăng nhập</button>
+                </form>
+
                 <div className="forgot-password">
                     <Link to="/forgot-password">Quên mật khẩu?</Link>
                 </div>

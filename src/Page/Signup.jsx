@@ -46,7 +46,7 @@ const Signup = () => {
         <div className="signup">
             <div className="signup-container">
                 <h1>Đăng ký</h1>
-                <div className="signup-form">
+                <form className="signup-form">
                     <input type="text" placeholder="Họ và tên" value={name} onChange={(e) => setName(e.target.value)} />
                     <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     <input
@@ -55,9 +55,9 @@ const Signup = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                </div>
-                {errorMessage && <p className="error-message">{errorMessage}</p>}
-                <button onClick={handleSignUp}>Đăng ký</button>
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
+                    <button onClick={handleSignUp}>Đăng ký</button>
+                </form>
             </div>
         </div>
     );

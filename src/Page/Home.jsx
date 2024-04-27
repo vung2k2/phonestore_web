@@ -7,6 +7,7 @@ import Footer from '../Components/Footer/Footer';
 
 const Home = () => {
     const allproducts = useProducts();
+
     return (
         <div className="home">
             <BannerSlider />

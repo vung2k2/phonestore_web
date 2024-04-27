@@ -68,6 +68,8 @@
     justify-content: space-between;
     grid-template-columns: repeat(2, 1fr);
     margin: 30px 200px;
+    animation-name: loading-delay;
+    animation-duration: 0.7s;
 }
 .my-account-main .edit-form > div:nth-child(3) {
     grid-column: span 2; /* Chiếm cả 2 cột */

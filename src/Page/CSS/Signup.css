@@ -1,77 +1,65 @@
 .signup {
-  width: 100%;
-  height: 80vh;
-  background: #fce3fe;
-  padding-top: 40px;
-  background: linear-gradient(180deg, #d3caf4 0%, #e1ffea22 100%);
+    width: 100%;
+    height: 80vh;
+    background: #fce3fe;
+    padding-top: 40px;
+    background: linear-gradient(180deg, #d3caf4 0%, #e1ffea22 100%);
 }
 
 .signup-container {
-  width: 580px;
-  height: 600px;
-  background: white;
-  margin: auto;
-  padding: 10px 60px;
+    width: 580px;
+    height: 600px;
+    background: white;
+    margin: auto;
+    padding: 10px 60px;
 }
 
 .signup-container h1 {
-  margin: 20px 0px;
+    margin: 20px 0px;
 }
 
-.signup-container button {
-  width: 580px;
-  height: 55px;
-  color: white;
-  border-radius: 5px;
-  background: #253b80;
-  margin-top: 30px;
-  border: none;
-  font-size: 24px;
-  font-weight: 500;
-  cursor: pointer;
+.signup-form button {
+    width: 580px;
+    height: 55px;
+    color: white;
+    border-radius: 5px;
+    background: #253b80;
+    border: none;
+    font-size: 24px;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .signup-form {
-  display: flex;
-  flex-direction: column;
-  gap: 29px;
-  margin-top: 30px;
-}
-
-.signup-login {
-  margin-top: 20px;
-  color: #5c5c5c;
-  font-size: 18px;
-  font-weight: 500;
-}
-
-.signup-login span {
-  color: #ff4141;
-  font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    gap: 29px;
+    margin-top: 30px;
 }
 
 .signup-form input {
-  height: 55px;
-  width: 100%-20px;
-  padding-left: 20px;
-  border: 1px solid #c9c9c9;
-  border-radius: 5px;
-  outline: none;
-  color: #5c5c5c;
-  font-size: 18px;
+    height: 55px;
+    width: 100%-20px;
+    padding-left: 20px;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+    outline: none;
+    color: #5c5c5c;
+    font-size: 18px;
 }
 
 .signup-agree {
-  display: flex;
-  align-items: center;
-  margin-top: 25px;
-  gap: 20px;
-  color: #5c5c5c;
-  font-size: 18px;
-  font-weight: 500;
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+    gap: 20px;
+    color: #5c5c5c;
+    font-size: 18px;
+    font-weight: 500;
 }
 
 .error-message {
-  color: red;
-  text-align: center;
+    color: red;
+    text-align: center;
+    margin: -15px 0;
 }

@@ -56,8 +56,8 @@ const MyOrder = () => {
                 {filteredOrders
                     .slice()
                     .reverse()
-                    .map((order, index) => (
-                        <OrderItem key={index} order={order} />
+                    .map((order) => (
+                        <OrderItem key={order.id} order={order} />
                     ))}
             </div>
         </div>

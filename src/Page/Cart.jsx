@@ -281,7 +281,7 @@ const Cart = () => {
                                     />
                                 </div>
                                 <div>
-                                    <VNPay total={totalAmount(cartItems)} />
+                                    <VNPay OrderInfo={`${userName} - ${userPhoneNumber} - ${userAddress}`} />
                                 </div>
                             </div>
                         </div>

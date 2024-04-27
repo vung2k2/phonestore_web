@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column; /* Định hướng dọc */
     transition: 0.3s ease-in-out;
+    animation-name: loading-delay;
+    animation-duration: 1s;
 }
 
 .select-address select,

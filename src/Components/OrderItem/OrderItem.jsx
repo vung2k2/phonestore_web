@@ -1,22 +1,34 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import './OrderItem.css';
 import { ShopContext } from '../../context/ShopContext';
 import { Button } from '@mui/material';
+import ProductReviews from '../ProductReviews/ProductReviews';
 
 const OrderItem = ({ order }) => {
     const { CancelOrder, addToCart } = useContext(ShopContext);
-    const { id, total_amount, status, order_date, order_details } = order;
+    const { id, total_amount, orderInfo, status, order_date, order_details, provider } = order;
     const maxItemsToShow = 2;
-    const [showAllItems, setShowAllItems] = useState(false);
+    const [showDetails, setShowDetails] = useState(false);
+    const [showProductReviews, setShowProductReviews] = useState(false);
+    const [productRv, setProductRv] = useState({});
+    useEffect(() => {
+        document.body.style.overflow = showProductReviews ? 'hidden' : 'unset';
+        // Thiết lập lại trạng thái ngăn cuộn khi component bị hủy
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [showProductReviews]);
 
-    const toggleShowAllItems = (event) => {
-        setShowAllItems(!showAllItems);
+    const toggleshowDetails = (event) => {
+        setShowDetails(!showDetails);
         event.stopPropagation();
     };
 
     const handleCancel = () => {
-        const isConfirmed = window.confirm('Bạn có chắc muốn hủy đơn hàng này không?');
+        const isConfirmed = window.confirm(
+            'Bạn có chắc muốn hủy đơn hàng này không?\nChúng tôi sẽ liên hệ cho bạn qua sđt đặt hàng để tiến hành hoàn tiền(nếu đã thanh toán).',
+        );
         if (isConfirmed) {
             // Gọi hàm hủy đơn hàng khi xác nhận từ người dùng
             CancelOrder(id);
@@ -26,8 +38,7 @@ const OrderItem = ({ order }) => {
         order_details.map((product) => addToCart(product.id, product.quantity));
     };
 
-    const visibleItems = showAllItems ? order_details : order_details.slice(0, maxItemsToShow);
-    const showMoreButton = !showAllItems && order_details.length > maxItemsToShow;
+    const visibleItems = showDetails ? order_details : order_details.slice(0, maxItemsToShow);
 
     const renderActionButton = () => {
         switch (status) {
@@ -64,7 +75,17 @@ const OrderItem = ({ order }) => {
                             <div>
                                 <p className="item-name">
                                     {detail.name}
-                                    {status === 'completed' && <button className="review-btn">Đánh giá</button>}
+                                    {status === 'completed' && (
+                                        <button
+                                            className="review-btn"
+                                            onClick={() => {
+                                                setShowProductReviews(true);
+                                                setProductRv(detail);
+                                            }}
+                                        >
+                                            Đánh giá
+                                        </button>
+                                    )}
                                 </p>
                                 <p className="item-quantity">x{detail.quantity}</p>
                             </div>
@@ -80,10 +101,22 @@ const OrderItem = ({ order }) => {
                         </div>
                     </div>
                 ))}
-                {showMoreButton && (
-                    <div className="show-more-btn" onClick={toggleShowAllItems} style={{ cursor: 'pointer' }}>
-                        <span>Xem thêm sản phẩm</span>
+
+                {!showDetails && (
+                    <div className="show-more-btn" onClick={toggleshowDetails} style={{ cursor: 'pointer' }}>
+                        <span>Xem chi tiết</span>
                         <MdKeyboardDoubleArrowRight />
+                    </div>
+                )}
+                {showDetails && (
+                    <div className="more-detail">
+                        <p className="provider">
+                            Phương thức than toán: <span>{provider}vnpay</span>
+                        </p>
+
+                        <p className="delivery-address">
+                            Địa chỉ nhận hàng: <span>{orderInfo}</span>
+                        </p>
                     </div>
                 )}
             </div>
@@ -93,6 +126,7 @@ const OrderItem = ({ order }) => {
                 </p>
                 {renderActionButton()}
             </div>
+            {showProductReviews && <ProductReviews onClose={() => setShowProductReviews(false)} product={productRv} />}
         </div>
     );
 };

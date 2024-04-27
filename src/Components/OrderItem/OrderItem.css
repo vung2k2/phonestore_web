@@ -64,12 +64,43 @@
 .order-item .main .show-more-btn svg {
     margin-top: 5px;
 }
+.order-item .main .delivery-address {
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1px;
+    color: #6b6b6b;
+}
 
+.order-item .main .delivery-address span {
+    font-style: normal;
+    font-weight: 400;
+}
+
+.order-item .main .provider {
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 600;
+    color: #6b6b6b;
+    line-height: 1px;
+    padding-bottom: 5px;
+}
+.order-item .main .provider span {
+    font-style: normal;
+    font-weight: 400;
+}
 .order-item .order-item-detail {
+    animation-name: loading-delay;
+    animation-duration: 0.7s;
     display: flex;
     align-items: center;
 
     margin-bottom: 10px;
+}
+
+.order-item .more-detail {
+    animation-name: loading-delay;
+    animation-duration: 0.7s;
 }
 
 .order-item .order-item-detail img {

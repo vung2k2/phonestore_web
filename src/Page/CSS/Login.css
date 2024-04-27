@@ -25,7 +25,7 @@
     color: white;
     border-radius: 5px;
     background: #253b80;
-    margin-top: 30px;
+
     border: none;
     font-size: 24px;
     font-weight: 500;
@@ -52,4 +52,5 @@
 .error-message {
     color: red;
     text-align: center;
+    margin: -15px 0;
 }

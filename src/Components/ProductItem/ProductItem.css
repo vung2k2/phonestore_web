@@ -6,6 +6,8 @@
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     cursor: pointer;
+    animation-name: loading-delay;
+    animation-duration: 0.7s;
 }
 
 .product-card:hover {

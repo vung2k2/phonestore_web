@@ -101,7 +101,7 @@ const SelectAddress = ({ onSelect }) => {
         const selectedWardName = wards.find((ward) => ward.WardCode === selectedWard)?.WardName || '';
 
         // Tạo địa chỉ từ các giá trị đã chọn
-        const address = `${addressDetail} - ${selectedWardName} - ${selectedDistrictName} - ${selectedProvinceName}`;
+        const address = `${addressDetail}, ${selectedWardName}, ${selectedDistrictName}, ${selectedProvinceName}`;
         // Gọi hàm callback và truyền địa chỉ đã chọn tới cart.jsx
         onSelect(address);
     };

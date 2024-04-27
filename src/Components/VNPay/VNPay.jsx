@@ -3,12 +3,12 @@ import axios from 'axios';
 import { useNavigate, useHistory } from 'react-router-dom';
 import vnpay_logo from '../../Assets/img/vnpay-logo.png';
 
-const VNPayy = ({ total }) => {
+const VNPayy = ({ OrderInfo }) => {
     const navigate = useNavigate();
     const handleClick = async () => {
-        const response = await axios.get(
+        const response = await axios.post(
             'http://localhost:1406/user/payment',
-
+            { OrderInfo: OrderInfo },
             {
                 headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
             },
