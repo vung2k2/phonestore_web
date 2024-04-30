@@ -6,7 +6,6 @@ import { ShopContext } from '../context/ShopContext';
 const MyOrder = () => {
     const { orders, fetchOrders } = useContext(ShopContext);
     const [selectedCategory, setSelectedCategory] = useState('all');
-
     useEffect(() => {
         // Gọi hàm để lấy tất cả hóa đơn khi component được render lần đầu tiên
         fetchOrders();

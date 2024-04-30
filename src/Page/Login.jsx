@@ -67,7 +67,7 @@ const Login = () => {
                 }}
             >
                 <Typography component="h1" variant="h5" sx={{ fontSize: '30px' }}>
-                    Sign In
+                    Đăng nhập
                 </Typography>
                 <Box component="form" noValidate sx={{ mt: 1 }} style={{ position: 'relative' }}>
                     <TextField
@@ -78,7 +78,7 @@ const Login = () => {
                         required={true}
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label="Email"
                         name="email"
                         autoComplete="email"
                         autoFocus
@@ -90,7 +90,7 @@ const Login = () => {
                         required={true}
                         fullWidth
                         name="password"
-                        label="Password"
+                        label="Mật khẩu"
                         type={showPassword ? 'text' : 'password'}
                         id="password"
                         autoComplete="current-password"
@@ -110,20 +110,21 @@ const Login = () => {
                             color="#808080"
                         />
                     )}
-                    <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+                    <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Nhớ mật khẩu" />
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
                     <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleLogin}>
-                        Sign In
+                        Đăng nhập
                     </Button>
                     <Grid container>
                         <Grid item xs>
                             <Link href="/forgot-password" variant="body2">
-                                Forgot password?
+                                Quên mật khẩu?
                             </Link>
                         </Grid>
                         <Grid item>
+                            <span style={{ fontSize: '15px' }}>Bạn chưa có tài khoản? </span>
                             <Link href="/signup " variant="body2">
-                                {"Don't have an account? Sign Up"}
+                                Đăng ký
                             </Link>
                         </Grid>
                     </Grid>

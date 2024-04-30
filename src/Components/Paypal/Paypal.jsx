@@ -13,7 +13,7 @@ const ButtonWrapper = ({ currency, showSpinner, total, payload }) => {
     const { deleteCart } = useContext(ShopContext);
     const navigate = useNavigate();
     let products = payload.products;
-    const accessToken = localStorage.getItem('accessToken');
+
     const [{ isPending, options }, dispatch] = usePayPalScriptReducer();
     useEffect(() => {
         dispatch({
@@ -35,26 +35,15 @@ const ButtonWrapper = ({ currency, showSpinner, total, payload }) => {
                         total_amount: payload.amount,
                         provider: 'paypal',
                         payment_status: 'pending',
+                        orderInfo: payload.orderInfo,
                     },
                     {
-                        headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
+                        headers: {
+                            'Content-Type': 'application/json',
+                            AccessToken: localStorage.getItem('accessToken'),
+                        },
                     },
                 );
-                let order_id = order.data.insertId;
-                for (let i = 0; i < products.length; i++) {
-                    await axios.post(
-                        'http://localhost:1406/user/order-detail',
-                        {
-                            order_id: order_id,
-                            productId: products[i].id,
-                            quantity: products[i].productQuantity,
-                            price: parseInt(products[i].productQuantity * products[i].newPrice),
-                        },
-                        {
-                            headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
-                        },
-                    );
-                }
                 deleteCart();
                 navigate('/order-return?paypal_TransactionStatus=00');
             } else navigate('/order-return?paypal_TransactionStatus=01');

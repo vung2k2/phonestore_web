@@ -4,11 +4,12 @@ import { useLocation } from 'react-router-dom';
 import { GoCheckCircle } from 'react-icons/go';
 import { LiaTimesCircleSolid } from 'react-icons/lia';
 import { ShopContext } from '../context/ShopContext';
+import { useNavigate } from 'react-router-dom';
 
 const OrderReturn = () => {
     const location = useLocation();
     const [isOrderSuccess, setIsOrderSuccess] = useState(false);
-    const { createOrder } = useContext(ShopContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
@@ -16,8 +17,9 @@ const OrderReturn = () => {
         const vnp_Amount = params.get('vnp_Amount');
         const paypalStatus = params.get('paypal_TransactionStatus');
         const momolStatus = params.get('paypal_TransactionStatus');
+        const on_deliverylStatus = params.get('on_delivery_TransactionStatus');
 
-        if (vnpStatus === '00' || paypalStatus === '00' || momolStatus === '00') {
+        if (vnpStatus === '00' || paypalStatus === '00' || momolStatus === '00' || on_deliverylStatus === '00') {
             setIsOrderSuccess(true);
         } else {
             setIsOrderSuccess(false);
@@ -44,7 +46,7 @@ const OrderReturn = () => {
                     </div>
                     <p>Giao dịch thất bại</p>
                     <div className="btn">
-                        <button>Thử lại</button>
+                        <button onClick={() => navigate('/cart')}>Thử lại</button>
                     </div>
                 </div>
             )}

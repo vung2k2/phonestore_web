@@ -57,7 +57,7 @@ const Signup = () => {
             }
         } catch (error) {
             console.error('Lỗi đăng ký:', error.response ? error.response.data : error.message);
-            toast.error('Đã xảy ra lỗi trong quá trình đăng ký');
+            toast.error('Đã xảy ra lỗi trong quá trình đăng ký', { position: 'top-center', autoClose: 1500 });
         }
     };
 
@@ -102,7 +102,7 @@ const Signup = () => {
                             required={true}
                             fullWidth
                             id="name"
-                            label="Enter name"
+                            label="Tên"
                             name="name"
                             autoComplete="name"
                             autoFocus
@@ -115,10 +115,8 @@ const Signup = () => {
                             required={true}
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="Email"
                             name="email"
-                            autoComplete="email"
-                            autoFocus
                         />
                         <TextField
                             onChange={(e) => setPassword(e.target.value)}
@@ -128,10 +126,10 @@ const Signup = () => {
                             value={password}
                             fullWidth
                             name="password"
-                            label="Enter password"
+                            label="Mật khẩu"
                             type={showPassword ? 'text' : 'password'}
                             id="password"
-                            autoComplete="current-password"
+                            autoComplete="new-password"
                         />
                         {showPassword ? (
                             <RiEyeCloseLine

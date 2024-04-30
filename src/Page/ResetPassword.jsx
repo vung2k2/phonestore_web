@@ -79,11 +79,13 @@ const ResetPassword = () => {
             ) : (
                 <>
                     <Typography sx={{ textAlign: 'center', fontSize: '18px' }}>Tạo lại mật khẩu</Typography>
+
                     <TextField
                         size="small"
                         type={show ? 'text' : 'password'}
                         placeholder="Mật khẩu mới"
                         fullWidth
+                        autoComplete="new-password"
                         sx={{ margin: '15px 0px', fontSize: '15px', position: 'relative' }}
                         onChange={(e) => setPassword(e.target.value)}
                     />
@@ -114,6 +116,7 @@ const ResetPassword = () => {
                         type={showRepassword ? 'text' : 'password'}
                         placeholder="Nhập lại mật khẩu mới"
                         fullWidth
+                        autoComplete="new-password"
                         sx={{
                             fontSize: '15px',
                             marginBottom: '15px',

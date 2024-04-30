@@ -15,9 +15,10 @@ import TextField from '@mui/material/TextField';
 import { IoIosArrowBack } from 'react-icons/io';
 import Loading from '../Components/Loading/Loading';
 import SelectAddress from '../Components/SelectAddress/SelectAddress';
+import cart_empty_icon from '../Assets/img/cart_empty.png';
 
 const Cart = () => {
-    const { cartItems, setCartItems, removeFromCart, changeQuantityItem, deleteCart } = useContext(ShopContext);
+    const { cartItems, setCartItems, removeFromCart, changeQuantityItem, createOrder } = useContext(ShopContext);
     const [AmountVNP, setAmountVNP] = useState(0);
     const navigate = useNavigate();
     const accessToken = localStorage.getItem('accessToken');
@@ -122,7 +123,10 @@ const Cart = () => {
         <div className="cartitems">
             <Loading isLoading={isLoading} />
             {cartItems.length === 0 ? (
-                <p className="cartitems-empty-message">Không có sản phẩm nào trong giỏ hàng</p>
+                // <p className="cartitems-empty-message">Không có sản phẩm nào trong giỏ hàng</p>
+                <div className="cart_empty">
+                    <img src={cart_empty_icon}></img>
+                </div>
             ) : (
                 <div className="cartitems-container">
                     <Link
@@ -277,11 +281,27 @@ const Cart = () => {
                                         payload={{
                                             products: cartItems,
                                             amount: amount,
+                                            orderInfo: `${userName} - ${userPhoneNumber} - ${userAddress}`,
                                         }}
                                     />
                                 </div>
-                                <div>
+                                <div className="vnpal">
                                     <VNPay OrderInfo={`${userName} - ${userPhoneNumber} - ${userAddress}`} />
+                                </div>
+                                <div style={{ padding: '20px 0 5px 0' }}>
+                                    <span style={{ fontSize: '18px', fontWeight: '600', color: '#454545' }}>Hoặc</span>
+                                </div>
+                                <div className="on_delivery">
+                                    <button
+                                        onClick={() =>
+                                            createOrder(
+                                                'on_delivery',
+                                                `${userName} - ${userPhoneNumber} - ${userAddress}`,
+                                            )
+                                        }
+                                    >
+                                        Thanh toán khi nhận hàng
+                                    </button>
                                 </div>
                             </div>
                         </div>

@@ -8,6 +8,7 @@ import ProductReviews from '../ProductReviews/ProductReviews';
 const OrderItem = ({ order }) => {
     const { CancelOrder, addToCart } = useContext(ShopContext);
     const { id, total_amount, orderInfo, status, order_date, order_details, provider } = order;
+
     const maxItemsToShow = 2;
     const [showDetails, setShowDetails] = useState(false);
     const [showProductReviews, setShowProductReviews] = useState(false);
@@ -60,7 +61,6 @@ const OrderItem = ({ order }) => {
                 return null;
         }
     };
-
     return (
         <div className="order-item">
             <div className="top">
@@ -75,7 +75,7 @@ const OrderItem = ({ order }) => {
                             <div>
                                 <p className="item-name">
                                     {detail.name}
-                                    {status === 'completed' && (
+                                    {status === 'completed' && detail.rating === null && (
                                         <button
                                             className="review-btn"
                                             onClick={() => {
@@ -111,7 +111,8 @@ const OrderItem = ({ order }) => {
                 {showDetails && (
                     <div className="more-detail">
                         <p className="provider">
-                            Phương thức than toán: <span>{provider}vnpay</span>
+                            Phương thức than toán:{' '}
+                            <span>{provider === 'on_delivery' ? 'Thanh toán khi nhận hàng' : provider}</span>
                         </p>
 
                         <p className="delivery-address">

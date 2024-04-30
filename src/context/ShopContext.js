@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import { useProducts } from './ProductContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export const ShopContext = createContext(null);
 
@@ -12,8 +13,30 @@ export const ShopContextProvider = (props) => {
     const [orders, setOrders] = useState([]);
     const [accessToken, setAccessToken] = useState('');
     const [refreshToken, setRefreshToken] = useState('');
-
+    const navigate = useNavigate();
     const allProducts = useProducts();
+
+    axios.interceptors.response.use(
+        (response) => {
+            return response;
+        },
+        async (error) => {
+            const originalRequest = error.config;
+
+            if (error.response.status === 401 && !originalRequest._isRetry) {
+                const refreshToken = localStorage.getItem('refreshToken');
+                if (refreshToken) {
+                    const newAccessToken = await refreshAccessToken(refreshToken);
+                    localStorage.setItem('accessToken', newAccessToken);
+                    originalRequest.headers.Accesstoken = newAccessToken;
+                    originalRequest._isRetry = true; // Đánh dấu request đã được gửi lại
+                    return axios(originalRequest);
+                }
+            }
+
+            return Promise.reject(error);
+        },
+    );
 
     // Danh sách sp đã xem
     useEffect(() => {
@@ -62,7 +85,7 @@ export const ShopContextProvider = (props) => {
 
             fetchCartItems();
         }
-    }, [accessToken]);
+    }, []);
 
     const fetchCartItems = async () => {
         try {
@@ -77,19 +100,20 @@ export const ShopContextProvider = (props) => {
 
     const refreshAccessToken = async (refreshToken) => {
         try {
-            const response = await axios.post(
-                'http://localhost:1406/auth/refresh-token',
-                null, // Body của yêu cầu POST, ở đây không cần body nên để null
-                {
-                    headers: { refreshToken: refreshToken },
-                },
-            );
-
-            const newAccessToken = response.data;
-            localStorage.setItem('accessToken', newAccessToken);
-            // Thực hiện lại request gốc với accessToken mới
+            const response = await axios.post('http://localhost:1406/auth/refresh-token', null, {
+                headers: { refreshToken: refreshToken },
+            });
+            const newAccessToken = response.data.accessToken;
+            const newRefreshToken = response.data.refreshToken;
+            localStorage.setItem('refreshToken', newRefreshToken);
+            return newAccessToken;
         } catch (error) {
-            console.error('Error refreshing access token:', error);
+            localStorage.removeItem('userAddress');
+            localStorage.removeItem('userPhoneNumber');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('refreshToken');
+            localStorage.removeItem('accessToken');
+            window.location.href = '/login';
         }
     };
 
@@ -117,6 +141,10 @@ export const ShopContextProvider = (props) => {
         //     setCartItems([...cartItems, updatedProduct]);
         // }
 
+        if (localStorage.getItem('refreshToken') === null) {
+            toast.error('Bạn cần đăng nhập trước!', { position: 'top-center', autoClose: 1500 });
+            return;
+        }
         try {
             const response = await axios.post(
                 'http://localhost:1406/user/cart',
@@ -125,12 +153,16 @@ export const ShopContextProvider = (props) => {
                     quantity: quantity,
                 },
                 {
-                    headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        AccessToken: localStorage.getItem('accessToken'),
+                    },
                 },
             );
             toast.success('Đã thêm vào giỏ hàng', { position: 'top-center', autoClose: 1500 });
             fetchCartItems();
         } catch (error) {
+            toast.error('Có lỗi gì đó!', { position: 'top-center', autoClose: 1500 });
             console.error('Error:', error.response ? error.response.data : error.message);
             // Xử lý lỗi nếu có
         }
@@ -188,43 +220,24 @@ export const ShopContextProvider = (props) => {
         return total;
     };
 
-    const createOrder = async (amount) => {
+    const createOrder = async (provider, orderInfo) => {
         try {
-            console.log(amount);
             const order = await axios.post(
                 'http://localhost:1406/user/order',
                 {
-                    total_amount: amount,
-                    provider: 'vnpay',
-                    payment_status: 'pending',
+                    provider: provider,
+                    orderInfo: orderInfo,
                 },
                 {
                     headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
                 },
             );
 
-            let order_id = order.data.insertId;
-            console.log(cartItems.length);
-            for (let i = 0; i < cartItems.length; i++) {
-                await axios.post(
-                    'http://localhost:1406/user/order-detail',
-                    {
-                        order_id: order_id,
-                        productId: cartItems[i].id,
-                        quantity: cartItems[i].productQuantity,
-                        price: parseInt(parseInt(cartItems[i].productQuantity) * parseInt(cartItems[i].newPrice)),
-                    },
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            AccessToken: localStorage.getItem('accessToken'),
-                        },
-                    },
-                );
-            }
             deleteCart();
+            navigate('/order-return?on_delivery_TransactionStatus=00');
         } catch (error) {
             console.error('Error creating order:', error);
+            navigate('/order-return?on_delivery_TransactionStatus=01');
         }
     };
 
@@ -267,6 +280,27 @@ export const ShopContextProvider = (props) => {
         }
     };
 
+    const ratingProduct = async (productId, rate, comment) => {
+        try {
+            await axios.post(
+                `http://localhost:1406/user/review`,
+                {
+                    productId: productId,
+                    rate: rate,
+                    comment: comment,
+                },
+                {
+                    headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
+                },
+            );
+            toast.success('Cám ơn bạn đã đánh giá!', { position: 'top-center', autoClose: 1500 });
+            fetchOrders();
+        } catch (error) {
+            console.error('Lỗi đánh giá sp:', error);
+            toast.error('Đã xảy ra lỗi!', { position: 'top-center', autoClose: 1500 });
+        }
+    };
+
     const updateInfo = async (name, address, phone) => {
         try {
             await axios.put(
@@ -277,7 +311,7 @@ export const ShopContextProvider = (props) => {
                     phone: phone,
                 },
                 {
-                    headers: { 'Content-Type': 'application/json', AccessToken: accessToken },
+                    headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
                 },
             );
             localStorage.setItem('userName', name);
@@ -309,6 +343,7 @@ export const ShopContextProvider = (props) => {
         fetchOrders,
         changeQuantityItem,
         updateInfo,
+        ratingProduct,
     };
 
     return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>;

@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './ProductReviews.css';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { ShopContext } from '../../context/ShopContext';
 import Rating from '@mui/material/Rating';
 const ProductReviews = ({ onClose, product }) => {
+    const { ratingProduct } = useContext(ShopContext);
+    console.log(product);
+
     const [value, setValue] = useState(5);
+    const [comment, setComment] = useState('');
     const getValueDescription = (value) => {
         switch (value) {
             case 1:
@@ -52,10 +57,25 @@ const ProductReviews = ({ onClose, product }) => {
                         </p>
                     </div>
                     <div className="cmt">
-                        <textarea rows="4" cols="50" placeholder="Hãy viết gì đó..."></textarea>
+                        <textarea
+                            rows="4"
+                            cols="50"
+                            placeholder="Hãy viết gì đó..."
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                            style={{ resize: 'none' }}
+                        ></textarea>
                     </div>
                     <div className="btn">
-                        <button>Hoàn tất</button>
+                        <button
+                            onClick={() => {
+                                console.log(product.id);
+                                ratingProduct(product.id, value, comment);
+                                onClose();
+                            }}
+                        >
+                            Hoàn tất
+                        </button>
                     </div>
                 </div>
             </div>
