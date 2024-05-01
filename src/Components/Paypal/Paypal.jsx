@@ -10,7 +10,7 @@ const style = { layout: 'vertical' };
 
 // Custom component to wrap the PayPalButtons and show loading spinner
 const ButtonWrapper = ({ currency, showSpinner, total, payload }) => {
-    const { deleteCart } = useContext(ShopContext);
+    const { deleteCart, createOrder } = useContext(ShopContext);
     const navigate = useNavigate();
     let products = payload.products;
 
@@ -29,23 +29,24 @@ const ButtonWrapper = ({ currency, showSpinner, total, payload }) => {
     const onApprove = (data, actions) => {
         return actions.order.capture().then(async (res) => {
             if (res.status === 'COMPLETED') {
-                const order = await axios.post(
-                    'http://localhost:1406/user/order',
-                    {
-                        total_amount: payload.amount,
-                        provider: 'paypal',
-                        payment_status: 'pending',
-                        orderInfo: payload.orderInfo,
-                    },
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            AccessToken: localStorage.getItem('accessToken'),
-                        },
-                    },
-                );
-                deleteCart();
-                navigate('/order-return?paypal_TransactionStatus=00');
+                createOrder('paypal', payload.orderInfo);
+                // const order = await axios.post(
+                //     'http://localhost:1406/user/order',
+                //     {
+                //         total_amount: payload.amount,
+                //         provider: 'paypal',
+                //         payment_status: 'pending',
+                //         orderInfo: payload.orderInfo,
+                //     },
+                //     {
+                //         headers: {
+                //             'Content-Type': 'application/json',
+                //             AccessToken: localStorage.getItem('accessToken'),
+                //         },
+                //     },
+                // );
+                // deleteCart();
+                // navigate('/order-return?paypal_TransactionStatus=00');
             } else navigate('/order-return?paypal_TransactionStatus=01');
         });
     };

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export const ShopContext = createContext(null);
 
 export const ShopContextProvider = (props) => {
+    const baseUrl = 'http://localhost:1406';
     const [compareList, setCompareList] = useState([]);
     const [viewedProducts, setViewedProducts] = useState([]);
     const [cartItems, setCartItems] = useState([]);
@@ -29,7 +30,7 @@ export const ShopContextProvider = (props) => {
                     const newAccessToken = await refreshAccessToken(refreshToken);
                     localStorage.setItem('accessToken', newAccessToken);
                     originalRequest.headers.Accesstoken = newAccessToken;
-                    originalRequest._isRetry = true; // Đánh dấu request đã được gửi lại
+                    originalRequest._isRetry = true;
                     return axios(originalRequest);
                 }
             }
@@ -89,7 +90,7 @@ export const ShopContextProvider = (props) => {
 
     const fetchCartItems = async () => {
         try {
-            const response = await axios.get('http://localhost:1406/user/cart', {
+            const response = await axios.get(`${baseUrl}/user/cart`, {
                 headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
             });
             setCartItems(response.data);
@@ -100,7 +101,7 @@ export const ShopContextProvider = (props) => {
 
     const refreshAccessToken = async (refreshToken) => {
         try {
-            const response = await axios.post('http://localhost:1406/auth/refresh-token', null, {
+            const response = await axios.post(`${baseUrl}/auth/refresh-token`, null, {
                 headers: { refreshToken: refreshToken },
             });
             const newAccessToken = response.data.accessToken;
@@ -147,7 +148,7 @@ export const ShopContextProvider = (props) => {
         }
         try {
             const response = await axios.post(
-                'http://localhost:1406/user/cart',
+                `${baseUrl}/user/cart`,
                 {
                     productId: id,
                     quantity: quantity,
@@ -170,7 +171,7 @@ export const ShopContextProvider = (props) => {
 
     const removeFromCart = async (productId) => {
         try {
-            await axios.delete(`http://localhost:1406/user/delete-product/${productId}`, {
+            await axios.delete(`${baseUrl}/user/delete-product/${productId}`, {
                 headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
             });
             setCartItems(cartItems.filter((item) => item.id !== productId));
@@ -182,7 +183,7 @@ export const ShopContextProvider = (props) => {
     const deleteCart = async () => {
         try {
             await axios.post(
-                `http://localhost:1406/user/delete-all-cart`,
+                `${baseUrl}/user/delete-all-cart`,
                 {},
                 {
                     headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
@@ -197,7 +198,7 @@ export const ShopContextProvider = (props) => {
     const changeQuantityItem = async (productId, quantity) => {
         try {
             await axios.put(
-                `http://localhost:1406/user/change-quantity`,
+                `${baseUrl}/user/change-quantity`,
                 {
                     productId: productId,
                     quantity: quantity,
@@ -223,7 +224,7 @@ export const ShopContextProvider = (props) => {
     const createOrder = async (provider, orderInfo) => {
         try {
             const order = await axios.post(
-                'http://localhost:1406/user/order',
+                `${baseUrl}/user/order`,
                 {
                     provider: provider,
                     orderInfo: orderInfo,
@@ -232,19 +233,18 @@ export const ShopContextProvider = (props) => {
                     headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
                 },
             );
-
-            deleteCart();
-            navigate('/order-return?on_delivery_TransactionStatus=00');
+            window.location.href = `/order-return?${provider}_TransactionStatus=00`;
         } catch (error) {
             console.error('Error creating order:', error);
-            navigate('/order-return?on_delivery_TransactionStatus=01');
+
+            navigate(`/order-return?${provider}_TransactionStatus=01`);
         }
     };
 
     const CancelOrder = async (id) => {
         try {
             await axios.put(
-                `http://localhost:1406/user/order/${id}`,
+                `${baseUrl}/user/order/${id}`,
                 {},
 
                 {
@@ -265,7 +265,7 @@ export const ShopContextProvider = (props) => {
     const fetchOrders = async () => {
         try {
             const response = await axios.get(
-                'http://localhost:1406/user/detail-order',
+                `${baseUrl}/user/detail-order`,
 
                 {
                     headers: {
@@ -283,7 +283,7 @@ export const ShopContextProvider = (props) => {
     const ratingProduct = async (productId, rate, comment) => {
         try {
             await axios.post(
-                `http://localhost:1406/user/review`,
+                `${baseUrl}/user/review`,
                 {
                     productId: productId,
                     rate: rate,
@@ -304,7 +304,7 @@ export const ShopContextProvider = (props) => {
     const updateInfo = async (name, address, phone) => {
         try {
             await axios.put(
-                `http://localhost:1406/user/info`,
+                `${baseUrl}/user/info`,
                 {
                     name: name,
                     address: address,
@@ -324,6 +324,18 @@ export const ShopContextProvider = (props) => {
             toast.error('Đã xảy ra lỗi!', { position: 'top-center', autoClose: 1500 });
         }
     };
+
+    const getReviewsProduct = async (productId) => {
+        try {
+            const reviews = await axios.get(`${baseUrl}/public/review/${productId}`, {
+                headers: { 'Content-Type': 'application/json' },
+            });
+            return reviews.data;
+        } catch (error) {
+            console.error('Lỗi lấy đánh giá sp:', error);
+        }
+    };
+
     const contextValue = {
         compareList,
         addToCompareList,
@@ -344,6 +356,7 @@ export const ShopContextProvider = (props) => {
         changeQuantityItem,
         updateInfo,
         ratingProduct,
+        getReviewsProduct,
     };
 
     return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>;

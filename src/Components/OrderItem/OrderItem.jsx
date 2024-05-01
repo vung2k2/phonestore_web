@@ -92,10 +92,10 @@ const OrderItem = ({ order }) => {
 
                             <div className="price">
                                 <p className="price-old">
-                                    {detail.oldPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ'}
+                                    {detail.oldPrice?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ'}
                                 </p>
                                 <p className="price-new">
-                                    {detail.newPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ'}
+                                    {detail.newPrice?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ'}
                                 </p>
                             </div>
                         </div>
@@ -123,7 +123,7 @@ const OrderItem = ({ order }) => {
             </div>
             <div className="bottom">
                 <p className="total-amount">
-                    Thành tiền: <span>{total_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ'}</span>
+                    Thành tiền: <span>{total_amount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ'}</span>
                 </p>
                 {renderActionButton()}
             </div>

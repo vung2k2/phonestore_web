@@ -10,6 +10,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import CompareList from '../Components/CompareList/CompareList';
 import Footer from '../Components/Footer/Footer';
 import { toast } from 'react-toastify';
+import Rate from '../Components/Rate/Rate';
 
 const ProductDetail = () => {
     const { slug } = useParams();
@@ -188,6 +189,7 @@ const ProductDetail = () => {
                                 <p style={{ fontStyle: 'italic' }}>(Miễn phí giao hàng trên toàn quốc)</p>
                             </button>
                         </div>
+                        <Rate id={25} />
                     </div>
                     <div className="box-right">
                         <div className="product-parameters">
@@ -276,11 +278,6 @@ const ProductDetail = () => {
                         </div>
                         <div className="add-cart">
                             <button onClick={handleAddToCart}>Thêm vào giỏ hàng</button>
-                        </div>
-                        <div style={{ width: '100%', paddingTop: '5px', justifyContent: 'center', display: 'flex' }}>
-                            <Link style={{ textDecoration: 'none', color: 'blue', textAlign: 'center' }} to="/cart">
-                                Xem giỏ hàng
-                            </Link>
                         </div>
                     </div>
                 </>

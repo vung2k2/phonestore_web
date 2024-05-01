@@ -1,0 +1,26 @@
+.rate {
+    padding-top: 30px;
+}
+.rate-category {
+    display: flex;
+    justify-content: flex-start;
+    gap: 25px;
+    padding-bottom: 20px;
+    background-color: #f0f0f0;
+}
+.rate-category button {
+    position: relative;
+
+    padding: 8px 12px;
+    border: 1px solid #253b80;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+.rate-category button.active {
+    background-color: #253b80;
+    color: #fff;
+}
