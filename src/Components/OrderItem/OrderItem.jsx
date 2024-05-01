@@ -2,11 +2,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import './OrderItem.css';
 import { ShopContext } from '../../context/ShopContext';
-import { Button } from '@mui/material';
 import ProductReviews from '../ProductReviews/ProductReviews';
 
 const OrderItem = ({ order }) => {
-    const { CancelOrder, addToCart } = useContext(ShopContext);
+    const { CancelOrder, addToCart, formatDateTime } = useContext(ShopContext);
     const { id, total_amount, orderInfo, status, order_date, order_details, provider } = order;
 
     const maxItemsToShow = 2;
@@ -65,7 +64,7 @@ const OrderItem = ({ order }) => {
         <div className="order-item">
             <div className="top">
                 <p className="order-id">Mã đơn #{id}</p>
-                <p className="order-date">Ngày đặt: {new Date(order_date).toLocaleDateString()}</p>
+                <p className="order-date">Ngày đặt: {formatDateTime(order_date)}</p>
             </div>
             <div className="main">
                 {visibleItems.map((detail, index) => (

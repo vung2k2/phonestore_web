@@ -111,7 +111,11 @@ const Login = () => {
                         />
                     )}
                     <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Nhớ mật khẩu" />
-                    {errorMessage && <p className="error-message">{errorMessage}</p>}
+                    {errorMessage && (
+                        <p className="error-message" style={{ color: 'red', textAlign: 'center' }}>
+                            {errorMessage}
+                        </p>
+                    )}
                     <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleLogin}>
                         Đăng nhập
                     </Button>

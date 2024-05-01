@@ -336,6 +336,18 @@ export const ShopContextProvider = (props) => {
         }
     };
 
+    // Hàm chuyển đổi ngày giờ
+    const formatDateTime = (mysqlDateString) => {
+        const originalDate = new Date(mysqlDateString);
+        const year = originalDate.getFullYear();
+        const month = ('0' + (originalDate.getMonth() + 1)).slice(-2);
+        const day = ('0' + originalDate.getDate()).slice(-2);
+        const hours = ('0' + originalDate.getHours()).slice(-2);
+        const minutes = ('0' + originalDate.getMinutes()).slice(-2);
+
+        return `${hours}:${minutes} ${day}/${month}/${year} `;
+    };
+
     const contextValue = {
         compareList,
         addToCompareList,
@@ -357,6 +369,7 @@ export const ShopContextProvider = (props) => {
         updateInfo,
         ratingProduct,
         getReviewsProduct,
+        formatDateTime,
     };
 
     return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>;

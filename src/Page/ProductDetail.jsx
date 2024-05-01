@@ -112,11 +112,11 @@ const ProductDetail = () => {
             <Breadcrum product={product} />
             <div className="product-detail">
                 <div className="product-detail-header">
-                    <h2>Điện thoại {product.name}</h2>
+                    <h1>Điện thoại {product.name}</h1>
                     <div className="rating">
-                        <span className="number-stars">{product.numberReview}</span>
+                        <span className="number-stars">{(product.rate / product.numberReview).toFixed(1)}</span>
                         <span className="stars"> ★★★★★</span>
-                        <span className="rating-count">({product.rate})</span>
+                        <span className="rating-count">({product.numberReview})</span>
                     </div>
                     <span className="product-card-compare" onClick={handleAddToCompare}>
                         {isCompared ? '✓ Đã thêm vào so sánh' : '+ So sánh'}
@@ -189,7 +189,7 @@ const ProductDetail = () => {
                                 <p style={{ fontStyle: 'italic' }}>(Miễn phí giao hàng trên toàn quốc)</p>
                             </button>
                         </div>
-                        <Rate id={25} />
+                        <Rate id={product.id} start={(product.rate / product.numberReview).toFixed(1)} />
                     </div>
                     <div className="box-right">
                         <div className="product-parameters">

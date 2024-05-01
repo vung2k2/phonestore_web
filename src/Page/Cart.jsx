@@ -76,12 +76,12 @@ const Cart = () => {
     );
 
     const [userPhoneNumber, setUserPhoneNumber] = useState(
-        localStorage.getItem('userPhoneNumber') === null || localStorage.getItem('userPhoneNumber') === 'undefined'
+        localStorage.getItem('userPhoneNumber') === 'null' || localStorage.getItem('userPhoneNumber') === 'undefined'
             ? ''
             : localStorage.getItem('userPhoneNumber'),
     );
     const [userAddress, setUserAddress] = useState(
-        localStorage.getItem('userAddress') === null || localStorage.getItem('userAddress') === 'undefined'
+        localStorage.getItem('userAddress') === 'null' || localStorage.getItem('userAddress') === 'undefined'
             ? ''
             : localStorage.getItem('userAddress'),
     );

@@ -6,6 +6,9 @@
     align-items: center;
     margin-bottom: -6px;
 }
+.product-detail h1 {
+    font-size: 24px;
+}
 
 .rating {
     padding-left: 10px;
