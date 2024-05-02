@@ -15,7 +15,7 @@ export const ShopContextProvider = (props) => {
     const [accessToken, setAccessToken] = useState('');
     const [refreshToken, setRefreshToken] = useState('');
     const navigate = useNavigate();
-    const allProducts = useProducts();
+    let allProducts = useProducts();
 
     axios.interceptors.response.use(
         (response) => {
@@ -41,6 +41,7 @@ export const ShopContextProvider = (props) => {
 
     // Danh sách sp đã xem
     useEffect(() => {
+        console.log(allProducts);
         const storedViewedProducts = JSON.parse(localStorage.getItem('viewedHistory')) || [];
         setViewedProducts(storedViewedProducts);
     }, []);
@@ -60,6 +61,8 @@ export const ShopContextProvider = (props) => {
             const newCompareList = [...compareList, product];
             setCompareList(newCompareList);
             localStorage.setItem('compareList', JSON.stringify(newCompareList));
+        } else {
+            toast.warning('Sản phẩm đã có trong danh sách!', { position: 'top-center', autoClose: 1500 });
         }
     };
 
@@ -295,12 +298,23 @@ export const ShopContextProvider = (props) => {
             );
             toast.success('Cám ơn bạn đã đánh giá!', { position: 'top-center', autoClose: 1500 });
             fetchOrders();
+            updateProductReview(productId, rate);
         } catch (error) {
             console.error('Lỗi đánh giá sp:', error);
             toast.error('Đã xảy ra lỗi!', { position: 'top-center', autoClose: 1500 });
         }
     };
+    const updateProductReview = (productId, rating) => {
+        const productIndex = allProducts.findIndex((product) => product.id === productId);
 
+        if (productIndex !== -1) {
+            const productToUpdate = allProducts[productIndex];
+            productToUpdate.rate += rating;
+            productToUpdate.numberReview += 1;
+            allProducts[productIndex] = productToUpdate;
+        } else {
+        }
+    };
     const updateInfo = async (name, address, phone) => {
         try {
             await axios.put(

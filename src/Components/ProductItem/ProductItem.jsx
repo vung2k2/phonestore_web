@@ -55,7 +55,9 @@ const ProductItem = ({ product }) => {
                         <span className="product-card-discount">-{Math.floor((1 - newPrice / oldPrice) * 100)}%</span>
                     </div>
                     <div className="product-card-rating">
-                        <span className="product-card-rating-stars">★ {rate}</span>
+                        <span className="product-card-rating-stars">
+                            ★ {rate ? (rate / numberReview).toFixed(1) : 0}
+                        </span>
                         <span className="product-card-rating-count">({numberReview})</span>
                     </div>
                 </Link>

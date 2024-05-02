@@ -49,7 +49,7 @@ const ProductDetail = () => {
             addToCompareList(product);
             setIsCompared(!isCompared);
         } else {
-            alert('Danh sách so sánh đã đầy');
+            toast.warning('Danh sách đã đầy!', { position: 'top-center', autoClose: 1500 });
         }
     };
 
@@ -113,11 +113,18 @@ const ProductDetail = () => {
             <div className="product-detail">
                 <div className="product-detail-header">
                     <h1>Điện thoại {product.name}</h1>
-                    <div className="rating">
-                        <span className="number-stars">{(product.rate / product.numberReview).toFixed(1)}</span>
-                        <span className="stars"> ★★★★★</span>
-                        <span className="rating-count">({product.numberReview})</span>
-                    </div>
+                    {product.rate ? (
+                        <div className="rating">
+                            <span className="number-stars">
+                                {product.rate ? (product.rate / product.numberReview).toFixed(1) : 0}
+                            </span>
+                            <span className="stars"> ★★★★★</span>
+                            <span className="rating-count">({product.numberReview})</span>
+                        </div>
+                    ) : (
+                        ''
+                    )}
+
                     <span className="product-card-compare" onClick={handleAddToCompare}>
                         {isCompared ? '✓ Đã thêm vào so sánh' : '+ So sánh'}
                     </span>
@@ -189,7 +196,11 @@ const ProductDetail = () => {
                                 <p style={{ fontStyle: 'italic' }}>(Miễn phí giao hàng trên toàn quốc)</p>
                             </button>
                         </div>
-                        <Rate id={product.id} start={(product.rate / product.numberReview).toFixed(1)} />
+                        {product.numberReview ? (
+                            <Rate id={product.id} start={(product.rate / product.numberReview).toFixed(1)} />
+                        ) : (
+                            ''
+                        )}
                     </div>
                     <div className="box-right">
                         <div className="product-parameters">
