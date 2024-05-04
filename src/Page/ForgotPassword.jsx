@@ -11,7 +11,7 @@ const ForgotPassword = () => {
 
     const handleSearch = async () => {
         try {
-            const response = await axios.post('http://localhost:1406/auth/forgot-password', { email });
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/forgot-password`, { email });
             if (response.data.status === false) {
                 setResponse(false);
                 setErrorMessage(response.data.message);
@@ -38,7 +38,7 @@ const ForgotPassword = () => {
         >
             {response === true ? (
                 <>
-                    <Typography sx={{ textAlign: 'center' }}>Mã xác nhận đã được gửi tới email của bạn</Typography>
+                    <Typography sx={{ textAlign: 'center' }}>Vui lòng kiểm tra email</Typography>
                     <CheckIcon
                         sx={{
                             marginTop: '15px',

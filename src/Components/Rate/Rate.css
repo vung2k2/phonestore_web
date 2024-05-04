@@ -1,6 +1,6 @@
 .rate {
     margin: 40px 65px 20px 0;
-
+    min-height: 450px;
     box-shadow: 1px 1px 5px rgb(203, 203, 203);
     padding: 1px 20px 10px 20px;
     border-radius: 20px;

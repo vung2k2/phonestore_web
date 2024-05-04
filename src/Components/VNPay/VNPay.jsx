@@ -7,7 +7,7 @@ const VNPayy = ({ OrderInfo }) => {
     const navigate = useNavigate();
     const handleClick = async () => {
         const response = await axios.post(
-            'http://localhost:1406/user/payment',
+            `${process.env.REACT_APP_API_URL}/user/payment`,
             { OrderInfo: OrderInfo },
             {
                 headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },

@@ -1,6 +1,6 @@
 .my-account {
     background: #f0f0f0;
-    padding: 60px 300px 90px 300px;
+    padding: 3% 18vw;
 }
 .my-account-main {
     background-color: #fff;
@@ -18,7 +18,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 200px;
+    margin: 0 12vw;
 }
 .my-account-main .img {
     margin: 40px 0;
@@ -58,10 +58,16 @@
     color: #fff;
     font-size: 20px;
     font-weight: 500;
+    transition: 0.1s ease-in-out;
 }
 .my-account-main .info-main button:hover {
     background-color: #253b80;
 }
+
+.my-account-main .info-main button:active {
+    transform: scale(0.95);
+}
+
 .my-account-main .edit-form {
     display: grid;
     justify-items: center;
@@ -74,9 +80,12 @@
 .my-account-main .edit-form > div:nth-child(3) {
     grid-column: span 2; /* Chiếm cả 2 cột */
 }
+.my-account-main .edit-form > div:nth-child(4) {
+    grid-column: span 2; /* Chiếm cả 2 cột */
+}
 .my-account-main .edit-form .btn {
     height: 50px;
-    width: 90%;
+    width: 270px;
     border-radius: 30px;
     border: none;
     background-color: #3d559d;
@@ -85,8 +94,11 @@
     color: #fff;
     font-size: 20px;
     font-weight: 500;
+    transition: 0.1s ease-in-out;
 }
-
+.my-account-main .edit-form .btn:active {
+    transform: scale(0.95);
+}
 .my-account-main .edit-form button:hover {
     background-color: #253b80;
     color: #fff;

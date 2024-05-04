@@ -1,7 +1,6 @@
 import React from 'react';
 import './Loading.css';
 
-// Loading.jsx
 const Loading = ({ isLoading }) => {
     return isLoading ? (
         <div className="loading-overlay">

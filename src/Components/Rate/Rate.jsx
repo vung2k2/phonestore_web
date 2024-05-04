@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import './Rate.css';
 import { ShopContext } from '../../context/ShopContext';
 import { PiUserCircleLight } from 'react-icons/pi';
+import { FaExclamationCircle } from 'react-icons/fa';
 
 const Rate = ({ id, start }) => {
     const [selectedStar, setSelectedStar] = useState('all');
@@ -52,18 +53,23 @@ const Rate = ({ id, start }) => {
                     </button>
                 ))}
             </div>
-
-            {filterReviewsByStar(selectedStar).map((review) => (
-                <div key={review.id} className="rate-el">
-                    <div className="user-info">
-                        <PiUserCircleLight className="user-icon" />
-                        <span className="user-name">{review.name}</span>
+            {filterReviewsByStar(selectedStar).length > 0 ? (
+                filterReviewsByStar(selectedStar).map((review) => (
+                    <div key={review.id} className="rate-el">
+                        <div className="user-info">
+                            <PiUserCircleLight className="user-icon" />
+                            <span className="user-name">{review.name}</span>
+                        </div>
+                        <div className="rating">{'★'.repeat(review.rate) + '☆'.repeat(5 - review.rate)}</div>
+                        <div className="content">{review.comment}</div>
+                        <div className="date">{formatDateTime(review.created_at)}</div>
                     </div>
-                    <div className="rating">{'★'.repeat(review.rate) + '☆'.repeat(5 - review.rate)}</div>
-                    <div className="content">{review.comment}</div>
-                    <div className="date">{formatDateTime(review.created_at)}</div>
-                </div>
-            ))}
+                ))
+            ) : (
+                <p style={{ fontSize: '20px', margin: '0', paddingTop: '100px', color: '#808080' }}>
+                    <FaExclamationCircle style={{ marginRight: '4px' }} /> Chưa có đánh giá
+                </p>
+            )}
         </div>
     );
 };

@@ -30,23 +30,6 @@ const ButtonWrapper = ({ currency, showSpinner, total, payload }) => {
         return actions.order.capture().then(async (res) => {
             if (res.status === 'COMPLETED') {
                 createOrder('paypal', payload.orderInfo);
-                // const order = await axios.post(
-                //     'http://localhost:1406/user/order',
-                //     {
-                //         total_amount: payload.amount,
-                //         provider: 'paypal',
-                //         payment_status: 'pending',
-                //         orderInfo: payload.orderInfo,
-                //     },
-                //     {
-                //         headers: {
-                //             'Content-Type': 'application/json',
-                //             AccessToken: localStorage.getItem('accessToken'),
-                //         },
-                //     },
-                // );
-                // deleteCart();
-                // navigate('/order-return?paypal_TransactionStatus=00');
             } else navigate('/order-return?paypal_TransactionStatus=01');
         });
     };

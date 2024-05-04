@@ -12,6 +12,7 @@ import Container from '@mui/material/Container';
 import axios from 'axios';
 import { useState } from 'react';
 import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
+import Loading from '../Components/Loading/Loading';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -20,12 +21,14 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [mailError, setMailError] = useState(false);
     const [passError, setPassError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
     const handleLogin = async (event) => {
+        setIsLoading(true);
         try {
             event.preventDefault();
             if (email === '') {
@@ -35,21 +38,21 @@ const Login = () => {
             if (password === '') {
                 setPassword(true);
             } else setPassword(false);
-            const response = await axios.post('http://localhost:1406/auth/login', {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
                 email,
                 password,
             });
 
-            if (response.status === 200) {
-                localStorage.setItem('accessToken', response.data.accessToken);
-                localStorage.setItem('refreshToken', response.data.refreshToken);
-                localStorage.setItem('userName', response.data.name);
-                localStorage.setItem('userPhoneNumber', response.data.phone);
-                localStorage.setItem('userAddress', response.data.address);
+            setIsLoading(false);
+            localStorage.setItem('accessToken', response.data.accessToken);
+            localStorage.setItem('refreshToken', response.data.refreshToken);
+            localStorage.setItem('userName', response.data.name);
+            localStorage.setItem('userPhoneNumber', response.data.phone);
+            localStorage.setItem('userAddress', response.data.address);
 
-                window.location.href = '/';
-            }
+            window.location.href = '/';
         } catch (error) {
+            setIsLoading(false);
             console.error('Lỗi đăng nhập:', error.response ? error.response.data : error.message);
             setErrorMessage('Vui lòng kiểm tra chính xác thông tin đăng nhập.');
         }
@@ -57,6 +60,7 @@ const Login = () => {
 
     return (
         <Container component="main" maxWidth="xs">
+            <Loading isLoading={isLoading} />
             <CssBaseline />
             <Box
                 sx={{
@@ -110,7 +114,10 @@ const Login = () => {
                             color="#808080"
                         />
                     )}
-                    <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Nhớ mật khẩu" />
+                    <FormControlLabel
+                        control={<Checkbox value="remember" color="primary" defaultChecked />}
+                        label="Nhớ mật khẩu"
+                    />
                     {errorMessage && (
                         <p className="error-message" style={{ color: 'red', textAlign: 'center' }}>
                             {errorMessage}

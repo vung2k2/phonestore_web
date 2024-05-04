@@ -6,6 +6,7 @@ import { TextField } from '@mui/material';
 import SelectAddress from '../Components/SelectAddress/SelectAddress';
 import { ShopContext } from '../context/ShopContext';
 import { ClassNames } from '@emotion/react';
+import { Link } from 'react-router-dom';
 
 const MyAccount = () => {
     const { updateInfo } = useContext(ShopContext);
@@ -13,12 +14,12 @@ const MyAccount = () => {
     const [userName, setUserName] = useState(localStorage.getItem('userName'));
     const [isEditingAddress, setIsEditingAddress] = useState(false);
     const [userPhoneNumber, setUserPhoneNumber] = useState(
-        localStorage.getItem('userPhoneNumber') === null || localStorage.getItem('userPhoneNumber') === 'undefined'
+        localStorage.getItem('userPhoneNumber') === 'null' || localStorage.getItem('userPhoneNumber') === 'undefined'
             ? ''
             : localStorage.getItem('userPhoneNumber'),
     );
     const [userAddress, setUserAddress] = useState(
-        localStorage.getItem('userAddress') === null || localStorage.getItem('userAddress') === 'undefined'
+        localStorage.getItem('userAddress') === 'null' || localStorage.getItem('userAddress') === 'undefined'
             ? ''
             : localStorage.getItem('userAddress'),
     );
@@ -97,20 +98,16 @@ const MyAccount = () => {
                                 </p>
                                 {isEditingAddress && <SelectAddress onSelect={handleAddressSelect} />}
                             </div>
-                            <button
-                                onClick={() => {
-                                    updateInfo(userName, userAddress, userPhoneNumber);
-                                }}
-                                className="btn"
-                            >
-                                Cập nhật thông tin
-                            </button>
-                            <button
-                                className="btn"
-                                style={{ background: '#cad8ff', color: '#3d559d', fontWeight: 600 }}
-                            >
-                                Thay đổi mật khẩu
-                            </button>
+                            <div>
+                                <button
+                                    onClick={() => {
+                                        updateInfo(userName, userAddress, userPhoneNumber);
+                                    }}
+                                    className="btn"
+                                >
+                                    Cập nhật thông tin
+                                </button>
+                            </div>
                         </div>
                     ) : (
                         <div className="info">
@@ -121,14 +118,19 @@ const MyAccount = () => {
                                 </div>
                                 <div className="phone-number">
                                     <p>Số điện thoại</p>
-                                    <p>{localStorage.getItem('userPhoneNumber')}</p>
+                                    <p>{userPhoneNumber}</p>
                                 </div>
                                 <div className="address">
                                     <p>Địa chỉ</p>
-                                    <p>{localStorage.getItem('userAddress')}</p>
+                                    <p>{userAddress}</p>
                                 </div>
 
                                 <button onClick={handleEditClick}>Chỉnh sửa thông tin</button>
+                                <Link to="/my-account/password">
+                                    <button style={{ background: '#cad8ff', color: '#3d559d', fontWeight: 600 }}>
+                                        Thay đổi mật khẩu
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     )}

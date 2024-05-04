@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export const ShopContext = createContext(null);
 
 export const ShopContextProvider = (props) => {
-    const baseUrl = 'http://localhost:1406';
+    const baseUrl = process.env.REACT_APP_API_URL;
     const [compareList, setCompareList] = useState([]);
     const [viewedProducts, setViewedProducts] = useState([]);
     const [cartItems, setCartItems] = useState([]);
@@ -41,7 +41,6 @@ export const ShopContextProvider = (props) => {
 
     // Danh sách sp đã xem
     useEffect(() => {
-        console.log(allProducts);
         const storedViewedProducts = JSON.parse(localStorage.getItem('viewedHistory')) || [];
         setViewedProducts(storedViewedProducts);
     }, []);
@@ -331,8 +330,8 @@ export const ShopContextProvider = (props) => {
             localStorage.setItem('userName', name);
             localStorage.setItem('userAddress', address);
             localStorage.setItem('userPhoneNumber', phone);
-            toast.success('Đã cập nhật thông tin cá nhân!', { position: 'top-center', autoClose: 1500 });
             window.location.reload();
+            toast.success('Đã cập nhật thông tin cá nhân!', { position: 'top-center', autoClose: 1500 });
         } catch (error) {
             console.error('Lỗi cập nhật thoong tin cá nhân:', error);
             toast.error('Đã xảy ra lỗi!', { position: 'top-center', autoClose: 1500 });

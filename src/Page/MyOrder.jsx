@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import './CSS/MyOrder.css';
 import OrderItem from '../Components/OrderItem/OrderItem';
 import { ShopContext } from '../context/ShopContext';
+import { FaExclamationCircle } from 'react-icons/fa';
 
 const MyOrder = () => {
     const { orders, fetchOrders } = useContext(ShopContext);
@@ -51,13 +52,27 @@ const MyOrder = () => {
                 ))}
             </div>
             <div className="my-order-main">
-                {/* Hiển thị danh sách các đơn hàng */}
-                {filteredOrders
-                    .slice()
-                    .reverse()
-                    .map((order) => (
-                        <OrderItem key={order.id} order={order} />
-                    ))}
+                {filteredOrders.length > 0 ? (
+                    filteredOrders
+                        .slice()
+                        .reverse()
+                        .map((order) => <OrderItem key={order.id} order={order} />)
+                ) : (
+                    <p
+                        style={{
+                            fontSize: '30px',
+                            textAlign: 'center',
+                            paddingTop: '100px',
+                            color: '#808080',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <FaExclamationCircle style={{ marginRight: '10px', verticalAlign: 'middle' }} />
+                        <span style={{ verticalAlign: 'middle' }}>Không có đơn hàng nào</span>
+                    </p>
+                )}
             </div>
         </div>
     );

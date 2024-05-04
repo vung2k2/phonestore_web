@@ -12,6 +12,8 @@ import { useState } from 'react';
 import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../Components/Loading/Loading';
+import { Flag } from '@mui/icons-material';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -24,12 +26,14 @@ const Signup = () => {
     const [passError, setPassError] = useState(false);
     const [nameError, setNameError] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
     const handleSignUp = async (event) => {
+        setIsLoading(true);
         try {
             event.preventDefault();
             if (name === '') {
@@ -43,26 +47,31 @@ const Signup = () => {
                 setPassError(true);
             } else setPassError(false);
 
-            const response = await axios.post('http://localhost:1406/auth/register', {
+            await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, {
                 name,
                 email,
                 password,
             });
-            if (response.status === 201) {
-                setSuccess(true);
-                toast.success('Đăng ký tài khoản thành công');
-                setName('');
-                setEmail('');
-                setPassword('');
-            }
+            setIsLoading(false);
+            setSuccess(true);
+            toast.success('Đăng ký tài khoản thành công', { position: 'top-center', autoClose: 1500 });
+            setName('');
+            setEmail('');
+            setPassword('');
         } catch (error) {
+            setIsLoading(false);
             console.error('Lỗi đăng ký:', error.response ? error.response.data : error.message);
-            toast.error('Đã xảy ra lỗi trong quá trình đăng ký', { position: 'top-center', autoClose: 1500 });
+            if (error.response) {
+                toast.error(`${error.response.data.message}`, { position: 'top-center', autoClose: 1500 });
+            } else {
+                toast.error('Lỗi đăng ký', { position: 'top-center', autoClose: 1500 });
+            }
         }
     };
 
     return (
         <Container component="main" maxWidth="xs">
+            <Loading isLoading={isLoading} />
             <CssBaseline />
             {success === true ? (
                 <Box
@@ -75,10 +84,10 @@ const Signup = () => {
                     }}
                 >
                     <Typography component="h1" variant="h5" sx={{ fontSize: '30px' }}>
-                        Sign Up
+                        Đăng ký
                     </Typography>
                     <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }} onClick={() => navigate('/login')}>
-                        Back to login
+                        Đăng nhập ngay
                     </Button>
                 </Box>
             ) : (
@@ -91,7 +100,7 @@ const Signup = () => {
                     }}
                 >
                     <Typography component="h1" variant="h5" sx={{ fontSize: '30px' }}>
-                        Sign Up
+                        Đăng ký
                     </Typography>
                     <Box component="form" noValidate sx={{ mt: 1 }} style={{ position: 'relative' }}>
                         <TextField
@@ -146,7 +155,11 @@ const Signup = () => {
                                 color="#808080"
                             />
                         )}
-                        <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary" defaultChecked />}
+                            label="Nhớ mật khẩu"
+                        />
+
                         {errorMessage && <p className="error-message">{errorMessage}</p>}
                         <Button
                             type="submit"
