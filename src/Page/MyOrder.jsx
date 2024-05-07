@@ -5,6 +5,7 @@ import { ShopContext } from '../context/ShopContext';
 import { FaExclamationCircle } from 'react-icons/fa';
 
 const MyOrder = () => {
+    window.scrollTo(0, 0);
     const { orders, fetchOrders } = useContext(ShopContext);
     const [selectedCategory, setSelectedCategory] = useState('all');
     useEffect(() => {

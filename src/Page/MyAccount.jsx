@@ -9,6 +9,7 @@ import { ClassNames } from '@emotion/react';
 import { Link } from 'react-router-dom';
 
 const MyAccount = () => {
+    window.scrollTo(0, 0);
     const { updateInfo } = useContext(ShopContext);
     const [isEditing, setIsEditing] = useState(false);
     const [userName, setUserName] = useState(localStorage.getItem('userName'));

@@ -5,8 +5,11 @@ import ProductList from '../Components/ProductList/ProductList';
 import FilterProducts from '../Components/FilterProducts/FilterProducts';
 import CompareList from '../Components/CompareList/CompareList';
 import Footer from '../Components/Footer/Footer';
+import ScrollToTop from 'react-scroll-to-top';
+import { RiArrowUpDoubleFill } from 'react-icons/ri';
 
 const Product = () => {
+    window.scrollTo(0, 0);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [filters, setFilters] = useState({});
 
@@ -18,6 +21,7 @@ const Product = () => {
     };
     return (
         <div className="product">
+            <ScrollToTop smooth component={<RiArrowUpDoubleFill size={25} color="#253b80" />} />
             <Navbar handleBrandClick={handleBrandClick} />
             <FilterProducts handleFilters={handleFilters} />
             <ProductList selectedCategory={selectedCategory} filters={filters} />

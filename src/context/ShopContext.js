@@ -60,6 +60,7 @@ export const ShopContextProvider = (props) => {
             const newCompareList = [...compareList, product];
             setCompareList(newCompareList);
             localStorage.setItem('compareList', JSON.stringify(newCompareList));
+            toast.success('Đã thêm vào danh sách so sánh!', { position: 'top-center', autoClose: 1500 });
         } else {
             toast.warning('Sản phẩm đã có trong danh sách!', { position: 'top-center', autoClose: 1500 });
         }

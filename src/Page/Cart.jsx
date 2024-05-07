@@ -18,6 +18,7 @@ import SelectAddress from '../Components/SelectAddress/SelectAddress';
 import cart_empty_icon from '../Assets/img/cart_empty.png';
 
 const Cart = () => {
+    window.scrollTo(0, 0);
     const { cartItems, setCartItems, removeFromCart, changeQuantityItem, createOrder } = useContext(ShopContext);
     const [AmountVNP, setAmountVNP] = useState(0);
     const navigate = useNavigate();

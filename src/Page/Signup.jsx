@@ -160,7 +160,7 @@ const Signup = () => {
                             label="Nhớ mật khẩu"
                         />
 
-                        {errorMessage && <p className="error-message">{errorMessage}</p>}
+                        {/* {errorMessage && <p className="error-message">{errorMessage}</p>} */}
                         <Button
                             type="submit"
                             fullWidth

@@ -15,6 +15,7 @@ import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
 import Loading from '../Components/Loading/Loading';
 
 const Login = () => {
+    window.scrollTo(0, 0);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);

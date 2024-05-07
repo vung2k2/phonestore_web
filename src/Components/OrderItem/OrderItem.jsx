@@ -3,6 +3,7 @@ import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import './OrderItem.css';
 import { ShopContext } from '../../context/ShopContext';
 import ProductReviews from '../ProductReviews/ProductReviews';
+import { Link } from 'react-router-dom';
 
 const OrderItem = ({ order }) => {
     const { CancelOrder, addToCart, formatDateTime } = useContext(ShopContext);
@@ -69,7 +70,9 @@ const OrderItem = ({ order }) => {
             <div className="main">
                 {visibleItems.map((detail, index) => (
                     <div key={index} className="order-item-detail">
-                        <img src={detail.imageUrl} alt={detail.name} />
+                        <Link style={{ textDecoration: 'none', color: 'white' }} to={`/product/${detail.slug}`}>
+                            <img src={detail.imageUrl} alt={detail.name} />
+                        </Link>
                         <div className="item-info">
                             <div>
                                 <p className="item-name">
