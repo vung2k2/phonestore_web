@@ -29,13 +29,15 @@
     gap: 30px 10px;
 }
 
-.product-list-container p {
-    text-align: center;
-    font-size: 25px;
-    font-weight: 600;
-    color: rgb(65, 65, 65);
+.product-list-container .list-empty {
+    display: flex;
+    min-height: 450px;
+    align-items: center;
+    justify-content: center;
 }
-
+.product-list-container .list-empty img {
+    height: 250px;
+}
 @media screen and (max-width: 1024px) {
     .product-list-container {
         padding-top: 20px;

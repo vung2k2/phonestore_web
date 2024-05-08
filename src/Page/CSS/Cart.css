@@ -127,7 +127,7 @@
     padding-left: 30px;
     position: sticky;
     top: 0;
-    height: calc(100vh - 22px);
+    min-height: 100vh;
 }
 .cartitems-right .pay > div {
     padding-bottom: 10px;

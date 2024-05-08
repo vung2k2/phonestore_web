@@ -89,7 +89,7 @@ const Cart = () => {
 
     const handleAddressSelect = (address) => {
         setUserAddress(address);
-        localStorage.setItem('userAddress', address);
+        // localStorage.setItem('userAddress', address);
         setIsEditingAddress(false);
     };
 

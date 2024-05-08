@@ -1,10 +1,9 @@
 // src/components/ProductList.js
 import React, { useState } from 'react';
-
 import './ProductList.css';
-
 import ProductItem from '../ProductItem/ProductItem';
 import { useProducts } from '../../context/ProductContext';
+import list_empty_icom from '../../Assets/img/no-products-found.png';
 
 const ProductList = ({ selectedCategory, filters }) => {
     const allproducts = useProducts();
@@ -157,7 +156,9 @@ const ProductList = ({ selectedCategory, filters }) => {
                 // <p>Đang tải sản phẩm...</p>
                 <div className="loading-spinner"></div>
             ) : (
-                <p>Không có sản phẩm nào</p>
+                <div className="list-empty">
+                    <img src={list_empty_icom} alt="" />
+                </div>
             )}
         </div>
     );

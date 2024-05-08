@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Navbar.css';
 import samsung_logo from '../../Assets/img/samsung-logo.png';
 import iphone_logo from '../../Assets/img/iphone-logo.png';
@@ -10,11 +11,20 @@ import xiaomi_logo from '../../Assets/img/xiaomi-logo.png';
 import other_logo from '../../Assets/img/other-logo.png';
 
 const Navbar = ({ handleBrandClick }) => {
-    const [activeBrand, setActiveBrand] = useState('');
-
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const selectedBrand = searchParams.get('brand');
+    const [activeBrand, setActiveBrand] = useState(selectedBrand);
+    console.log(selectedBrand);
+    const navigate = useNavigate();
     const handleBrand = (brand) => {
         setActiveBrand(brand);
         handleBrandClick(brand);
+        if (brand === null) {
+            navigate('/product');
+        } else {
+            navigate(`/product?brand=${brand}`);
+        }
     };
 
     return (
@@ -23,9 +33,9 @@ const Navbar = ({ handleBrandClick }) => {
                 <div className="navbar-item">
                     <img
                         src={all_logo}
-                        onClick={() => handleBrand('')}
+                        onClick={() => handleBrand(null)}
                         alt=""
-                        className={`brand-logo ${activeBrand === '' ? 'active' : ''}`}
+                        className={`brand-logo ${activeBrand === null ? 'active' : ''}`}
                     />
                 </div>
                 <div className="navbar-item">

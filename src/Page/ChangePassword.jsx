@@ -41,7 +41,7 @@ const ChangePassword = () => {
                     setOldPassword('');
                     setPassword('');
                     setRePassword('');
-                    toast.success('Thay đổi mật khẩu thành công');
+                    toast.success('Thay đổi mật khẩu thành công', { position: 'top-center', autoClose: 1500 });
                 }
             } catch (error) {
                 setResponse(false);
@@ -76,8 +76,8 @@ const ChangePassword = () => {
                                 fontSize: '50px',
                             }}
                         />
-                        <Button onClick={() => navigate('/login')} variant="outlined">
-                            Quay về đăng nhập
+                        <Button onClick={() => navigate('/')} variant="outlined">
+                            Quay về trang chủ
                         </Button>
                     </>
                 </>

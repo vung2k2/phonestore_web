@@ -3,11 +3,12 @@
     padding: 3% 18vw;
 }
 .my-account-main {
+    min-height: 560px;
     background-color: #fff;
     box-shadow: 0 0 18px rgba(0, 0, 0, 0.12);
     border-radius: 20px;
     justify-content: center;
-    padding: 1px 0px 60px 0px;
+    padding-top: 1px;
 }
 .my-account-main .title {
     border-bottom: 3px solid #dfdfdf;

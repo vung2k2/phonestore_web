@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import '../Page/CSS/Product.css';
 import Navbar from '../Components/Navbar/Navbar';
 import ProductList from '../Components/ProductList/ProductList';
@@ -10,7 +11,12 @@ import { RiArrowUpDoubleFill } from 'react-icons/ri';
 
 const Product = () => {
     window.scrollTo(0, 0);
-    const [selectedCategory, setSelectedCategory] = useState(null);
+
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const selectedBrand = searchParams.get('brand');
+
+    const [selectedCategory, setSelectedCategory] = useState(selectedBrand);
     const [filters, setFilters] = useState({});
 
     const handleBrandClick = (brand) => {
