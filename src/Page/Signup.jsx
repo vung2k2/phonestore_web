@@ -13,7 +13,6 @@ import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../Components/Loading/Loading';
-import { Flag } from '@mui/icons-material';
 
 const Signup = () => {
     const navigate = useNavigate();

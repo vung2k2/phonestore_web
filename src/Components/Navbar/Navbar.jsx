@@ -15,7 +15,7 @@ const Navbar = ({ handleBrandClick }) => {
     const searchParams = new URLSearchParams(location.search);
     const selectedBrand = searchParams.get('brand');
     const [activeBrand, setActiveBrand] = useState(selectedBrand);
-    console.log(selectedBrand);
+
     const navigate = useNavigate();
     const handleBrand = (brand) => {
         setActiveBrand(brand);
