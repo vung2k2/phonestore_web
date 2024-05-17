@@ -141,14 +141,14 @@ const Signup = () => {
                             autoComplete="new-password"
                         />
                         {showPassword ? (
-                            <RiEyeCloseLine
+                            <RiEyeLine
                                 onClick={togglePasswordVisibility}
                                 style={{ position: 'absolute', top: 192, right: 10, cursor: 'pointer' }}
                                 size={27}
                                 color="#808080"
                             />
                         ) : (
-                            <RiEyeLine
+                            <RiEyeCloseLine
                                 onClick={togglePasswordVisibility}
                                 style={{ position: 'absolute', top: 192, right: 10, cursor: 'pointer' }}
                                 size={27}

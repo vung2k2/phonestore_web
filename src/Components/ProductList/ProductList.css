@@ -1,5 +1,6 @@
 .product-list-container {
     padding-top: 30px;
+    min-height: 230px;
 }
 
 .box-sort {

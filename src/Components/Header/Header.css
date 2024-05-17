@@ -18,6 +18,7 @@
     align-items: center;
     gap: 10px;
 }
+
 .header-logo p {
     padding-left: 15px;
     transform: scale(1.5);
@@ -32,6 +33,7 @@
     list-style: none;
     justify-content: space-around;
 }
+
 .header-menu li {
     display: flex;
     font-size: 18px;
@@ -42,12 +44,14 @@
     gap: 1px;
     cursor: pointer;
 }
+
 .header-menu li span {
     text-decoration: none;
     color: white;
     display: flex;
     align-items: center;
 }
+
 .header-menu img {
     height: 30px;
 }
@@ -75,6 +79,7 @@
 .login-options li:hover {
     background-color: #0842f0;
 }
+
 .cart {
     position: relative;
 }
@@ -82,6 +87,7 @@
 .cart-icon {
     font-size: 35px;
 }
+
 .cart-count {
     position: absolute;
     width: 22px;
@@ -97,9 +103,9 @@
     color: white;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1280px) {
     .header {
-        padding: 0 20px;
+        padding: 0 30px;
         font-size: 16px;
     }
 
@@ -109,19 +115,7 @@
 
     .header-logo p {
         padding-left: 10px;
-
         transform: scale(1.3);
-    }
-
-    .search-box input {
-        width: 300px;
-        height: 30px;
-    }
-
-    .search-box button {
-        height: 30px;
-        width: 70px;
-        font-size: 13px;
     }
 
     .header-menu li {
@@ -129,13 +123,72 @@
     }
 
     .cart-count {
-        width: 15px;
-        height: 15px;
-        top: -5px;
-        right: -12px;
+        width: 18px;
+        height: 18px;
+        font-size: 12px;
     }
 
     .cart-icon {
-        font-size: 28px;
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .header {
+        padding: 0 20px;
+        font-size: 14px;
+    }
+
+    .header-logo img {
+        height: 35px;
+    }
+
+    .header-logo p {
+        padding-left: 8px;
+        transform: scale(1.1);
+    }
+
+    .header-menu li {
+        font-size: 14px;
+    }
+
+    .cart-count {
+        width: 15px;
+        height: 15px;
+        font-size: 10px;
+    }
+
+    .cart-icon {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 0 10px;
+        font-size: 12px;
+    }
+
+    .header-logo img {
+        height: 30px;
+    }
+
+    .header-logo p {
+        padding-left: 5px;
+        transform: scale(1);
+    }
+
+    .header-menu li {
+        font-size: 12px;
+    }
+
+    .cart-count {
+        width: 12px;
+        height: 12px;
+        font-size: 8px;
+    }
+
+    .cart-icon {
+        font-size: 20px;
     }
 }

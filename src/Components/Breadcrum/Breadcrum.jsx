@@ -53,6 +53,7 @@ const Breadcrum = (props) => {
                     fontSize: '17px',
                     fontWeight: '600',
                     color: '#808080',
+                    cursor: 'default',
                 }}
                 to={`/product/${product.slug}`}
             >

@@ -101,14 +101,14 @@ const Login = () => {
                         autoComplete="current-password"
                     />
                     {showPassword ? (
-                        <RiEyeCloseLine
+                        <RiEyeLine
                             onClick={togglePasswordVisibility}
                             style={{ position: 'absolute', top: 110, right: 10, cursor: 'pointer' }}
                             size={27}
                             color="#808080"
                         />
                     ) : (
-                        <RiEyeLine
+                        <RiEyeCloseLine
                             onClick={togglePasswordVisibility}
                             style={{ position: 'absolute', top: 110, right: 10, cursor: 'pointer' }}
                             size={27}

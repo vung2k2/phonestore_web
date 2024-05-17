@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './ProductList.css';
 import ProductItem from '../ProductItem/ProductItem';
+import Loading from '../Loading/Loading';
 import { useProducts } from '../../context/ProductContext';
 import list_empty_icom from '../../Assets/img/no-products-found.png';
 
@@ -153,8 +154,7 @@ const ProductList = ({ selectedCategory, filters }) => {
                     ))}
                 </ul>
             ) : allproducts.length == 0 ? (
-                // <p>Đang tải sản phẩm...</p>
-                <div className="loading-spinner"></div>
+                <Loading isLoading={true} />
             ) : (
                 <div className="list-empty">
                     <img src={list_empty_icom} alt="" />

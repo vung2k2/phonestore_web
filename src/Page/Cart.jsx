@@ -209,7 +209,11 @@ const Cart = () => {
                                                 className="cartitems-remove-icon"
                                                 size={25}
                                                 style={{ cursor: 'pointer' }}
-                                                onClick={() => removeFromCart(product.id)}
+                                                onClick={async () => {
+                                                    setIsLoading(true);
+                                                    await removeFromCart(product.id);
+                                                    setIsLoading(false);
+                                                }}
                                             />
                                         </div>
                                         <hr />
@@ -294,12 +298,14 @@ const Cart = () => {
                                 </div>
                                 <div className="on_delivery">
                                     <button
-                                        onClick={() =>
-                                            createOrder(
+                                        onClick={async () => {
+                                            setIsLoading(true);
+                                            await createOrder(
                                                 'on_delivery',
                                                 `${userName} - ${userPhoneNumber} - ${userAddress}`,
-                                            )
-                                        }
+                                            );
+                                            setIsLoading(false);
+                                        }}
                                     >
                                         Thanh toán khi nhận hàng
                                     </button>
