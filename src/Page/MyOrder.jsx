@@ -3,14 +3,20 @@ import './CSS/MyOrder.css';
 import OrderItem from '../Components/OrderItem/OrderItem';
 import { ShopContext } from '../context/ShopContext';
 import { FaExclamationCircle } from 'react-icons/fa';
+import Loading from '../Components/Loading/Loading';
 
 const MyOrder = () => {
     window.scrollTo(0, 0);
     const { orders, fetchOrders } = useContext(ShopContext);
+    const [isLoading, setIsLoading] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('all');
     useEffect(() => {
-        // Gọi hàm để lấy tất cả hóa đơn khi component được render lần đầu tiên
-        fetchOrders();
+        const fetchData = async () => {
+            setIsLoading(true);
+            await fetchOrders();
+            setIsLoading(false);
+        };
+        fetchData();
     }, []);
 
     // Hàm lọc danh sách các đơn hàng theo category
@@ -35,6 +41,7 @@ const MyOrder = () => {
 
     return (
         <div className="my-order">
+            <Loading isLoading={isLoading} />
             <div className="my-order-category">
                 {/* Hiển thị danh sách các category */}
                 {categories.map((category, index) => (
