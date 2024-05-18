@@ -107,6 +107,9 @@ export const ShopContextProvider = (props) => {
             const response = await axios.post(`${baseUrl}/auth/refresh-token`, null, {
                 headers: { refreshToken: refreshToken },
             });
+            if (!response.data.accessToken || !response.data.refreshToken) {
+                throw new Error('Refresh token response is empty');
+            }
             const newAccessToken = response.data.accessToken;
             const newRefreshToken = response.data.refreshToken;
             localStorage.setItem('refreshToken', newRefreshToken);
