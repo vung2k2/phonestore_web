@@ -25,9 +25,13 @@
     grid-template-columns: 2fr 1fr; /* Chia tỉ lệ 50-50 */
     gap: 20px;
     box-shadow: 0 0 18px rgba(0, 0, 0, 0.12);
+    align-items: start;
 }
 .cartitems-left {
     overflow-y: auto;
+    min-height: 100vh;
+    padding-right: 10px;
+    border-right: 3px solid #ccc;
 }
 .cartitems hr {
     height: 1px;
@@ -121,13 +125,12 @@
 
 .cartitems-right {
     flex: none;
-    border-left: 3px solid #ccc;
+
     align-items: center;
     justify-content: center;
-    padding-left: 30px;
+    padding-left: 15px;
     position: sticky;
-    top: 0;
-    min-height: 100vh;
+    top: 120px;
 }
 .cartitems-right .pay > div {
     padding-bottom: 10px;

@@ -1,7 +1,5 @@
 import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { useContext, useEffect } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { ShopContext } from '../../context/ShopContext';
 
@@ -12,7 +10,6 @@ const style = { layout: 'vertical' };
 const ButtonWrapper = ({ currency, showSpinner, total, payload }) => {
     const { deleteCart, createOrder } = useContext(ShopContext);
     const navigate = useNavigate();
-    let products = payload.products;
 
     const [{ isPending, options }, dispatch] = usePayPalScriptReducer();
     useEffect(() => {
