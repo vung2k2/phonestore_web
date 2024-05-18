@@ -1,0 +1,90 @@
+.search-box {
+    display: flex;
+    flex: 1.5;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.search-box input {
+    outline: none;
+    width: 400px;
+    height: 35px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    font-size: 15px;
+}
+
+.search-box button {
+    height: 35px;
+    width: 90px;
+    border: none;
+    color: #253b80;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+    font-size: 15px;
+}
+
+.search-box button:hover {
+    background: #96abe9;
+}
+
+.search-box .search-results {
+    position: absolute;
+    top: calc(100% + 5px); /* Vị trí hiển thị ngay dưới ô input và có khoảng cách 5px */
+    left: 0;
+    z-index: 999; /* Đảm bảo popover hiển thị trên cùng */
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    max-height: 200px; /* Giới hạn chiều cao của popover để tránh quá nhiều nội dung */
+    overflow-y: auto; /* Hiển thị thanh cuộn nếu nội dung quá dài */
+    width: calc(100% - 10px);
+}
+
+.search-result-item {
+    color: black;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.search-result-item:hover {
+    background-color: #f2f2f2;
+}
+
+@media screen and (max-width: 1280px) {
+    .search-box input {
+        width: 350px;
+        font-size: 14px;
+    }
+
+    .search-box button {
+        width: 80px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .search-box input {
+        width: 300px;
+    }
+
+    .search-box button {
+        width: 70px;
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .search-box input {
+        width: 250px;
+    }
+
+    .search-box button {
+        width: 60px;
+        font-size: 12px;
+    }
+}

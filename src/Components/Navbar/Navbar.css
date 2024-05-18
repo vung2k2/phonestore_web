@@ -1,0 +1,53 @@
+.navbar {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.navbar-menu {
+    width: 80%;
+    justify-content: space-around;
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+.navbar-item {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-right: 18px;
+}
+
+.navbar-item img {
+    border: 2px solid #e4e0e0;
+    border-radius: 15px;
+    height: 30px;
+    cursor: pointer;
+}
+.navbar-item img:hover {
+    transform: scale(1.1);
+    border: 2px solid #253b80;
+}
+
+.navbar-item img.active {
+    transform: scale(1.1);
+    border: 2px solid #253b80;
+}
+
+@media screen and (max-width: 1024px) {
+    .navbar {
+        margin-top: 15px;
+        padding-left: 5px;
+    }
+
+    .navbar-item {
+        margin-right: 10px; /* Điều chỉnh khoảng cách giữa các mục trong navbar */
+    }
+
+    .navbar-item img {
+        height: 25px; /* Điều chỉnh kích thước của các logo */
+    }
+}

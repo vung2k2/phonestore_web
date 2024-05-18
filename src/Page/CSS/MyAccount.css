@@ -1,0 +1,106 @@
+.my-account {
+    background: #f0f0f0;
+    padding: 3% 18vw;
+}
+.my-account-main {
+    min-height: 560px;
+    background-color: #fff;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.12);
+    border-radius: 20px;
+    justify-content: center;
+    padding-top: 1px;
+}
+.my-account-main .title {
+    border-bottom: 3px solid #dfdfdf;
+    padding-left: 20px;
+}
+.my-account-main .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 12vw;
+}
+.my-account-main .img {
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+}
+.my-account-main .info .info-main {
+    width: 100%;
+}
+.my-account-main .info .info-main > div {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #ccc;
+}
+
+.my-account-main .info .info-main > div p:first-of-type {
+    color: #9b9b9b;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+.my-account-main .info .info-main > div p:last-of-type {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0;
+    overflow-wrap: break-word;
+}
+.my-account-main .info-main button {
+    width: 100%;
+    height: 50px;
+    border-radius: 30px;
+    border: none;
+    background-color: #3d559d;
+    margin-top: 20px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    transition: 0.1s ease-in-out;
+}
+.my-account-main .info-main button:hover {
+    background-color: #253b80;
+}
+
+.my-account-main .info-main button:active {
+    transform: scale(0.95);
+}
+
+.my-account-main .edit-form {
+    display: grid;
+    justify-items: center;
+    justify-content: space-between;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 30px 200px;
+    animation-name: loading-delay;
+    animation-duration: 0.7s;
+}
+.my-account-main .edit-form > div:nth-child(3) {
+    grid-column: span 2; /* Chiếm cả 2 cột */
+}
+.my-account-main .edit-form > div:nth-child(4) {
+    grid-column: span 2; /* Chiếm cả 2 cột */
+}
+.my-account-main .edit-form .btn {
+    height: 50px;
+    width: 270px;
+    border-radius: 30px;
+    border: none;
+    background-color: #3d559d;
+    margin-top: 20px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    transition: 0.1s ease-in-out;
+}
+.my-account-main .edit-form .btn:active {
+    transform: scale(0.95);
+}
+.my-account-main .edit-form button:hover {
+    background-color: #253b80;
+    color: #fff;
+}

@@ -1,0 +1,82 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    opacity: 0.8;
+    z-index: 9996;
+}
+.product-reviews {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+    height: 400px;
+    width: 670px;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9997;
+}
+.product-reviews .close-popup {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.product-reviews-main h2 {
+    font-weight: 500;
+}
+.product-reviews-main {
+    display: flex;
+    flex-direction: column;
+}
+.product-reviews-main .product-info {
+    display: flex;
+}
+.product-reviews-main .product-info img {
+    height: 70px;
+}
+.product-reviews-main .product-info p {
+    font-size: 22px;
+}
+.product-reviews-main .rating {
+    display: flex;
+    align-items: center;
+}
+.product-reviews-main .rating p {
+    font-size: 16x;
+    padding-right: 40px;
+}
+
+.product-reviews-main .cmt textarea {
+    height: 150px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+}
+.product-reviews-main .btn {
+    align-self: flex-end;
+}
+.product-reviews-main .btn button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-color: #3d559d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.product-reviews-main .btn button:hover {
+    background-color: #0f2d84;
+}

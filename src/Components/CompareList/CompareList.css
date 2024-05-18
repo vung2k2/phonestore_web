@@ -1,0 +1,89 @@
+.compare {
+    width: 100%;
+    height: 100%;
+}
+
+.show-compare-modal {
+    position: fixed;
+    bottom: 50px;
+    left: 10px;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 30px;
+    box-shadow: 0 0 15px #999;
+    color: #d90018;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px;
+}
+
+.compare-list {
+    position: fixed;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 120px;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.compare-item {
+    flex-grow: 1; /* Chia đều chiều rộng cho các phần tử */
+    width: 25%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.compare-item img {
+    height: 60%;
+    object-fit: cover;
+}
+
+.compare-item p {
+    font-size: 15px;
+    cursor: context-menu;
+}
+
+.compare-item button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    font-size: 17px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.compare-item button:hover {
+    background-color: #253b80;
+}
+.add-icon {
+    display: flex;
+    font-size: 24px;
+    color: #666;
+    height: 50px;
+    width: 50px;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.remove {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+}

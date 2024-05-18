@@ -1,0 +1,57 @@
+.viewed-products {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: 500px;
+    width: 500px;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
+.viewed-products .close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 30px;
+    color: #636161;
+}
+
+.viewed-products h2 {
+    text-align: center;
+}
+
+.viewed-products .product-list {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.viewed-products .product-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.viewed-products .product-item:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Hiển thị đổ bóng khi hover */
+    transform: translateY(-5px); /* Di chuyển lên trên một chút */
+    border-radius: 5px;
+}
+.viewed-products .product-image {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.viewed-products .product-name {
+    font-size: 16px;
+}
