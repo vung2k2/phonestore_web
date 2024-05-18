@@ -122,7 +122,7 @@ const Cart = () => {
     }, [cartItems]);
     return (
         <div className="cartitems">
-            <Loading isLoading={isLoading} />
+            {/* <Loading isLoading={isLoading} /> */}
             {cartItems.length === 0 ? (
                 // <p className="cartitems-empty-message">Không có sản phẩm nào trong giỏ hàng</p>
                 <div className="cart_empty">
@@ -209,10 +209,10 @@ const Cart = () => {
                                                 className="cartitems-remove-icon"
                                                 size={25}
                                                 style={{ cursor: 'pointer' }}
-                                                onClick={async () => {
-                                                    setIsLoading(true);
-                                                    await removeFromCart(product.id);
-                                                    setIsLoading(false);
+                                                onClick={() => {
+                                                    // setIsLoading(true);
+                                                    removeFromCart(product.id);
+                                                    // setIsLoading(false);
                                                 }}
                                             />
                                         </div>
