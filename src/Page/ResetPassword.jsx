@@ -90,7 +90,7 @@ const ResetPassword = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     {show ? (
-                        <VisibilityOffIcon
+                        <VisibilityIcon
                             sx={{
                                 position: 'absolute',
                                 marginBottom: '15px',
@@ -100,7 +100,7 @@ const ResetPassword = () => {
                             onClick={() => setShow(!show)}
                         />
                     ) : (
-                        <VisibilityIcon
+                        <VisibilityOffIcon
                             onClick={() => setShow(!show)}
                             sx={{
                                 position: 'absolute',

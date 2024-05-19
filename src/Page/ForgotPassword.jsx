@@ -3,15 +3,19 @@ import { Button, Container, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
+import Loading from '../Components/Loading/Loading';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
     const [response, setResponse] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSearch = async () => {
         try {
+            setIsLoading(true);
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/forgot-password`, { email });
+            setIsLoading(false);
             if (response.data.status === false) {
                 setResponse(false);
                 setErrorMessage(response.data.message);
@@ -36,6 +40,7 @@ const ForgotPassword = () => {
                 alignItems: 'center',
             }}
         >
+            <Loading isLoading={isLoading} />
             {response === true ? (
                 <>
                     <Typography sx={{ textAlign: 'center' }}>Vui lòng kiểm tra email</Typography>
