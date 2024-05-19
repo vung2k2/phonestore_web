@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import CheckIcon from '@mui/icons-material/Check';
+import Loading from '../Components/Loading/Loading';
 
 const ResetPassword = () => {
     const [password, setPassword] = useState('');
@@ -16,7 +17,7 @@ const ResetPassword = () => {
     const [show, setShow] = useState(false);
     const [response, setResponse] = useState(false);
     const navigate = useNavigate();
-
+    const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         const queryString = window.location.search;
         const token = queryString.substring(queryString.indexOf('token=') + 6);
@@ -28,15 +29,21 @@ const ResetPassword = () => {
             setErrorMessage('Mật khẩu mới không khớp');
         } else {
             try {
+                setIsLoading(true);
                 const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/reset-password`, {
                     token: token,
                     newPassword: rePassword,
                 });
+                setIsLoading(false);
+
                 if (response.data.status === true) {
                     setResponse(true);
                     setPassword('');
                     setRePassword('');
                     toast.success('Thay đổi mật khẩu thành công');
+                }
+                if (response.data.statusCode === 400) {
+                    setErrorMessage('Mật khẩu mới không được trùng mật khẩu cũ.');
                 }
             } catch (error) {
                 setResponse(false);
@@ -78,6 +85,7 @@ const ResetPassword = () => {
                 </>
             ) : (
                 <>
+                    <Loading isLoading={isLoading} />
                     <Typography sx={{ textAlign: 'center', fontSize: '18px' }}>Tạo lại mật khẩu</Typography>
 
                     <TextField
@@ -125,7 +133,7 @@ const ResetPassword = () => {
                         onChange={(e) => setRePassword(e.target.value)}
                     />
                     {showRepassword ? (
-                        <VisibilityOffIcon
+                        <VisibilityIcon
                             sx={{
                                 position: 'absolute',
                                 marginTop: '25px',
@@ -134,7 +142,7 @@ const ResetPassword = () => {
                             onClick={() => setShowRepassword(!showRepassword)}
                         />
                     ) : (
-                        <VisibilityIcon
+                        <VisibilityOffIcon
                             onClick={() => setShowRepassword(!showRepassword)}
                             sx={{
                                 position: 'absolute',

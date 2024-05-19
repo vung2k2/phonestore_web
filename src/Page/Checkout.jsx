@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import './CSS/Checkout.css';
 import Paypal from '../Components/Paypal';
