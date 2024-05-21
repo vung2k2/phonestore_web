@@ -12,6 +12,8 @@ const ProductItem = ({ product }) => {
 
     const [isCompared, setIsCompared] = useState(compareList.some((item) => item.id === product.id));
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const handleAddToCompare = () => {
         if (isCompared) {
             removeFromCompareList(product.id);
@@ -24,8 +26,10 @@ const ProductItem = ({ product }) => {
         }
     };
 
-    const handleAddToCart = () => {
-        addToCart(product.id, 1);
+    const handleAddToCart = async () => {
+        setIsLoading(true);
+        await addToCart(product.id, 1);
+        setIsLoading(false);
     };
 
     return (
@@ -67,8 +71,8 @@ const ProductItem = ({ product }) => {
                     </span>
                 </div>
                 <div className="product-card-actions">
-                    <button className="product-card-action-button" onClick={handleAddToCart}>
-                        Thêm vào giỏ hàng
+                    <button className="product-card-action-button" onClick={handleAddToCart} disabled={isLoading}>
+                        {isLoading ? <span className="loader-add-product"></span> : 'Thêm vào giỏ hàng'}
                     </button>
                 </div>
             </div>

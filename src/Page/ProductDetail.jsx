@@ -11,6 +11,7 @@ import CompareList from '../Components/CompareList/CompareList';
 import Footer from '../Components/Footer/Footer';
 import { toast } from 'react-toastify';
 import Rate from '../Components/Rate/Rate';
+import Loading from '../Components/Loading/Loading';
 
 const ProductDetail = () => {
     const { slug } = useParams();
@@ -19,10 +20,13 @@ const ProductDetail = () => {
     const product = allProducts.find((product) => product.slug === slug);
     const [showPurchaseConfirmation, setShowPurchaseConfirmation] = useState(false);
     const [quantity, setQuantity] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleAddToCart = () => {
-        addToCart(product.id, quantity); // Gọi hàm addToCart và truyền vào id và số lượng
+    const handleAddToCart = async () => {
         setShowPurchaseConfirmation(false);
+        setIsLoading(true);
+        await addToCart(product.id, quantity);
+        setIsLoading(false);
     };
 
     useEffect(() => {
@@ -109,6 +113,7 @@ const ProductDetail = () => {
 
     return (
         <div>
+            <Loading isLoading={isLoading} />
             <Breadcrum product={product} />
             <div className="product-detail">
                 <div className="product-detail-header">
