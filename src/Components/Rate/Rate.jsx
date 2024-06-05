@@ -55,7 +55,7 @@ const Rate = ({ id, start }) => {
             </div>
             {filterReviewsByStar(selectedStar).length > 0 ? (
                 filterReviewsByStar(selectedStar).map((review) => (
-                    <div key={review.id} className="rate-el">
+                    <div key={review._id} className="rate-el">
                         <div className="user-info">
                             <PiUserCircleLight className="user-icon" />
                             <span className="user-name">{review.name}</span>

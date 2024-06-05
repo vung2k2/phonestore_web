@@ -150,7 +150,7 @@ const ProductList = ({ selectedCategory, filters }) => {
             {products.length > 0 ? (
                 <ul className="product-list">
                     {products.map((product) => (
-                        <ProductItem key={product.id} product={product} />
+                        <ProductItem key={product._id} product={product} />
                     ))}
                 </ul>
             ) : allproducts.length == 0 ? (

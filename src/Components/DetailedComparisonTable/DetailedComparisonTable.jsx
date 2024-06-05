@@ -38,7 +38,7 @@ const DetailedComparisonTable = ({ setShowComparisonTable }) => {
                                         <div className="product-info">
                                             <IoCloseSharp
                                                 className="remove"
-                                                onClick={() => removeFromCompareList(compareList[index].id)}
+                                                onClick={() => removeFromCompareList(compareList[index]._id)}
                                             />
                                             <img src={compareList[index].imageUrl} className="product-img" alt="" />
                                             <div className="product-name-price">

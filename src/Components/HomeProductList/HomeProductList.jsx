@@ -24,7 +24,7 @@ const HomeProductList = ({ listProduct }) => {
     const viewedHistory = JSON.parse(localStorage.getItem('viewedHistory'));
     let viewedProducts = [];
     if (viewedHistory !== null) {
-        viewedProducts = listProduct.filter((product) => viewedHistory.includes(product.id));
+        viewedProducts = listProduct.filter((product) => viewedHistory.includes(product._id));
     }
 
     const settings = {
@@ -66,7 +66,7 @@ const HomeProductList = ({ listProduct }) => {
                 </p>
                 <Slider {...settings} autoplay={true} className="slick">
                     {topProductsByDiscount.map((product) => (
-                        <HomeProductItem key={product.id} product={product} />
+                        <HomeProductItem key={product._id} product={product} />
                     ))}
                 </Slider>
             </div>{' '}
@@ -74,7 +74,7 @@ const HomeProductList = ({ listProduct }) => {
                 <p>NỔI BẬT NHẤT</p>
                 <Slider {...settings} className="slick">
                     {topProductsByReview.map((product) => (
-                        <HomeProductItem key={product.id} product={product} />
+                        <HomeProductItem key={product._id} product={product} />
                     ))}
                 </Slider>
             </div>
@@ -83,7 +83,7 @@ const HomeProductList = ({ listProduct }) => {
                     <p>ĐÃ XEM GẦN ĐÂY</p>
                     <Slider {...settings} className="slick">
                         {viewedProducts.map((product) => (
-                            <HomeProductItem key={product.id} product={product} />
+                            <HomeProductItem key={product._id} product={product} />
                         ))}
                     </Slider>
                 </div>
@@ -92,7 +92,7 @@ const HomeProductList = ({ listProduct }) => {
                 <p>IPHONE</p>
                 <Slider {...settings} className="slick">
                     {iphoneiProducts.map((product) => (
-                        <HomeProductItem key={product.id} product={product} />
+                        <HomeProductItem key={product._id} product={product} />
                     ))}
                 </Slider>
             </div>{' '}
@@ -100,7 +100,7 @@ const HomeProductList = ({ listProduct }) => {
                 <p>XIAOMI</p>
                 <Slider {...settings} className="slick">
                     {xiaomiProducts.map((product) => (
-                        <HomeProductItem key={product.id} product={product} />
+                        <HomeProductItem key={product._id} product={product} />
                     ))}
                 </Slider>
             </div>

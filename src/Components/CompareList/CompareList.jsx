@@ -64,7 +64,7 @@ const CompareList = () => {
                                         <>
                                             <IoCloseSharp
                                                 className="remove"
-                                                onClick={() => removeFromCompareList(item.id)}
+                                                onClick={() => removeFromCompareList(item._id)}
                                             />
                                             <img src={item.imageUrl} alt={item.name} />
                                             <p>{item.name}</p>

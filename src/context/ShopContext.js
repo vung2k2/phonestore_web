@@ -46,7 +46,7 @@ export const ShopContextProvider = (props) => {
     }, []);
 
     const getViewedProducts = () => {
-        return viewedProducts.map((productId) => allProducts.find((product) => product.id === productId));
+        return viewedProducts.map((productId) => allProducts.find((product) => product._id === productId));
     };
 
     // Danh sách so sánh
@@ -56,7 +56,7 @@ export const ShopContextProvider = (props) => {
     }, []);
 
     const addToCompareList = (product) => {
-        if (compareList.length < 3 && !compareList.find((item) => item.id === product.id)) {
+        if (compareList.length < 3 && !compareList.find((item) => item._id === product._id)) {
             const newCompareList = [...compareList, product];
             setCompareList(newCompareList);
             localStorage.setItem('compareList', JSON.stringify(newCompareList));
@@ -67,7 +67,7 @@ export const ShopContextProvider = (props) => {
     };
 
     const removeFromCompareList = (productId) => {
-        const updatedCompareList = compareList.filter((item) => item.id !== productId);
+        const updatedCompareList = compareList.filter((item) => item._id !== productId);
         setCompareList(updatedCompareList);
         localStorage.setItem('compareList', JSON.stringify(updatedCompareList));
     };
@@ -130,7 +130,7 @@ export const ShopContextProvider = (props) => {
 
     const addToCart = async (id, quantity) => {
         // // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
-        // const existingProductIndex = cartItems.findIndex((item) => item.id === product.id);
+        // const existingProductIndex = cartItems.findIndex((item) => item._id === product._id);
 
         // if (existingProductIndex !== -1) {
         //     // Nếu sản phẩm đã tồn tại trong giỏ hàng, tăng số lượng của nó
@@ -180,7 +180,7 @@ export const ShopContextProvider = (props) => {
             await axios.delete(`${baseUrl}/user/delete-product/${productId}`, {
                 headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
             });
-            setCartItems(cartItems.filter((item) => item.id !== productId));
+            setCartItems(cartItems.filter((item) => item._id !== productId));
         } catch (error) {
             console.error('Error removing item from cart:', error);
         }
@@ -271,7 +271,7 @@ export const ShopContextProvider = (props) => {
     const fetchOrders = async () => {
         try {
             const response = await axios.get(
-                `${baseUrl}/user/detail-order`,
+                `${baseUrl}/user/order`,
 
                 {
                     headers: {
@@ -308,7 +308,7 @@ export const ShopContextProvider = (props) => {
         }
     };
     const updateProductReview = (productId, rating) => {
-        const productIndex = allProducts.findIndex((product) => product.id === productId);
+        const productIndex = allProducts.findIndex((product) => product._id === productId);
 
         if (productIndex !== -1) {
             const productToUpdate = allProducts[productIndex];

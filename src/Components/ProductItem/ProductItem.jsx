@@ -10,13 +10,13 @@ const ProductItem = ({ product }) => {
 
     const { addToCompareList, removeFromCompareList, compareList, addToCart } = useContext(ShopContext);
 
-    const [isCompared, setIsCompared] = useState(compareList.some((item) => item.id === product.id));
+    const [isCompared, setIsCompared] = useState(compareList.some((item) => item._id === product._id));
 
     const [isLoading, setIsLoading] = useState(false);
 
     const handleAddToCompare = () => {
         if (isCompared) {
-            removeFromCompareList(product.id);
+            removeFromCompareList(product._id);
             setIsCompared(!isCompared);
         } else if (!isCompared && compareList.length < 3) {
             addToCompareList(product);
@@ -28,7 +28,7 @@ const ProductItem = ({ product }) => {
 
     const handleAddToCart = async () => {
         setIsLoading(true);
-        await addToCart(product.id, 1);
+        await addToCart(product._id, 1);
         setIsLoading(false);
     };
 

@@ -64,7 +64,7 @@ const MyOrder = () => {
                     filteredOrders
                         .slice()
                         .reverse()
-                        .map((order) => <OrderItem key={order.id} order={order} />)
+                        .map((order) => <OrderItem key={order._id} order={order} />)
                 ) : (
                     <p
                         style={{

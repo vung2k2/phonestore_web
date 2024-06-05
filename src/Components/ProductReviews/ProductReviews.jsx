@@ -69,8 +69,8 @@ const ProductReviews = ({ onClose, product }) => {
                     <div className="btn">
                         <button
                             onClick={() => {
-                                console.log(product.id);
-                                ratingProduct(product.id, value, comment);
+                                console.log(product._id);
+                                ratingProduct(product._id, value, comment);
                                 onClose();
                             }}
                         >

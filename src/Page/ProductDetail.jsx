@@ -25,7 +25,7 @@ const ProductDetail = () => {
     const handleAddToCart = async () => {
         setShowPurchaseConfirmation(false);
         setIsLoading(true);
-        await addToCart(product.id, quantity);
+        await addToCart(product._id, quantity);
         setIsLoading(false);
     };
 
@@ -41,13 +41,13 @@ const ProductDetail = () => {
     const { addToCompareList, removeFromCompareList, compareList, setViewedProducts } = useContext(ShopContext);
     const [isCompared, setIsCompared] = useState(() => {
         if (product) {
-            return compareList.some((item) => item.id === product.id);
+            return compareList.some((item) => item._id === product._id);
         }
         return false;
     });
     const handleAddToCompare = () => {
         if (isCompared) {
-            removeFromCompareList(product.id);
+            removeFromCompareList(product._id);
             setIsCompared(!isCompared);
         } else if (!isCompared && compareList.length < 3) {
             addToCompareList(product);
@@ -74,8 +74,8 @@ const ProductDetail = () => {
     };
 
     useEffect(() => {
-        if (product && product.id) {
-            addProductIdToLocalStorage(product.id);
+        if (product && product._id) {
+            addProductIdToLocalStorage(product._id);
         }
     }, [product]);
 
@@ -202,7 +202,7 @@ const ProductDetail = () => {
                             </button>
                         </div>
                         {product.numberReview ? (
-                            <Rate id={product.id} start={(product.rate / product.numberReview).toFixed(1)} />
+                            <Rate id={product._id} start={(product.rate / product.numberReview).toFixed(1)} />
                         ) : (
                             ''
                         )}

@@ -30,7 +30,7 @@ const Cart = () => {
 
     const handleQuantityChange = (productId, change) => {
         const newCart = cartItems.map((item) => {
-            if (item.id === productId) {
+            if (item._id === productId) {
                 const newQuantity = item.productQuantity + change;
                 // Kiểm tra điều kiện trước khi cập nhật số lượng
                 if (newQuantity >= 1 && newQuantity <= item.quantity) {
@@ -49,11 +49,9 @@ const Cart = () => {
         // Thiết lập timeout mới để gửi yêu cầu API sau 1 giây
         timeoutRef.current = setTimeout(() => {
             setIsLoading(true);
-            changeQuantityItem(productId, newCart.find((item) => item.id === productId).productQuantity)
+            changeQuantityItem(productId, newCart.find((item) => item._id === productId).productQuantity)
                 .then(() => {
-                    setTimeout(() => {
-                        setIsLoading(false);
-                    }, 300);
+                    setIsLoading(false);
                 })
                 .catch(() => {
                     setTimeout(() => {
@@ -158,7 +156,7 @@ const Cart = () => {
                                 .slice()
                                 .reverse()
                                 .map((product) => (
-                                    <div key={product.id}>
+                                    <div key={product._id}>
                                         <div className="cartitems-left-format cartitems-left-format-main">
                                             <div className="cartitems-info">
                                                 <Link
@@ -180,7 +178,7 @@ const Cart = () => {
                                             </div>
                                             <div className="cartitems-quantity">
                                                 <button
-                                                    onClick={() => handleQuantityChange(product.id, -1)}
+                                                    onClick={() => handleQuantityChange(product._id, -1)}
                                                     disabled={product.productQuantity <= 1}
                                                 >
                                                     <IoMdRemove size={20} />
@@ -193,7 +191,7 @@ const Cart = () => {
                                                     readOnly
                                                 />
                                                 <button
-                                                    onClick={() => handleQuantityChange(product.id, 1)}
+                                                    onClick={() => handleQuantityChange(product._id, 1)}
                                                     disabled={product.productQuantity >= product.quantity}
                                                 >
                                                     <IoMdAdd size={20} />
@@ -211,7 +209,7 @@ const Cart = () => {
                                                 style={{ cursor: 'pointer' }}
                                                 onClick={async () => {
                                                     setIsLoading(true);
-                                                    await removeFromCart(product.id);
+                                                    await removeFromCart(product._id);
                                                     setIsLoading(false);
                                                 }}
                                             />
@@ -280,7 +278,7 @@ const Cart = () => {
                                     Tổng tiền:{' '}
                                     <span style={{ color: 'red' }}>{formatCurrency(totalAmount(cartItems))}</span>
                                 </h2>
-                                <div className="paypal" style={{ height: '45px' }}>
+                                {/* <div className="paypal" style={{ height: '45px' }}>
                                     <Paypal
                                         amount={amount}
                                         payload={{
@@ -289,7 +287,7 @@ const Cart = () => {
                                             orderInfo: `${userName} - ${userPhoneNumber} - ${userAddress}`,
                                         }}
                                     />
-                                </div>
+                                </div> */}
                                 <div className="vnpal">
                                     <VNPay OrderInfo={`${userName} - ${userPhoneNumber} - ${userAddress}`} />
                                 </div>

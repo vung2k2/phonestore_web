@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const OrderItem = ({ order }) => {
     const { CancelOrder, addToCart, formatDateTime } = useContext(ShopContext);
-    const { id, total_amount, orderInfo, status, order_date, order_details, provider } = order;
+    const { _id, total_amount, orderInfo, status, order_date, products, provider } = order;
 
     const maxItemsToShow = 2;
     const [showDetails, setShowDetails] = useState(false);
@@ -32,14 +32,14 @@ const OrderItem = ({ order }) => {
         );
         if (isConfirmed) {
             // Gọi hàm hủy đơn hàng khi xác nhận từ người dùng
-            CancelOrder(id);
+            CancelOrder(_id);
         }
     };
     const handleReorder = () => {
-        order_details.map((product) => addToCart(product.id, product.quantity));
+        products.map((product) => addToCart(product._id, product.quantity));
     };
 
-    const visibleItems = showDetails ? order_details : order_details.slice(0, maxItemsToShow);
+    const visibleItems = showDetails ? products : products.slice(0, maxItemsToShow);
 
     const renderActionButton = () => {
         switch (status) {
@@ -64,7 +64,7 @@ const OrderItem = ({ order }) => {
     return (
         <div className="order-item">
             <div className="top">
-                <p className="order-id">Mã đơn #{id}</p>
+                <p className="order-id">Mã đơn #{_id.slice(-6)}</p>
                 <p className="order-date">Ngày đặt: {formatDateTime(order_date)}</p>
             </div>
             <div className="main">

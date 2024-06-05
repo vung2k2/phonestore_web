@@ -37,8 +37,8 @@ const Login = () => {
             } else setMailError(false);
 
             if (password === '') {
-                setPassword(true);
-            } else setPassword(false);
+                setPassError(true);
+            } else setPassError(false);
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
                 email,
                 password,
@@ -76,7 +76,6 @@ const Login = () => {
                 </Typography>
                 <Box component="form" noValidate sx={{ mt: 1 }} style={{ position: 'relative' }}>
                     <TextField
-                        error={mailError}
                         onChange={(e) => setEmail(e.target.value)}
                         margin="normal"
                         value={email}
@@ -90,7 +89,6 @@ const Login = () => {
                     />
                     <TextField
                         onChange={(e) => setPassword(e.target.value)}
-                        error={passError}
                         margin="normal"
                         required={true}
                         fullWidth

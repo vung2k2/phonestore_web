@@ -17,7 +17,7 @@ const ViewedProducts = ({ viewedProducts, setShowViewedProducts }) => {
             <ul className="product-list">
                 {viewedProducts.map((product) => (
                     <li
-                        key={product.id}
+                        key={product._id}
                         className="product-item"
                         onClick={() => {
                             addToCompareList(product);
