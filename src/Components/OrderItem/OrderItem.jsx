@@ -77,7 +77,7 @@ const OrderItem = ({ order }) => {
                             <div>
                                 <p className="item-name">
                                     {detail.name}
-                                    {status === 'completed' && detail.rating === null && (
+                                    {status === 'completed' && detail.isRated === false && (
                                         <button
                                             className="review-btn"
                                             onClick={() => {
@@ -129,7 +129,9 @@ const OrderItem = ({ order }) => {
                 </p>
                 {renderActionButton()}
             </div>
-            {showProductReviews && <ProductReviews onClose={() => setShowProductReviews(false)} product={productRv} />}
+            {showProductReviews && (
+                <ProductReviews onClose={() => setShowProductReviews(false)} product={productRv} orderId={_id} />
+            )}
         </div>
     );
 };

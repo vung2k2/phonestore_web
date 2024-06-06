@@ -6,7 +6,7 @@ import { ShopContext } from '../../context/ShopContext';
 import { toast } from 'react-toastify';
 
 const ProductItem = ({ product }) => {
-    const { imageUrl, name, oldPrice, newPrice, rate, numberReview } = product;
+    const { imageUrl, name, oldPrice, newPrice, rate, numberReview, quantity } = product;
 
     const { addToCompareList, removeFromCompareList, compareList, addToCart } = useContext(ShopContext);
 
@@ -71,9 +71,15 @@ const ProductItem = ({ product }) => {
                     </span>
                 </div>
                 <div className="product-card-actions">
-                    <button className="product-card-action-button" onClick={handleAddToCart} disabled={isLoading}>
-                        {isLoading ? <span className="loader-add-product"></span> : 'Thêm vào giỏ hàng'}
-                    </button>
+                    {product.quantity > 0 ? (
+                        <button className="product-card-action-button" onClick={handleAddToCart} disabled={isLoading}>
+                            {isLoading ? <span className="loader-add-product"></span> : 'Thêm vào giỏ hàng'}
+                        </button>
+                    ) : (
+                        <button className="product-card-action-button-disabled" disabled>
+                            Đã hết hàng
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

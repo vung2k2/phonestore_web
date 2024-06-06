@@ -117,13 +117,12 @@
     flex: 1.5;
 }
 
-.purchase button {
+.purchase .btn-buy {
     height: 80px;
     margin-left: 18px;
     width: 280px;
     align-items: center;
     padding: 10px 15px;
-
     background-color: #3d559d;
     color: #fff;
     border: none;
@@ -132,7 +131,23 @@
     font-weight: 600;
     cursor: pointer;
 }
-.purchase button:hover {
+
+.purchase .btn-buy-disabled {
+    height: 80px;
+    margin-left: 18px;
+    width: 280px;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #b0b0b0;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: not-allowed;
+}
+
+.purchase .btn-buy:hover {
     transform: translateY(-5px);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
 }

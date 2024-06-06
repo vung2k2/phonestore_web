@@ -34,7 +34,6 @@ export const ShopContextProvider = (props) => {
                     return axios(originalRequest);
                 }
             }
-
             return Promise.reject(error);
         },
     );
@@ -169,9 +168,7 @@ export const ShopContextProvider = (props) => {
             toast.success('Đã thêm vào giỏ hàng', { position: 'top-center', autoClose: 1500 });
             fetchCartItems();
         } catch (error) {
-            toast.error('Có lỗi gì đó!', { position: 'top-center', autoClose: 1500 });
-            console.error('Error:', error.response ? error.response.data : error.message);
-            // Xử lý lỗi nếu có
+            toast.error(error.response.data.message, { position: 'top-center', autoClose: 1500 });
         }
     };
 
@@ -261,7 +258,7 @@ export const ShopContextProvider = (props) => {
                 },
             );
             fetchOrders();
-            toast.success(`Đã hủy đơn hàng #${id}`, { position: 'top-center', autoClose: 1500 });
+            toast.success(`Đã hủy đơn hàng #${id.slice(-6)}`, { position: 'top-center', autoClose: 1500 });
         } catch (error) {
             console.error('Lỗi huỷ đơn hàng:', error);
             toast.error('Đã xảy ra lỗi!', { position: 'top-center', autoClose: 1500 });
@@ -286,11 +283,12 @@ export const ShopContextProvider = (props) => {
         }
     };
 
-    const ratingProduct = async (productId, rate, comment) => {
+    const ratingProduct = async (orderId, productId, rate, comment) => {
         try {
             await axios.post(
                 `${baseUrl}/user/review`,
                 {
+                    orderId: orderId,
                     productId: productId,
                     rate: rate,
                     comment: comment,

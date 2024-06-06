@@ -187,19 +187,35 @@ const ProductDetail = () => {
                                 </span>
                             </div>
 
-                            <button className="btn-buy" onClick={handleBuyNow}>
-                                <p
-                                    style={{
-                                        marginTop: '15px',
-                                        fontSize: '22px',
-                                        fontWeight: '700',
-                                        lineHeight: '0',
-                                    }}
-                                >
-                                    Mua ngay
-                                </p>
-                                <p style={{ fontStyle: 'italic' }}>(Miễn phí giao hàng trên toàn quốc)</p>
-                            </button>
+                            {product.quantity > 0 ? (
+                                <button className="btn-buy" onClick={handleBuyNow}>
+                                    <p
+                                        style={{
+                                            marginTop: '15px',
+                                            fontSize: '22px',
+                                            fontWeight: '700',
+                                            lineHeight: '0',
+                                        }}
+                                    >
+                                        Mua ngay
+                                    </p>
+                                    <p style={{ fontStyle: 'italic' }}>(Miễn phí giao hàng trên toàn quốc)</p>
+                                </button>
+                            ) : (
+                                <button className="btn-buy-disabled" disabled>
+                                    <p
+                                        style={{
+                                            marginTop: '15px',
+                                            fontSize: '22px',
+                                            fontWeight: '700',
+                                            lineHeight: '0',
+                                        }}
+                                    >
+                                        Đã hết hàng
+                                    </p>
+                                    <p style={{ fontStyle: 'italic' }}>(Sản phẩm hiện không có sẵn)</p>
+                                </button>
+                            )}
                         </div>
                         {product.numberReview ? (
                             <Rate id={product._id} start={(product.rate / product.numberReview).toFixed(1)} />

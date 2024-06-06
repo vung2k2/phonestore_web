@@ -107,6 +107,20 @@
     cursor: pointer;
     transition: 0.1s ease-in-out;
 }
+
+.product-card-action-button-disabled {
+    width: 100%;
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-color: #b0b0b0;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: not-allowed;
+}
+
 .product-card-action-button:active {
     transform: scale(0.95);
 }

@@ -3,10 +3,8 @@ import './ProductReviews.css';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { ShopContext } from '../../context/ShopContext';
 import Rating from '@mui/material/Rating';
-const ProductReviews = ({ onClose, product }) => {
+const ProductReviews = ({ onClose, orderId, product }) => {
     const { ratingProduct } = useContext(ShopContext);
-    console.log(product);
-
     const [value, setValue] = useState(5);
     const [comment, setComment] = useState('');
     const getValueDescription = (value) => {
@@ -69,8 +67,7 @@ const ProductReviews = ({ onClose, product }) => {
                     <div className="btn">
                         <button
                             onClick={() => {
-                                console.log(product._id);
-                                ratingProduct(product._id, value, comment);
+                                ratingProduct(orderId, product._id, value, comment);
                                 onClose();
                             }}
                         >

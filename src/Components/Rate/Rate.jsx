@@ -58,11 +58,11 @@ const Rate = ({ id, start }) => {
                     <div key={review._id} className="rate-el">
                         <div className="user-info">
                             <PiUserCircleLight className="user-icon" />
-                            <span className="user-name">{review.name}</span>
+                            <span className="user-name">{review.userName}</span>
                         </div>
                         <div className="rating">{'★'.repeat(review.rate) + '☆'.repeat(5 - review.rate)}</div>
                         <div className="content">{review.comment}</div>
-                        <div className="date">{formatDateTime(review.created_at)}</div>
+                        <div className="date">{formatDateTime(review.createdAt)}</div>
                     </div>
                 ))
             ) : (
