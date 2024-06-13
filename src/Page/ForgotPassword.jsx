@@ -21,6 +21,7 @@ const ForgotPassword = () => {
             }
             setResponse(true);
         } catch (error) {
+            setIsLoading(false);
             setErrorMessage('Email chưa được đăng ký, vui lòng kiểm tra lại');
         }
     };

@@ -47,6 +47,7 @@ const ResetPassword = () => {
                 }
             } catch (error) {
                 setResponse(false);
+                setIsLoading(false);
                 setErrorMessage('Đã xảy ra lỗi');
             }
         }

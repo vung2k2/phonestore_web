@@ -12,7 +12,8 @@ const Rate = ({ id, start }) => {
     useEffect(() => {
         const fetchReviews = async () => {
             const reviews = await getReviewsProduct(id);
-            setReviewsProduct(reviews);
+            const reversedReviews = reviews.reverse();
+            setReviewsProduct(reversedReviews);
         };
         fetchReviews();
     }, [id]);
