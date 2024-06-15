@@ -53,7 +53,7 @@ const ProductDetail = () => {
             addToCompareList(product);
             setIsCompared(!isCompared);
         } else {
-            toast.warning('Danh sách đã đầy!', { position: 'top-center', autoClose: 1500 });
+            toast.warning('Danh sách đã đầy!');
         }
     };
 

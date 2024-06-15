@@ -53,7 +53,7 @@ const Signup = () => {
             });
             setIsLoading(false);
             setSuccess(true);
-            toast.success('Đăng ký tài khoản thành công', { position: 'top-center', autoClose: 1500 });
+            toast.success('Đăng ký tài khoản thành công');
             setName('');
             setEmail('');
             setPassword('');
@@ -61,9 +61,9 @@ const Signup = () => {
             setIsLoading(false);
             console.error('Lỗi đăng ký:', error.response ? error.response.data : error.message);
             if (error.response) {
-                toast.error(`${error.response.data.message}`, { position: 'top-center', autoClose: 1500 });
+                toast.error(`${error.response.data.message}`);
             } else {
-                toast.error('Lỗi đăng ký', { position: 'top-center', autoClose: 1500 });
+                toast.error('Lỗi đăng ký');
             }
         }
     };

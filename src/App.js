@@ -12,8 +12,6 @@ import { ProductProvider } from './context/ProductContext';
 import { ShopContextProvider } from './context/ShopContext';
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, ToastContainer } from 'react-toastify';
-import { Provider } from 'react-redux';
-import { store } from './redux/store';
 import ForgotPassword from './Page/ForgotPassword';
 import ResetPassword from './Page/ResetPassword';
 import Checkout from './Page/Checkout';
@@ -25,33 +23,32 @@ import ChangePassword from './Page/ChangePassword';
 function App() {
     return (
         <div>
-            <Provider store={store}>
-                <BrowserRouter>
-                    <ProductProvider>
-                        <ShopContextProvider>
-                            <Header />
-                            <Routes>
-                                <Route path="/" element={<Home />} />
-                                <Route path="/product" element={<Product />} />
-                                <Route path="/product/:slug" element={<ProductDetail />} />
-                                <Route path="/login" element={<Login />} />
-                                <Route path="/signup" element={<Signup />} />
-                                <Route path="/cart" element={<Cart />} />
-                                <Route path="/my-account" element={<MyAccount />} />
-                                <Route path="/my-account/password" element={<ChangePassword />} />
-                                <Route path="/forgot-password" element={<ForgotPassword />} />
-                                <Route path="/reset-password" element={<ResetPassword />} />
-                                <Route path="/checkout" element={<Checkout />} />
-                                <Route path="/order-return" element={<OrderReturn />} />
-                                <Route path="/my-order" element={<MyOrder />} />
-                            </Routes>
-                        </ShopContextProvider>
-                    </ProductProvider>
-                </BrowserRouter>
-            </Provider>
+            <BrowserRouter>
+                <ProductProvider>
+                    <ShopContextProvider>
+                        <Header />
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/product" element={<Product />} />
+                            <Route path="/product/:slug" element={<ProductDetail />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/signup" element={<Signup />} />
+                            <Route path="/cart" element={<Cart />} />
+                            <Route path="/my-account" element={<MyAccount />} />
+                            <Route path="/my-account/password" element={<ChangePassword />} />
+                            <Route path="/forgot-password" element={<ForgotPassword />} />
+                            <Route path="/reset-password" element={<ResetPassword />} />
+                            <Route path="/checkout" element={<Checkout />} />
+                            <Route path="/order-return" element={<OrderReturn />} />
+                            <Route path="/my-order" element={<MyOrder />} />
+                        </Routes>
+                    </ShopContextProvider>
+                </ProductProvider>
+            </BrowserRouter>
+
             <ToastContainer
-                position="top-right"
-                autoClose={5000}
+                position="top-center"
+                autoClose={1500}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick

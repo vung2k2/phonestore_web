@@ -41,7 +41,7 @@ const ChangePassword = () => {
                     setOldPassword('');
                     setPassword('');
                     setRePassword('');
-                    toast.success('Thay đổi mật khẩu thành công', { position: 'top-center', autoClose: 1500 });
+                    toast.success('Thay đổi mật khẩu thành công');
                 }
             } catch (error) {
                 setResponse(false);

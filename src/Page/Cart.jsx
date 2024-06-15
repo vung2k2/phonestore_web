@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import { ShopContext } from '../context/ShopContext';
 import './CSS/Cart.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import VNPay from '../Components/VNPay';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { IoMdRemove } from 'react-icons/io';
@@ -16,7 +16,6 @@ const Cart = () => {
     window.scrollTo(0, 0);
     const { cartItems, setCartItems, removeFromCart, changeQuantityItem, createOrder } = useContext(ShopContext);
     const [AmountVNP, setAmountVNP] = useState(0);
-    const navigate = useNavigate();
     const accessToken = localStorage.getItem('accessToken');
     const [isLoading, setIsLoading] = useState(false);
     const [isEditingAddress, setIsEditingAddress] = useState(false);

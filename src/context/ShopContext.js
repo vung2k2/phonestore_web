@@ -59,9 +59,9 @@ export const ShopContextProvider = (props) => {
             const newCompareList = [...compareList, product];
             setCompareList(newCompareList);
             localStorage.setItem('compareList', JSON.stringify(newCompareList));
-            toast.success('Đã thêm vào danh sách so sánh!', { position: 'top-center', autoClose: 1500 });
+            toast.success('Đã thêm vào danh sách so sánh!');
         } else {
-            toast.warning('Sản phẩm đã có trong danh sách!', { position: 'top-center', autoClose: 1500 });
+            toast.warning('Sản phẩm đã có trong danh sách!');
         }
     };
 
@@ -148,7 +148,7 @@ export const ShopContextProvider = (props) => {
         // }
 
         if (localStorage.getItem('refreshToken') === null) {
-            toast.error('Bạn cần đăng nhập trước!', { position: 'top-center', autoClose: 1500 });
+            toast.error('Bạn cần đăng nhập trước!');
             return;
         }
         try {
@@ -165,10 +165,10 @@ export const ShopContextProvider = (props) => {
                     },
                 },
             );
-            toast.success('Đã thêm vào giỏ hàng', { position: 'top-center', autoClose: 1500 });
+            toast.success('Đã thêm vào giỏ hàng');
             fetchCartItems();
         } catch (error) {
-            toast.error(error.response.data.message, { position: 'top-center', autoClose: 1500 });
+            toast.error(error.response.data.message);
         }
     };
 
@@ -258,10 +258,10 @@ export const ShopContextProvider = (props) => {
                 },
             );
             fetchOrders();
-            toast.success(`Đã hủy đơn hàng #${id.slice(-6)}`, { position: 'top-center', autoClose: 1500 });
+            toast.success(`Đã hủy đơn hàng #${id.slice(-6)}`);
         } catch (error) {
             console.error('Lỗi huỷ đơn hàng:', error);
-            toast.error('Đã xảy ra lỗi!', { position: 'top-center', autoClose: 1500 });
+            toast.error('Đã xảy ra lỗi!');
         }
     };
 
@@ -297,12 +297,12 @@ export const ShopContextProvider = (props) => {
                     headers: { 'Content-Type': 'application/json', AccessToken: localStorage.getItem('accessToken') },
                 },
             );
-            toast.success('Cám ơn bạn đã đánh giá!', { position: 'top-center', autoClose: 1500 });
+            toast.success('Cám ơn bạn đã đánh giá!');
             fetchOrders();
             updateProductReview(productId, rate);
         } catch (error) {
             console.error('Lỗi đánh giá sp:', error);
-            toast.error('Đã xảy ra lỗi!', { position: 'top-center', autoClose: 1500 });
+            toast.error('Đã xảy ra lỗi!');
         }
     };
     const updateProductReview = (productId, rating) => {
@@ -333,10 +333,10 @@ export const ShopContextProvider = (props) => {
             localStorage.setItem('userAddress', address);
             localStorage.setItem('userPhoneNumber', phone);
             window.location.reload();
-            toast.success('Đã cập nhật thông tin cá nhân!', { position: 'top-center', autoClose: 1500 });
+            toast.success('Đã cập nhật thông tin cá nhân!');
         } catch (error) {
             console.error('Lỗi cập nhật thoong tin cá nhân:', error);
-            toast.error('Đã xảy ra lỗi!', { position: 'top-center', autoClose: 1500 });
+            toast.error('Đã xảy ra lỗi!');
         }
     };
 
