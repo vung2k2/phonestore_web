@@ -14,7 +14,7 @@ Video demo
 
 
 ## Phía người dùng
-
+![screenshot](public/user1.png)
 Link web [tại đây](https://user-phonestore.vercel.app/) (lưu ý vui lòng đợi khoảng 1 phút để máy chủ khởi động trở lại)
 
 Tài khoản test: nguyenluongvung@gmail.com - 1
@@ -29,7 +29,7 @@ Chức năng:
 - Tích hợp thanh toán VNPay.
 
 ## Phía admin
-
+![screenshot](public/admin.png)
 Link web [tại đây](https://admin-phonestore.vercel.app/) (lưu ý vui lòng đợi khoảng 1 phút để máy chủ khởi động trở lại)
 
 Tài khoản test: admin@gmail.com - 1
