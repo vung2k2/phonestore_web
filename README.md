@@ -1,5 +1,7 @@
 # Website bán điện thoại online
 
+Video demo
+
 [![Demo Video](https://img.youtube.com/vi/6MQrMfDboUs/0.jpg)](https://www.youtube.com/watch?v=6MQrMfDboUs)
 
 - Mã nguồn FE phía user [tại đây](https://github.com/vung2k2/phonestore_web)
@@ -13,7 +15,7 @@
 
 ## Phía người dùng
 
-Link web [tại đây](https://user-phonestore.vercel.app/)
+Link web [tại đây](https://user-phonestore.vercel.app/) (lưu ý vui lòng đợi khoảng 1 phút để máy chủ khởi động trở lại)
 
 Tài khoản test: nguyenluongvung@gmail.com - 1
 
@@ -28,7 +30,7 @@ Chức năng:
 
 ## Phía admin
 
-Link web [tại đây](https://admin-phonestore.vercel.app/)
+Link web [tại đây](https://admin-phonestore.vercel.app/) (lưu ý vui lòng đợi khoảng 1 phút để máy chủ khởi động trở lại)
 
 Tài khoản test: admin@gmail.com - 1
 
